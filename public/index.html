@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f2f3ee">
+  <meta name="description" content="Find your line. Carve, tuck and hop your way down original alpine runs in Fallline, a free snowboard browser game.">
+  <meta property="og:title" content="Fallline — one more run">
+  <meta property="og:description" content="Three descents, fresh tracks and one more run. An original downhill snowboard game with keyboard and touch controls.">
+  <title>Fallline — one more run</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/src/game.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#mountain">Skip to the mountain</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Fallline home"><img src="/favicon.svg" width="34" height="34" alt=""><span>fallline<span class="brand-mark">/</span></span></a>
+    <span class="header-caption">A SMALL ESCAPE. A LONG WAY DOWN.</span>
+    <button id="guide-button" class="plain-button" aria-haspopup="dialog"><span aria-hidden="true">↗</span> Before you drop in</button>
+  </header>
+
+  <main>
+    <section id="mountain" class="mountain" aria-label="Snowboard run">
+      <canvas id="slope" tabindex="0" aria-label="Snowboard view. Arrow keys or A and D carve, down or S brakes, up or W tucks, Space jumps. P or Escape pauses.">Fallline needs Canvas support to show the mountain. Controls and instructions are also available as text.</canvas>
+      <div class="menu-wash" aria-hidden="true"></div>
+      <div class="mountain-label" aria-hidden="true"><span class="small-plus">+</span><span>FALLLINE / ALPINE ARCADE</span><span id="run-number">RUN 01</span></div>
+
+      <div id="menu-overlay" class="menu-overlay">
+        <div class="intro">
+          <p class="eyebrow">FRESH TRACKS, EVERY TIME</p>
+          <h1>ONE<br>MORE RUN.</h1>
+          <p class="intro-copy">Lean into a turn. Catch a little air.<br>Leave the rest of the world at the top.</p>
+          <div class="run-heading"><span>PICK YOUR LINE</span><span id="run-length">1.1 KM</span></div>
+          <div id="run-options" class="run-options" role="group" aria-label="Choose a snowboard run"></div>
+          <p id="run-description" class="run-description"></p>
+          <div class="launch-actions"><button id="start-button" class="button primary">Drop in <span aria-hidden="true">↓</span></button><button id="free-button" class="button quiet">Free ride <span aria-hidden="true">↗</span></button></div>
+          <p id="best-note" class="best-note">Your first tracks are waiting.</p>
+        </div>
+        <div class="resort-stamp" aria-hidden="true"><span>NO LIFTS. NO LINES.</span><svg viewBox="0 0 120 86"><path d="M8 70 43 13 63 45 82 23 113 70Z M31 32l12 13 12-12M71 36l11 10 9-9"/><path d="m32 74 53-4"/></svg><span>JUST ONE MORE RUN.</span></div>
+      </div>
+
+      <div id="ride-toolbar" class="ride-toolbar" hidden><span id="run-tag" class="run-tag">Meadow</span><button id="pause-button" class="icon-button glass" aria-label="Pause run">Ⅱ</button></div>
+      <div id="ride-hud" class="ride-hud" hidden>
+        <div><span>SPEED</span><strong id="speed">0 <small>km/h</small></strong></div>
+        <div class="clock"><span>RUN TIME</span><strong id="run-time">00:00.0</strong><span id="penalty">No penalties</span></div>
+        <div><span>FLAGS</span><strong id="flags">0 <small>/ 8</small></strong></div>
+      </div>
+      <div id="progress-rail" class="progress-rail" aria-hidden="true" hidden><div id="progress-fill"></div></div>
+      <p id="next-flag" class="next-flag" hidden>Follow the bright flags.</p>
+      <p id="ride-event" class="ride-event" aria-live="polite"></p>
+      <p id="ride-warning" class="ride-warning" role="status" hidden></p>
+      <div id="rider-status" class="rider-status" hidden>RIDING</div>
+
+      <div id="touch-controls" class="touch-controls" hidden>
+        <div class="touch-group"><button type="button" data-action="left" aria-label="Hold to carve left">←</button><button type="button" data-action="right" aria-label="Hold to carve right">→</button></div>
+        <div class="touch-group"><button type="button" data-action="brake" aria-label="Hold to brake"><span aria-hidden="true">Ⅱ</span><small>BRAKE</small></button><button type="button" data-action="tuck" aria-label="Hold to tuck"><span aria-hidden="true">↓</span><small>TUCK</small></button><button type="button" data-action="jump" aria-label="Jump"><span aria-hidden="true">↑</span><small>HOP</small></button></div>
+      </div>
+
+      <div id="pause-overlay" class="center-overlay" hidden><div class="overlay-card"><p class="eyebrow">SAVE A LITTLE ROOM TO BREATHE</p><h2>The mountain can wait.</h2><p id="pause-reason">Your run is paused.</p><button id="resume-button" class="button primary">Back to the run <span aria-hidden="true">↓</span></button><div class="secondary-actions"><button id="restart-button" class="button secondary">Start again</button><button id="pause-menu-button" class="button quiet">Choose a run</button></div></div></div>
+      <div id="result-overlay" class="center-overlay" hidden><div class="overlay-card result-card"><p id="result-eyebrow" class="eyebrow">DOWN TO THE VALLEY</p><h2 id="result-title">Run complete.</h2><p id="result-message"></p><div class="result-clock"><strong id="result-time">00:00.0</strong><span id="result-time-label">ADJUSTED TIME</span></div><div class="result-stats"><span><strong id="result-flags">0 / 8</strong>Flags passed</span><span><strong id="result-air">0.0s</strong>Air time</span><span><strong id="result-jumps">0</strong>Jumps</span></div><p id="result-detail" class="result-detail"></p><p id="record-message" class="record-message"></p><button id="again-button" class="button primary">Ride again <span aria-hidden="true">↺</span></button><button id="result-menu-button" class="button quiet">Choose a run</button></div></div>
+      <div id="error-overlay" class="center-overlay" hidden><div class="overlay-card"><p class="eyebrow">MOUNTAIN VIEW UNAVAILABLE</p><h2>We couldn’t open the run.</h2><p>Reload, or try a browser with Canvas support. No account is needed.</p><button id="reload-button" class="button primary">Reload game</button></div></div>
+      <div class="scene-caption" aria-hidden="true"><span>CHOOSE THE SCENIC ROUTE.</span><span>FALLLINE / 001</span></div>
+    </section>
+
+    <div class="control-strip">
+      <p><kbd>←</kbd><kbd>→</kbd><span>Carve</span><kbd>↓</kbd><span>Brake</span><kbd>↑</kbd><span>Tuck</span><kbd>Space</kbd><span>Hop</span><kbd>P</kbd><span>Pause</span></p>
+      <div class="preferences"><label><input type="checkbox" id="steady-camera"><span>Stable camera</span></label><button id="sound-button" class="plain-button" aria-pressed="false"><span aria-hidden="true">♪</span><span id="sound-label">Sound off</span></button></div>
+    </div>
+
+    <section class="field-guide" aria-labelledby="field-guide-title">
+      <div><p class="eyebrow">A FEW TRAIL NOTES</p><h2 id="field-guide-title">Find a rhythm.<br>Then find your line.</h2></div>
+      <article><span class="note-number">01 /</span><h3>Carve, don’t wrestle.</h3><p>Smooth turns leave you room to react. Tuck for speed, brake before a tight passage, and steer around the trees.</p></article>
+      <article><span class="note-number">02 /</span><h3>A little air goes a long way.</h3><p>Tap Space or Hop to jump. Low rocks can be cleared; trees need a different line. Ramps give you an extra lift.</p></article>
+      <article><span class="note-number">03 /</span><h3>Keep it clean.</h3><p>Pass between the flags. Each miss adds four seconds. Your best completed adjusted time is the one to beat.</p></article>
+    </section>
+    <footer class="site-footer"><span>For the feeling of one more run.</span><a href="https://github.com/alvarovillalbaa/fallline" target="_blank" rel="noopener noreferrer">View the source <span aria-hidden="true">↗</span></a><span>Device-local records. No accounts. No tracking.</span></footer>
+    <p id="storage-notice" class="storage-notice" role="status" hidden></p>
+  </main>
+
+  <dialog id="guide-dialog" aria-labelledby="guide-title"><div class="dialog-top"><p class="eyebrow">BEFORE YOU DROP IN</p><button id="close-guide" class="icon-button" aria-label="Close riding guide">×</button></div><h2 id="guide-title">Small moves.<br>Better lines.</h2><p>Ride down the marked slope. Pass between flags, leave room around trees, and hop over low rocks. You can pause or restart any time.</p><dl class="guide-controls"><div><dt><kbd>←</kbd> / <kbd>A</kbd></dt><dd>Carve left</dd></div><div><dt><kbd>→</kbd> / <kbd>D</kbd></dt><dd>Carve right</dd></div><div><dt><kbd>↓</kbd> / <kbd>S</kbd></dt><dd>Brake</dd></div><div><dt><kbd>↑</kbd> / <kbd>W</kbd></dt><dd>Tuck for speed</dd></div><div><dt><kbd>Space</kbd></dt><dd>Jump</dd></div><div><dt><kbd>P</kbd> / <kbd>Esc</kbd></dt><dd>Pause or resume</dd></div><div><dt><kbd>R</kbd></dt><dd>Restart the run</dd></div></dl><p>On touch screens, hold the arrow, brake or tuck buttons and tap Hop. Release a held control to return to a neutral stance. Holding Hop does not make the board jump repeatedly.</p><p>Your adjusted time is the run time plus four seconds per missed flag. Only completed course runs can replace a personal best; free rides and crashes do not. Records stay in this browser when storage is available.</p><p class="guide-small">This is an arcade game, not sports instruction. Visual motion is essential to play; Stable camera reduces camera movement. Sound is optional and starts only after you enable it.</p><button id="guide-done" class="button primary">Let’s ride <span aria-hidden="true">↓</span></button></dialog>
+  <noscript><div class="noscript">Fallline needs JavaScript for the mountain and controls. Enable JavaScript to play; no account is needed.</div></noscript>
+</body>
+</html>
