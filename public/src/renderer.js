@@ -224,15 +224,27 @@ export function createRenderer(canvas) {
   function rampObject(ramp, state, run, camera, p) {
     const left = ramp.x - ramp.width / 2, right = ramp.x + ramp.width / 2;
     const point = (x, z, raised = true) => ({ x, y: terrainHeight(run, x, z, state.mode) + (raised ? rampHeight(ramp, x, z) : 0), z });
+    const faces = [];
+    const add = (points, fill, stroke = null, markings = []) => faces.push({
+      points, fill, stroke, markings,
+      depth: points.reduce((sum, vertex) => sum + inCamera(vertex, camera).z, 0) / points.length,
+    });
     for (let row = 5; row >= 0; row--) {
       const z = ramp.z + ramp.length * row / 6, end = ramp.z + ramp.length * (row + 1) / 6;
-      polygon([point(left, z), point(right, z), point(right, end), point(left, end)], camera, color(fog(tint(p.snow, p.ice, 0.21 + row * 0.035), z - state.z, p)), color(p.ice, 0.3), 0.8);
-      if (row % 2 === 0) line(point(left + 0.25, end), point(right - 0.25, end), camera, color(p.ice, 0.55), 1.6);
+      const markings = [];
+      if (row % 2 === 0) markings.push({ a: point(left + 0.25, end), b: point(right - 0.25, end), color: color(p.ice, 0.55), width: 1.6 });
+      if (row === 5) markings.push({ a: point(left, end), b: point(right, end), color: color(p.accent, 0.85), width: 1.8 });
+      add([point(left, z), point(right, z), point(right, end), point(left, end)],
+        color(fog(tint(p.snow, p.ice, 0.21 + row * 0.035), z - state.z, p)), color(p.ice, 0.3), markings);
+      for (const x of [left, right]) add([point(x, z, false), point(x, end, false), point(x, end), point(x, z)], color(tint(p.shadow, p.ice, 0.25), 0.9));
     }
     const end = ramp.z + ramp.length;
-    for (const x of [left, right]) polygon([point(x, ramp.z, false), point(x, end, false), point(x, end), point(x, ramp.z)], camera, color(tint(p.shadow, p.ice, 0.25), 0.9));
-    polygon([point(left, end, false), point(right, end, false), point(right, end), point(left, end)], camera, color(tint(p.shadow, p.navy, 0.15)));
-    line(point(left, end), point(right, end), camera, color(p.accent, 0.85), 1.8);
+    add([point(left, end, false), point(right, end, false), point(right, end), point(left, end)], color(tint(p.shadow, p.navy, 0.15)));
+    faces.sort((a, b) => b.depth - a.depth);
+    for (const face of faces) {
+      polygon(face.points, camera, face.fill, face.stroke, 0.8);
+      for (const marking of face.markings) line(marking.a, marking.b, camera, marking.color, marking.width);
+    }
   }
   function obstacleObject(object, state, run, camera, p) {
     const ground = terrainHeight(run, object.x, object.z, state.mode), faces = [];
