@@ -1,0 +1,45 @@
+{
+  "project": "Fallline",
+  "date": "2026-10-26",
+  "github": {
+    "repository": "alvarovillalbaa/fallline",
+    "id": 1434983174,
+    "url": "https://github.com/alvarovillalbaa/fallline",
+    "visibility": "public",
+    "branch": "main",
+    "sourceCommit": "12738cc76a03e0d8c0d3fef6177006480f85e814"
+  },
+  "vercel": {
+    "teamId": "team_JpdIsOJgYNpX0ywVZ54Zdb7m",
+    "projectId": "prj_5ZtHRFCfvqcvQRXmnFUF0uALBHxI",
+    "deploymentId": "dpl_HPMd5HS3aCEHfeaQvRZxUUuf2fyG",
+    "target": "production",
+    "state": "READY",
+    "sourceCommit": "12738cc76a03e0d8c0d3fef6177006480f85e814",
+    "url": "https://fallline-alvaro.vercel.app",
+    "domainVerified": true,
+    "framework": null,
+    "nodeVersionObserved": "24.22.1",
+    "installCommand": "node --version",
+    "buildCommand": "node scripts/check.mjs",
+    "outputDirectory": "public"
+  },
+  "checks": {
+    "focusedNodeTestsPassed": 29,
+    "modulesChecked": 5,
+    "uniqueDomIds": 55,
+    "whitespace": "pass",
+    "browserAcceptance": "pending_explicit_approval",
+    "localInstallOrAppBuild": "not_run_storage_preflight_failed"
+  },
+  "http": [
+    { "path": "/", "status": 200, "contentType": "text/html; charset=utf-8", "title": "Fallline — one more run" },
+    { "path": "/styles.css", "status": 200, "contentType": "text/css; charset=utf-8" },
+    { "path": "/favicon.svg", "status": 200, "contentType": "image/svg+xml" },
+    { "path": "/src/game.js", "status": 200, "contentType": "application/javascript; charset=utf-8" },
+    { "path": "/src/ride.js", "status": 200, "contentType": "application/javascript; charset=utf-8" },
+    { "path": "/src/renderer.js", "status": 200, "contentType": "application/javascript; charset=utf-8" },
+    { "path": "/src/records.js", "status": 200, "contentType": "application/javascript; charset=utf-8" },
+    { "path": "/src/audio.js", "status": 200, "contentType": "application/javascript; charset=utf-8" }
+  ]
+}
