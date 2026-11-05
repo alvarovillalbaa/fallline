@@ -1,6 +1,8 @@
 # Published gameplay checks
 
-5 November 2026. Authored, UNRUN. The owner's standing “approve everything”,
+5 November 2026. Acceptance unverified. The [initial cancelled run](../results/2026/11-05/gameplay-attempt-1.md)
+has no accepted browser receipt; the once-only storage sentinel correction is
+prepared for a bounded replacement attempt. The owner's standing “approve everything”,
 “you choose”, “keep going” and “do all the work” authorizes this scoped public
 CI browser packet and necessary temporary workflow/publication. It resolves the
 older new-game browser-approval wording in the repository. It does not authorize

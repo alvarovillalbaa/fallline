@@ -9,7 +9,7 @@ const REPOSITORY = 'alvarovillalbaa/fallline';
 const BRANCH = 'refs/heads/qa/fallline-gameplay-20261105';
 const ACTIVE = '.github/workflows/browser-gameplay.yml';
 const SPEC = 'tests/browser/gameplay.mjs';
-const SPEC_SHA = 'e0d006c1911befa09e59e5fcf5b81d2fd21f555dc31d16c9befeefc37fd8b941';
+const SPEC_SHA = '95f07bd11ecf6541973952be384b39d4ccf278a622258314325b7a1643dca495';
 const ORIGIN = 'https://fallline-alvaro.vercel.app';
 const TITLES = [
   'desktop menu guide and keyboard controls affect the ride',

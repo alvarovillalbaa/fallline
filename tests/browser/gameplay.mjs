@@ -338,8 +338,9 @@ try {
     assert.match(await text(corrupt, '#best-note'), /Your best:/u);
     stage('genuine disabled local storage profile');
     const disabledBrowser = await launch(chromium, { args: ['--disable-local-storage'] });
-    const deniedContext = await contextFor(disabledBrowser, false, ({ origin, sentinel }) => { if (location.origin === origin) sessionStorage.setItem('fallline-authored-unrelated-session', sentinel); });
+    const deniedContext = await contextFor(disabledBrowser);
     const denied = await open(deniedContext);
+    await denied.evaluate(() => sessionStorage.setItem('fallline-authored-unrelated-session', 'fallline-authored-unrelated-v1'));
     const denial = await denied.evaluate(() => {
       let getterFailed = false, readFailed = false, writeFailed = false, objectPresent = false;
       let store; try { store = window.localStorage; objectPresent = store !== null && store !== undefined; } catch { getterFailed = true; }
@@ -356,6 +357,7 @@ try {
     assert.equal(await text(denied, '#record-message'), 'A new personal best for this visit.');
     assert.doesNotMatch(await text(denied, '#record-message'), /Saved on this device/u);
     await denied.locator('#result-menu-button').click(); assert.match(await text(denied, '#best-note'), /Best this visit:/u);
+    assert.equal(await denied.evaluate(() => sessionStorage.getItem('fallline-authored-unrelated-session')), 'fallline-authored-unrelated-v1');
     await denied.reload({ waitUntil: 'load' }); await denied.waitForFunction(() => document.body.dataset.mode === 'menu');
     assert.equal(await text(denied, '#best-note'), 'Your first tracks are waiting.');
     assert.equal(await denied.evaluate(() => sessionStorage.getItem('fallline-authored-unrelated-session')), 'fallline-authored-unrelated-v1');
