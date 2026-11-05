@@ -1,5 +1,10 @@
 # Published gameplay checks
 
+Current status: the [accepted result](../results/2026/11-05/gameplay-checks.md)
+owns the six-journey ledger, pause-HUD correction, exact editions and cleanup.
+The authored plan and intermediate status below are preserved historical
+context, not a new execution request. The temporary workflow is retired.
+
 5 November 2026. The [initial cancelled run](../results/2026/11-05/gameplay-attempt-1.md)
 has no accepted browser receipt. The replacement
 [run 42016760768](https://github.com/alvarovillalbaa/fallline/actions/runs/42016760768),

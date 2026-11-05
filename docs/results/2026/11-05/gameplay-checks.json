@@ -1,0 +1,3279 @@
+{
+  "schemaVersion": "fallline.browser-gameplay.v1",
+  "sourceCommit": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d",
+  "expectedDeployment": "dpl_3QFYZk9TY5FLmdkhK4stnhm4a1fd",
+  "origin": "https://fallline-alvaro.vercel.app",
+  "status": "passed",
+  "startedAtUtc": "2026-11-05T11:35:42.223Z",
+  "runtime": {
+    "node": "v24.21.0",
+    "platform": "linux",
+    "architecture": "x64",
+    "nodeSha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+    "npmCliSha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+    "npm": "11.19.0",
+    "toolPackages": [
+      {
+        "name": "playwright",
+        "version": "1.64.1",
+        "packageJsonSha256": "313d23ce667d93962d3a1ab4be80908cefe840e4d9e48f1cd5863b91f65e8e39"
+      },
+      {
+        "name": "playwright-core",
+        "version": "1.64.1",
+        "packageJsonSha256": "8aa1c9863fa8dea324e674254158cdc79440f4124ef2d84d38053013541cb7d6"
+      }
+    ],
+    "playwright": "1.64.1",
+    "playwrightCliSha256": "5e79302a6aad7d835d92d5ae6b4244c91cf61b28e94d7917279090e6c231f7a1"
+  },
+  "scope": {
+    "scenarios": [
+      "pause guide restart and resume clear held keyboard input",
+      "narrow touch holds multitouch cancellation and jump affect gameplay",
+      "corrupt and disabled storage keep play available with honest record notices"
+    ],
+    "cases": 3,
+    "carriedCases": [
+      "F01",
+      "F02",
+      "F03"
+    ],
+    "retries": 0,
+    "workers": 1,
+    "appBuild": false,
+    "appDependencies": false,
+    "accounts": false,
+    "backend": false,
+    "models": false,
+    "realTimePerformance": false,
+    "physicalTouch": false,
+    "profiles": [
+      "desktop1440x1000",
+      "touch-emulated390x844",
+      "storage-disabled-chromium"
+    ],
+    "clock": "Actual application RAF advanced through Playwright clock.runFor; no state injection or score replacement."
+  },
+  "limits": {
+    "workSeconds": 1020,
+    "cleanupSeconds": 90,
+    "browserSeconds": 540,
+    "jobMinutes": 20,
+    "streamBytes": 524288,
+    "streamGzipBytes": 131072,
+    "allStreamsGzipBytes": 524288,
+    "browserJsonBytes": 524288,
+    "reportBytes": 1048576,
+    "assetFetchSeconds": 8
+  },
+  "commands": [
+    {
+      "label": "before_head",
+      "args": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 41,
+          "observedSha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 41,
+            "sha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+            "compressedBytes": 60,
+            "data": "H4sIAAAAAAAAAwXBxwEAIAgEsL/TSJEyDni4/wgmjJ7Nj3typOK2mh+oSZITgvqishjrA1hE93opAAAA"
+          },
+          "head": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n",
+          "tail": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_tree",
+      "args": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-z",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2570,
+          "observedSha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2570,
+            "sha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+            "compressedBytes": 1135,
+            "data": "H4sIAAAAAAAAA5WWy5Kbxw2Fs+Vb+AWGBNAXAEtXPOVKVeJFnBfArce0OMMpkpKst08xslQajlSxlv8C3+lzgG78CDB7/8EPR/8BA2x26UgFPGkNXkZmo/Vl5pNVAKYGbLYP+8v+4el4qr/hF/Wd2bIvQh+ora/eKhtEsgQ2GSDcKNTn5sef73/5z6/bx3xRzlN7E+nSnBKnCqozcVCXXlDcpausHpt//uPv97/8ev+iGKbg6lTUGzi0mW2mYQ2ViZSrM4jjStj8+/7Hn/51f6utIkOZy0zBgsSs0why7Qqig5PWhNVok8c4755Px+fj2Q7nnZ+O7891unuwx3o+2Ie7+K3izfkVnkGncI5y8VY+lzVSn9IdWNnXWlkV/xe/fX88vVmH4/vth8fDtv6wx+fDyx60lCneGyVNb0MUWjHyjNFBg7G03AbmR6VTnd8eLucdAc0dwh3N3fNbP+zDLvvj0/b38/HpBX1kmbrOEsfOPVUWZfYUSoopxKOtxeR/iX6TEUqs4Qgt0dQQJBRnLJzcyzuuJbmolX6TfT6+PUV9owONWpMRvazFMkgbQNiYuy5MZWEl4D7oa3S8g7H73GG7XOrx+XKHX4lnWsaSLu61GnUcNUqqTWVEWzDVNGfW94jc+FhmAxvR4L6y+8opPoXHCk2O4Vosydb/ugS99tE7Uw1ZVgwD0tnRlkVNltmCiBB9tvyOsOiVD56BxrACpKAxQNYYSx1sGEAi8uLWvkOivfYxu+Bw8yBQccGGq0AoI2Z5QYyWy3v76rh+S+TGR7XZGlf1qeQ1vcngsZiQbCS6T104SeefEvusuzg+XU4Wl1vUSAToyyI0m0lhpx4GyTBXV4S12Iy0fUSdnytuCeAp2GwxmwTB6hJNsmkfVRN0NSg3Kdo8W7yxh3qd2BKoZpBThEa7HiQHeUxrbXmWt8AYvWrz8SLvlr3bx/Fpe3738JKzPAyRBls0bOm+gk0BUfsMzJjDyIU+cfZPWX9sf7s8Hl6mO/t0whktwLlXEoP6iDGgAwdw64sN8hPmfIqdvc39cfv7+eUkmEwaM8OFcxnMQCeigdFM0FN1hFPal6Br8285xEhDSCQjoJiprRirBbYUXDzyGl2ofMk5VRxPeb5FqUsOynIfTLimJlfWQq5oDUdbTiqq+BL1lHWq0y2rHEDTeK4JPRMXCivGoGkAGrNU3YPHC9Y+X9nDdZ21Am80sashoSnMJG6zFi/pjDVDP3MuHw513sb5JSa99+Lp4kYakcGrTw+LYIiaBKsSW8zNOU7758t59783e/t4exo1IsthHr7chnGfwzuOBRg+LJfxUrXPmNPbp7tXK/OW2jllFrgRNq82kAcaRad+/d2ZiUMwtePmUufL5xW8+yYvSK4+l0EVi9vIoIrrWFgbMUDlutFw/cn7NA3Xr1fxq6uyBl2jZqYqnj3a4Km6ercJOEt7/4S6dvBrHMEmbp2ml0kPZ1RfgqTppj7MASt72OZdnaIOH5+B/wLsGdpWCgoAAA=="
+          },
+          "head": "100644 blob 1c0a648412e0762f57fa2aa534faab67980069c0\t.gitignore100644 blob 477ad4f21b51934f43ed30cd78c138508732c9b6\tAGENTS.md100644 blob 7694388483b2d169819b727c2484e0e748498f4c\tLICENSE100644 blob 0681f42e2430b036d36da1e598612df4708b1fd0\tREADME.md100644 blob 9885977eaa90ac28aa425c2b94908957d2f60f32\tdocs/proposals/browser-gameplay-checks.md100644 blob 9709687d5eb8b3eb6fa329b684b0797bfffdeec2\tdocs/proposals/browser-gameplay.workflow.yml.example100644 blob 3d868b432d26b358903e7176c5409c71e9eba51d\td",
+          "tail": "5d0d68c98\tpublic/src/records.js100644 blob 9b8d52debb5721f69d7edef17ec33153fb298991\tpublic/src/renderer.js100644 blob eb009da76f604dd1f18791c526a009c6e99bbc75\tpublic/src/ride.js100644 blob 1f06f4e0b326149a121a906d2736ef7f8471e6c9\tpublic/styles.css100644 blob db44e76b8ba29ccdc7f46bcacc70ce620fed13c6\tscripts/check.mjs100644 blob 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a\tscripts/run-browser-gameplay.mjs100644 blob 47d86e0ba213be351751a2c4247fa26d1581d941\ttests/browser/gameplay.mjs100644 blob c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f\ttests/records.test.js100644 blob 19b9979c2f7f8772ee764c357699f44a6016e944\ttests/ride.test.js100644 blob 8138ba426bea84cb719bf8129dba9b5ab01ed4ca\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_index",
+      "args": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 25,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2474,
+          "observedSha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2474,
+            "sha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+            "compressedBytes": 1139,
+            "data": "H4sIAAAAAAAAA5XWTXKjxw0G4GznFrqASAD9A2DpSlSpVCVexLkA/lqmhxJVJDXjuX2KmZJEje2UZ8lFP914gf6aCDB7v8EAm106UgFPWoOXkdlofZn5ZBWAqQE38GFzvzvv7h8Px/oLfl3cmS37IvSB2vrqrbJBJEtgkwHCjUJ93sCHH/5+9+N/fto85MtantqbSJfmlDhVUJ2Jg7r0guIuXWX1uIEP//zHX+9+/OnuZSVMwdWpqDdwaDPbTMMaKhMpV2cQx5WXI//77oe//evualcVGcpcZgoWJGadRpBrVxAdnLQmrEY38CEPcdo+HQ9Ph5PtT1s/Hj6f6nh7bw/1tLcvt/FzxcfTtc2gUzhHuXgrn8saqU/pDqzsa62sij9hbz4fjh/X/vB58+Vhv6lf7eFp/xp6S5nivVHS9DZEoRUjzxgdNBhLy21gvmxzrNPz/nzaEtDcItzS3D49+34Xdt4dHje/nA6PL/TIMnWdJY6de6osyuwplBRTiEdbi8n/JP0WDUqs4Qgt0dQQJBRnLJzcyzuuJbmolf4f+HR4Pkb9NvVGrcmIXtZiGaQNIGzMXRemsrAScB/0+zTewti+ttTO53p4Ot/i+1SmZSzp4l6rUcdRo6TaVEa0BVNNc2Z93w5vFSyzgY1ocF/ZfeUUn8JjhSbHcC2WZOvf49O7CnpnqiHLimFAOjvasqjJMlsQEaLPlt+VEV1XwDPQGFaAFDQGyBpjqYMNA0hEXtzad/ntXQWzCw43DwIVF2y4CoQyYpYXxGi5vLc/mMw/2uGtgmqzNa7qU8lrepPBYzEh2Uh0n7pwks5Xf5d1G4fH89HifOWMRIC+LEKzmRR26mGQDHN1RViLzUjbi3N6qrhaDp6CzRazSRCsLtEkm/ZRNUFXg3KTugT5ZPHR7utdSkugmkFOERrtcoQc5DGtteVZ3gJj9LpM6td7ul32aReHx83p0/0rsjwMkQZbNGzpvoJNAVH7DMyYw8iF3pDdY9avm5/PD/vXOGefTjijBTj3SmJQHzEGdOAAbn2xQb4Zp2Ns7Tl3h80vp9emm0waM8OFcxnMQCeigdFM0FN1hFPae+XS5yuEGGkIiWQEFDO1FWO1wJaCi0de4gqV98ix4nDM05WjLjkoy30w4ZqaXFkLuaI1HG05qajit85j1rGOV1A5gKbxXBN6Ji4UVoxB0wA0Zqm6B49voF1eV4XrMlAF3mhiV0NCU5hJ3GYtXtIZa4ZeIecv+zpt4vRqpPdePF3cSCMyePXpYREMUZNgVWKLy8yf4rh7Op+2//v6bh6uzqFGZDnMw5fbMO5zeMexAMOH5TJeqnZlHJ8fb3/z4F2RnVNmgRth82oDeaBRdOqXvyYzcQim9kvQ5zqdX1/P7e9hQXIpbxlUsbiNDKq4TIC1EQNULk8SrlfspfGXX9d5q6uyBl2yZaYqnj3a4Km6ercJOEsvN/jFufTrG0SwiVun6WXSwxnVlyBpuqkPc8DKHpewPtUxav/1cv8XagZ6G6oJAAA="
+          },
+          "head": "100644 1c0a648412e0762f57fa2aa534faab67980069c0 0\t.gitignore100644 477ad4f21b51934f43ed30cd78c138508732c9b6 0\tAGENTS.md100644 7694388483b2d169819b727c2484e0e748498f4c 0\tLICENSE100644 0681f42e2430b036d36da1e598612df4708b1fd0 0\tREADME.md100644 9885977eaa90ac28aa425c2b94908957d2f60f32 0\tdocs/proposals/browser-gameplay-checks.md100644 9709687d5eb8b3eb6fa329b684b0797bfffdeec2 0\tdocs/proposals/browser-gameplay.workflow.yml.example100644 3d868b432d26b358903e7176c5409c71e9eba51d 0\tdocs/results/2026/10-2",
+          "tail": "288dcc0e7723fc5f3c13d81f75d0d68c98 0\tpublic/src/records.js100644 9b8d52debb5721f69d7edef17ec33153fb298991 0\tpublic/src/renderer.js100644 eb009da76f604dd1f18791c526a009c6e99bbc75 0\tpublic/src/ride.js100644 1f06f4e0b326149a121a906d2736ef7f8471e6c9 0\tpublic/styles.css100644 db44e76b8ba29ccdc7f46bcacc70ce620fed13c6 0\tscripts/check.mjs100644 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a 0\tscripts/run-browser-gameplay.mjs100644 47d86e0ba213be351751a2c4247fa26d1581d941 0\ttests/browser/gameplay.mjs100644 c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f 0\ttests/records.test.js100644 19b9979c2f7f8772ee764c357699f44a6016e944 0\ttests/ride.test.js100644 8138ba426bea84cb719bf8129dba9b5ab01ed4ca 0\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_status",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_diff",
+      "args": [
+        "git",
+        "-c",
+        "core.filemode=true",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_ignored",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--ignored=matching",
+        "--untracked-files=normal"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "npm_version",
+      "args": [
+        "[node]",
+        "/opt/hostedtoolcache/node/24.21.0/x64/lib/node_modules/npm/bin/npm-cli.js",
+        "--version"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 84,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 8,
+          "observedSha256": "005206ab803f8881d8227540b7980b37e723b69a8849edb31734a90b7e7964e2",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 8,
+            "sha256": "005206ab803f8881d8227540b7980b37e723b69a8849edb31734a90b7e7964e2",
+            "compressedBytes": 28,
+            "data": "H4sIAAAAAAAAAzM01DO01DPgAgAw1NUDCAAAAA=="
+          },
+          "head": "11.19.0\n",
+          "tail": "11.19.0\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "install_playwright",
+      "args": [
+        "[node]",
+        "/opt/hostedtoolcache/node/24.21.0/x64/lib/node_modules/npm/bin/npm-cli.js",
+        "install",
+        "--prefix",
+        "[scratch]/tools",
+        "--no-save",
+        "--package-lock=false",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--registry=https://registry.npmjs.org",
+        "playwright@1.64.1"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 1247,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 24,
+          "observedSha256": "4aaef3acc3c4b16766abf61c4f4aa2d3bd413e2fe822d3edd6cfa9d7e7334efa",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 24,
+            "sha256": "4aaef3acc3c4b16766abf61c4f4aa2d3bd413e2fe822d3edd6cfa9d7e7334efa",
+            "compressedBytes": 44,
+            "data": "H4sIAAAAAAAAA+NKTElJTVEwUihITM5OTE8tVsjMUzAs5gIANkfzthgAAAA="
+          },
+          "head": "\nadded 2 packages in 1s\n",
+          "tail": "\nadded 2 packages in 1s\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "install_chromium_and_runner_libraries",
+      "args": [
+        "[node]",
+        "[scratch]/tools/node_modules/playwright/cli.js",
+        "install",
+        "--with-deps",
+        "chromium"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 16404,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 16208,
+          "observedSha256": "fa19bf3f0445f2178d2d54d86c8d2789d03d111f3773d1fe30f3e289b3397407",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 16208,
+            "sha256": "fa19bf3f0445f2178d2d54d86c8d2789d03d111f3773d1fe30f3e289b3397407",
+            "compressedBytes": 2552,
+            "data": "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"
+          },
+          "head": "Installing dependencies...\nSwitching to root user to install dependencies...\nGet:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]\nGet:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]\nGet:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [731 kB]\nGet:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [663 kB]\nHit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease\nGet:3 http://azure.archive.ubuntu.com/ubuntu no",
+          "tail": " |  80% of 120 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 120 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 120 MiB\nChrome Headless Shell 156.0.8078.4 (playwright chromium-headless-shell v1248) downloaded to [scratch]/browsers/chromium_headless_shell-1248\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 237,
+          "observedSha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 237,
+            "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+            "compressedBytes": 151,
+            "data": "H4sIAAAAAAAAA33OMQ7CQAxE0X5PMSUUyU2goKDfsKNkBbGD7UXi9ihKRAf9+5pJlyZSZcSdJnzAydkRioFoSxfalRzsUzornPaqNzqELLsxemQLlo3cVCJXof1DzWlwulcVRzbC9hPaYp0rGKpkq/QtuJ4wNnr8wNN7WZ+5Gg5Pzu34zaGCmKpjUo8+fQDHcEoc7QAAAA=="
+          },
+          "head": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n",
+          "tail": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n"
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_head",
+      "args": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 33,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 41,
+          "observedSha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 41,
+            "sha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+            "compressedBytes": 60,
+            "data": "H4sIAAAAAAAAAwXBxwEAIAgEsL/TSJEyDni4/wgmjJ7Nj3typOK2mh+oSZITgvqishjrA1hE93opAAAA"
+          },
+          "head": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n",
+          "tail": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_tree",
+      "args": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-z",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 33,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2570,
+          "observedSha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2570,
+            "sha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+            "compressedBytes": 1135,
+            "data": "H4sIAAAAAAAAA5WWy5Kbxw2Fs+Vb+AWGBNAXAEtXPOVKVeJFnBfArce0OMMpkpKst08xslQajlSxlv8C3+lzgG78CDB7/8EPR/8BA2x26UgFPGkNXkZmo/Vl5pNVAKYGbLYP+8v+4el4qr/hF/Wd2bIvQh+ora/eKhtEsgQ2GSDcKNTn5sef73/5z6/bx3xRzlN7E+nSnBKnCqozcVCXXlDcpausHpt//uPv97/8ev+iGKbg6lTUGzi0mW2mYQ2ViZSrM4jjStj8+/7Hn/51f6utIkOZy0zBgsSs0why7Qqig5PWhNVok8c4755Px+fj2Q7nnZ+O7891unuwx3o+2Ie7+K3izfkVnkGncI5y8VY+lzVSn9IdWNnXWlkV/xe/fX88vVmH4/vth8fDtv6wx+fDyx60lCneGyVNb0MUWjHyjNFBg7G03AbmR6VTnd8eLucdAc0dwh3N3fNbP+zDLvvj0/b38/HpBX1kmbrOEsfOPVUWZfYUSoopxKOtxeR/iX6TEUqs4Qgt0dQQJBRnLJzcyzuuJbmolX6TfT6+PUV9owONWpMRvazFMkgbQNiYuy5MZWEl4D7oa3S8g7H73GG7XOrx+XKHX4lnWsaSLu61GnUcNUqqTWVEWzDVNGfW94jc+FhmAxvR4L6y+8opPoXHCk2O4Vosydb/ugS99tE7Uw1ZVgwD0tnRlkVNltmCiBB9tvyOsOiVD56BxrACpKAxQNYYSx1sGEAi8uLWvkOivfYxu+Bw8yBQccGGq0AoI2Z5QYyWy3v76rh+S+TGR7XZGlf1qeQ1vcngsZiQbCS6T104SeefEvusuzg+XU4Wl1vUSAToyyI0m0lhpx4GyTBXV4S12Iy0fUSdnytuCeAp2GwxmwTB6hJNsmkfVRN0NSg3Kdo8W7yxh3qd2BKoZpBThEa7HiQHeUxrbXmWt8AYvWrz8SLvlr3bx/Fpe3738JKzPAyRBls0bOm+gk0BUfsMzJjDyIU+cfZPWX9sf7s8Hl6mO/t0whktwLlXEoP6iDGgAwdw64sN8hPmfIqdvc39cfv7+eUkmEwaM8OFcxnMQCeigdFM0FN1hFPal6Br8285xEhDSCQjoJiprRirBbYUXDzyGl2ofMk5VRxPeb5FqUsOynIfTLimJlfWQq5oDUdbTiqq+BL1lHWq0y2rHEDTeK4JPRMXCivGoGkAGrNU3YPHC9Y+X9nDdZ21Am80sashoSnMJG6zFi/pjDVDP3MuHw513sb5JSa99+Lp4kYakcGrTw+LYIiaBKsSW8zNOU7758t59783e/t4exo1IsthHr7chnGfwzuOBRg+LJfxUrXPmNPbp7tXK/OW2jllFrgRNq82kAcaRad+/d2ZiUMwtePmUufL5xW8+yYvSK4+l0EVi9vIoIrrWFgbMUDlutFw/cn7NA3Xr1fxq6uyBl2jZqYqnj3a4Km6ercJOEt7/4S6dvBrHMEmbp2ml0kPZ1RfgqTppj7MASt72OZdnaIOH5+B/wLsGdpWCgoAAA=="
+          },
+          "head": "100644 blob 1c0a648412e0762f57fa2aa534faab67980069c0\t.gitignore100644 blob 477ad4f21b51934f43ed30cd78c138508732c9b6\tAGENTS.md100644 blob 7694388483b2d169819b727c2484e0e748498f4c\tLICENSE100644 blob 0681f42e2430b036d36da1e598612df4708b1fd0\tREADME.md100644 blob 9885977eaa90ac28aa425c2b94908957d2f60f32\tdocs/proposals/browser-gameplay-checks.md100644 blob 9709687d5eb8b3eb6fa329b684b0797bfffdeec2\tdocs/proposals/browser-gameplay.workflow.yml.example100644 blob 3d868b432d26b358903e7176c5409c71e9eba51d\td",
+          "tail": "5d0d68c98\tpublic/src/records.js100644 blob 9b8d52debb5721f69d7edef17ec33153fb298991\tpublic/src/renderer.js100644 blob eb009da76f604dd1f18791c526a009c6e99bbc75\tpublic/src/ride.js100644 blob 1f06f4e0b326149a121a906d2736ef7f8471e6c9\tpublic/styles.css100644 blob db44e76b8ba29ccdc7f46bcacc70ce620fed13c6\tscripts/check.mjs100644 blob 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a\tscripts/run-browser-gameplay.mjs100644 blob 47d86e0ba213be351751a2c4247fa26d1581d941\ttests/browser/gameplay.mjs100644 blob c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f\ttests/records.test.js100644 blob 19b9979c2f7f8772ee764c357699f44a6016e944\ttests/ride.test.js100644 blob 8138ba426bea84cb719bf8129dba9b5ab01ed4ca\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_index",
+      "args": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 33,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2474,
+          "observedSha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2474,
+            "sha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+            "compressedBytes": 1139,
+            "data": "H4sIAAAAAAAAA5XWTXKjxw0G4GznFrqASAD9A2DpSlSpVCVexLkA/lqmhxJVJDXjuX2KmZJEje2UZ8lFP914gf6aCDB7v8EAm106UgFPWoOXkdlofZn5ZBWAqQE38GFzvzvv7h8Px/oLfl3cmS37IvSB2vrqrbJBJEtgkwHCjUJ93sCHH/5+9+N/fto85MtantqbSJfmlDhVUJ2Jg7r0guIuXWX1uIEP//zHX+9+/OnuZSVMwdWpqDdwaDPbTMMaKhMpV2cQx5WXI//77oe//evualcVGcpcZgoWJGadRpBrVxAdnLQmrEY38CEPcdo+HQ9Ph5PtT1s/Hj6f6nh7bw/1tLcvt/FzxcfTtc2gUzhHuXgrn8saqU/pDqzsa62sij9hbz4fjh/X/vB58+Vhv6lf7eFp/xp6S5nivVHS9DZEoRUjzxgdNBhLy21gvmxzrNPz/nzaEtDcItzS3D49+34Xdt4dHje/nA6PL/TIMnWdJY6de6osyuwplBRTiEdbi8n/JP0WDUqs4Qgt0dQQJBRnLJzcyzuuJbmolf4f+HR4Pkb9NvVGrcmIXtZiGaQNIGzMXRemsrAScB/0+zTewti+ttTO53p4Ot/i+1SmZSzp4l6rUcdRo6TaVEa0BVNNc2Z93w5vFSyzgY1ocF/ZfeUUn8JjhSbHcC2WZOvf49O7CnpnqiHLimFAOjvasqjJMlsQEaLPlt+VEV1XwDPQGFaAFDQGyBpjqYMNA0hEXtzad/ntXQWzCw43DwIVF2y4CoQyYpYXxGi5vLc/mMw/2uGtgmqzNa7qU8lrepPBYzEh2Uh0n7pwks5Xf5d1G4fH89HifOWMRIC+LEKzmRR26mGQDHN1RViLzUjbi3N6qrhaDp6CzRazSRCsLtEkm/ZRNUFXg3KTugT5ZPHR7utdSkugmkFOERrtcoQc5DGtteVZ3gJj9LpM6td7ul32aReHx83p0/0rsjwMkQZbNGzpvoJNAVH7DMyYw8iF3pDdY9avm5/PD/vXOGefTjijBTj3SmJQHzEGdOAAbn2xQb4Zp2Ns7Tl3h80vp9emm0waM8OFcxnMQCeigdFM0FN1hFPae+XS5yuEGGkIiWQEFDO1FWO1wJaCi0de4gqV98ix4nDM05WjLjkoy30w4ZqaXFkLuaI1HG05qajit85j1rGOV1A5gKbxXBN6Ji4UVoxB0wA0Zqm6B49voF1eV4XrMlAF3mhiV0NCU5hJ3GYtXtIZa4ZeIecv+zpt4vRqpPdePF3cSCMyePXpYREMUZNgVWKLy8yf4rh7Op+2//v6bh6uzqFGZDnMw5fbMO5zeMexAMOH5TJeqnZlHJ8fb3/z4F2RnVNmgRth82oDeaBRdOqXvyYzcQim9kvQ5zqdX1/P7e9hQXIpbxlUsbiNDKq4TIC1EQNULk8SrlfspfGXX9d5q6uyBl2yZaYqnj3a4Km6ercJOEsvN/jFufTrG0SwiVun6WXSwxnVlyBpuqkPc8DKHpewPtUxav/1cv8XagZ6G6oJAAA="
+          },
+          "head": "100644 1c0a648412e0762f57fa2aa534faab67980069c0 0\t.gitignore100644 477ad4f21b51934f43ed30cd78c138508732c9b6 0\tAGENTS.md100644 7694388483b2d169819b727c2484e0e748498f4c 0\tLICENSE100644 0681f42e2430b036d36da1e598612df4708b1fd0 0\tREADME.md100644 9885977eaa90ac28aa425c2b94908957d2f60f32 0\tdocs/proposals/browser-gameplay-checks.md100644 9709687d5eb8b3eb6fa329b684b0797bfffdeec2 0\tdocs/proposals/browser-gameplay.workflow.yml.example100644 3d868b432d26b358903e7176c5409c71e9eba51d 0\tdocs/results/2026/10-2",
+          "tail": "288dcc0e7723fc5f3c13d81f75d0d68c98 0\tpublic/src/records.js100644 9b8d52debb5721f69d7edef17ec33153fb298991 0\tpublic/src/renderer.js100644 eb009da76f604dd1f18791c526a009c6e99bbc75 0\tpublic/src/ride.js100644 1f06f4e0b326149a121a906d2736ef7f8471e6c9 0\tpublic/styles.css100644 db44e76b8ba29ccdc7f46bcacc70ce620fed13c6 0\tscripts/check.mjs100644 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a 0\tscripts/run-browser-gameplay.mjs100644 47d86e0ba213be351751a2c4247fa26d1581d941 0\ttests/browser/gameplay.mjs100644 c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f 0\ttests/records.test.js100644 19b9979c2f7f8772ee764c357699f44a6016e944 0\ttests/ride.test.js100644 8138ba426bea84cb719bf8129dba9b5ab01ed4ca 0\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_status",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 32,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_diff",
+      "args": [
+        "git",
+        "-c",
+        "core.filemode=true",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 33,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "before_browser_ignored",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--ignored=matching",
+        "--untracked-files=normal"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 33,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "browser_cases",
+      "args": [
+        "[node]",
+        "[scratch]/tools/gameplay.mjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 150214,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 21569,
+          "observedSha256": "a52e8af4d5df751055fd9d57f6e1609c4c949d12ad49cebd76a89e8d58a9165f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 21569,
+            "sha256": "a52e8af4d5df751055fd9d57f6e1609c4c949d12ad49cebd76a89e8d58a9165f",
+            "compressedBytes": 13604,
+            "data": "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"
+          },
+          "head": "FALLLINE_GAMEPLAY_RESULT={\"schemaVersion\":1,\"origin\":\"https://fallline-alvaro.vercel.app\",\"browserVersion\":\"156.0.8078.4\",\"profile\":{\"clock\":\"Playwright clock.runFor; actual requestAnimationFrame callbacks\",\"maxAdvanceMs\":1000,\"totalVirtualLimitMs\":900000,\"desktop\":{\"width\":1440,\"height\":1000},\"narrow\":{\"width\":390,\"height\":844,\"hasTouch\":true,\"isMobile\":true},\"physicalDevice\":false},\"cases\":[{\"id\":\"F04\",\"title\":\"pause guide restart and resume clear held keyboard input\",\"accepted\":true,\"observat",
+          "tail": "\":true,\"lateChecksComplete\":true,\"failures\":[]},\"boundaries\":{\"consoleErrors\":0,\"consoleWarnings\":1,\"pageErrors\":0,\"unhandledRejections\":0,\"failedSameOriginRequests\":0,\"unexpectedRequests\":0,\"webSockets\":0,\"credentialRequests\":0,\"events\":[],\"totalVirtualMs\":185600,\"network\":\"only eight exact own-origin GET/HEAD resources; no fulfillment or API calls\"},\"proofLimits\":[\"clock-controlled Chromium RAF gameplay is not real-time performance evidence\",\"390x844 touch emulation is not a physical-device result\",\"driver closes observed contexts and browsers; outer CI owns independent browser-process and filesystem cleanup\",\"no audio audibility, reputation, account, native/store or full-product claim\"]}\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_head",
+      "args": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 41,
+          "observedSha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 41,
+            "sha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+            "compressedBytes": 60,
+            "data": "H4sIAAAAAAAAAwXBxwEAIAgEsL/TSJEyDni4/wgmjJ7Nj3typOK2mh+oSZITgvqishjrA1hE93opAAAA"
+          },
+          "head": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n",
+          "tail": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_tree",
+      "args": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-z",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2570,
+          "observedSha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2570,
+            "sha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+            "compressedBytes": 1135,
+            "data": "H4sIAAAAAAAAA5WWy5Kbxw2Fs+Vb+AWGBNAXAEtXPOVKVeJFnBfArce0OMMpkpKst08xslQajlSxlv8C3+lzgG78CDB7/8EPR/8BA2x26UgFPGkNXkZmo/Vl5pNVAKYGbLYP+8v+4el4qr/hF/Wd2bIvQh+ora/eKhtEsgQ2GSDcKNTn5sef73/5z6/bx3xRzlN7E+nSnBKnCqozcVCXXlDcpausHpt//uPv97/8ev+iGKbg6lTUGzi0mW2mYQ2ViZSrM4jjStj8+/7Hn/51f6utIkOZy0zBgsSs0why7Qqig5PWhNVok8c4755Px+fj2Q7nnZ+O7891unuwx3o+2Ie7+K3izfkVnkGncI5y8VY+lzVSn9IdWNnXWlkV/xe/fX88vVmH4/vth8fDtv6wx+fDyx60lCneGyVNb0MUWjHyjNFBg7G03AbmR6VTnd8eLucdAc0dwh3N3fNbP+zDLvvj0/b38/HpBX1kmbrOEsfOPVUWZfYUSoopxKOtxeR/iX6TEUqs4Qgt0dQQJBRnLJzcyzuuJbmolX6TfT6+PUV9owONWpMRvazFMkgbQNiYuy5MZWEl4D7oa3S8g7H73GG7XOrx+XKHX4lnWsaSLu61GnUcNUqqTWVEWzDVNGfW94jc+FhmAxvR4L6y+8opPoXHCk2O4Vosydb/ugS99tE7Uw1ZVgwD0tnRlkVNltmCiBB9tvyOsOiVD56BxrACpKAxQNYYSx1sGEAi8uLWvkOivfYxu+Bw8yBQccGGq0AoI2Z5QYyWy3v76rh+S+TGR7XZGlf1qeQ1vcngsZiQbCS6T104SeefEvusuzg+XU4Wl1vUSAToyyI0m0lhpx4GyTBXV4S12Iy0fUSdnytuCeAp2GwxmwTB6hJNsmkfVRN0NSg3Kdo8W7yxh3qd2BKoZpBThEa7HiQHeUxrbXmWt8AYvWrz8SLvlr3bx/Fpe3738JKzPAyRBls0bOm+gk0BUfsMzJjDyIU+cfZPWX9sf7s8Hl6mO/t0whktwLlXEoP6iDGgAwdw64sN8hPmfIqdvc39cfv7+eUkmEwaM8OFcxnMQCeigdFM0FN1hFPal6Br8285xEhDSCQjoJiprRirBbYUXDzyGl2ofMk5VRxPeb5FqUsOynIfTLimJlfWQq5oDUdbTiqq+BL1lHWq0y2rHEDTeK4JPRMXCivGoGkAGrNU3YPHC9Y+X9nDdZ21Am80sashoSnMJG6zFi/pjDVDP3MuHw513sb5JSa99+Lp4kYakcGrTw+LYIiaBKsSW8zNOU7758t59783e/t4exo1IsthHr7chnGfwzuOBRg+LJfxUrXPmNPbp7tXK/OW2jllFrgRNq82kAcaRad+/d2ZiUMwtePmUufL5xW8+yYvSK4+l0EVi9vIoIrrWFgbMUDlutFw/cn7NA3Xr1fxq6uyBl2jZqYqnj3a4Km6ercJOEt7/4S6dvBrHMEmbp2ml0kPZ1RfgqTppj7MASt72OZdnaIOH5+B/wLsGdpWCgoAAA=="
+          },
+          "head": "100644 blob 1c0a648412e0762f57fa2aa534faab67980069c0\t.gitignore100644 blob 477ad4f21b51934f43ed30cd78c138508732c9b6\tAGENTS.md100644 blob 7694388483b2d169819b727c2484e0e748498f4c\tLICENSE100644 blob 0681f42e2430b036d36da1e598612df4708b1fd0\tREADME.md100644 blob 9885977eaa90ac28aa425c2b94908957d2f60f32\tdocs/proposals/browser-gameplay-checks.md100644 blob 9709687d5eb8b3eb6fa329b684b0797bfffdeec2\tdocs/proposals/browser-gameplay.workflow.yml.example100644 blob 3d868b432d26b358903e7176c5409c71e9eba51d\td",
+          "tail": "5d0d68c98\tpublic/src/records.js100644 blob 9b8d52debb5721f69d7edef17ec33153fb298991\tpublic/src/renderer.js100644 blob eb009da76f604dd1f18791c526a009c6e99bbc75\tpublic/src/ride.js100644 blob 1f06f4e0b326149a121a906d2736ef7f8471e6c9\tpublic/styles.css100644 blob db44e76b8ba29ccdc7f46bcacc70ce620fed13c6\tscripts/check.mjs100644 blob 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a\tscripts/run-browser-gameplay.mjs100644 blob 47d86e0ba213be351751a2c4247fa26d1581d941\ttests/browser/gameplay.mjs100644 blob c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f\ttests/records.test.js100644 blob 19b9979c2f7f8772ee764c357699f44a6016e944\ttests/ride.test.js100644 blob 8138ba426bea84cb719bf8129dba9b5ab01ed4ca\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_index",
+      "args": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2474,
+          "observedSha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2474,
+            "sha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+            "compressedBytes": 1139,
+            "data": "H4sIAAAAAAAAA5XWTXKjxw0G4GznFrqASAD9A2DpSlSpVCVexLkA/lqmhxJVJDXjuX2KmZJEje2UZ8lFP914gf6aCDB7v8EAm106UgFPWoOXkdlofZn5ZBWAqQE38GFzvzvv7h8Px/oLfl3cmS37IvSB2vrqrbJBJEtgkwHCjUJ93sCHH/5+9+N/fto85MtantqbSJfmlDhVUJ2Jg7r0guIuXWX1uIEP//zHX+9+/OnuZSVMwdWpqDdwaDPbTMMaKhMpV2cQx5WXI//77oe//evualcVGcpcZgoWJGadRpBrVxAdnLQmrEY38CEPcdo+HQ9Ph5PtT1s/Hj6f6nh7bw/1tLcvt/FzxcfTtc2gUzhHuXgrn8saqU/pDqzsa62sij9hbz4fjh/X/vB58+Vhv6lf7eFp/xp6S5nivVHS9DZEoRUjzxgdNBhLy21gvmxzrNPz/nzaEtDcItzS3D49+34Xdt4dHje/nA6PL/TIMnWdJY6de6osyuwplBRTiEdbi8n/JP0WDUqs4Qgt0dQQJBRnLJzcyzuuJbmolf4f+HR4Pkb9NvVGrcmIXtZiGaQNIGzMXRemsrAScB/0+zTewti+ttTO53p4Ot/i+1SmZSzp4l6rUcdRo6TaVEa0BVNNc2Z93w5vFSyzgY1ocF/ZfeUUn8JjhSbHcC2WZOvf49O7CnpnqiHLimFAOjvasqjJMlsQEaLPlt+VEV1XwDPQGFaAFDQGyBpjqYMNA0hEXtzad/ntXQWzCw43DwIVF2y4CoQyYpYXxGi5vLc/mMw/2uGtgmqzNa7qU8lrepPBYzEh2Uh0n7pwks5Xf5d1G4fH89HifOWMRIC+LEKzmRR26mGQDHN1RViLzUjbi3N6qrhaDp6CzRazSRCsLtEkm/ZRNUFXg3KTugT5ZPHR7utdSkugmkFOERrtcoQc5DGtteVZ3gJj9LpM6td7ul32aReHx83p0/0rsjwMkQZbNGzpvoJNAVH7DMyYw8iF3pDdY9avm5/PD/vXOGefTjijBTj3SmJQHzEGdOAAbn2xQb4Zp2Ns7Tl3h80vp9emm0waM8OFcxnMQCeigdFM0FN1hFPae+XS5yuEGGkIiWQEFDO1FWO1wJaCi0de4gqV98ix4nDM05WjLjkoy30w4ZqaXFkLuaI1HG05qajit85j1rGOV1A5gKbxXBN6Ji4UVoxB0wA0Zqm6B49voF1eV4XrMlAF3mhiV0NCU5hJ3GYtXtIZa4ZeIecv+zpt4vRqpPdePF3cSCMyePXpYREMUZNgVWKLy8yf4rh7Op+2//v6bh6uzqFGZDnMw5fbMO5zeMexAMOH5TJeqnZlHJ8fb3/z4F2RnVNmgRth82oDeaBRdOqXvyYzcQim9kvQ5zqdX1/P7e9hQXIpbxlUsbiNDKq4TIC1EQNULk8SrlfspfGXX9d5q6uyBl2yZaYqnj3a4Km6ercJOEsvN/jFufTrG0SwiVun6WXSwxnVlyBpuqkPc8DKHpewPtUxav/1cv8XagZ6G6oJAAA="
+          },
+          "head": "100644 1c0a648412e0762f57fa2aa534faab67980069c0 0\t.gitignore100644 477ad4f21b51934f43ed30cd78c138508732c9b6 0\tAGENTS.md100644 7694388483b2d169819b727c2484e0e748498f4c 0\tLICENSE100644 0681f42e2430b036d36da1e598612df4708b1fd0 0\tREADME.md100644 9885977eaa90ac28aa425c2b94908957d2f60f32 0\tdocs/proposals/browser-gameplay-checks.md100644 9709687d5eb8b3eb6fa329b684b0797bfffdeec2 0\tdocs/proposals/browser-gameplay.workflow.yml.example100644 3d868b432d26b358903e7176c5409c71e9eba51d 0\tdocs/results/2026/10-2",
+          "tail": "288dcc0e7723fc5f3c13d81f75d0d68c98 0\tpublic/src/records.js100644 9b8d52debb5721f69d7edef17ec33153fb298991 0\tpublic/src/renderer.js100644 eb009da76f604dd1f18791c526a009c6e99bbc75 0\tpublic/src/ride.js100644 1f06f4e0b326149a121a906d2736ef7f8471e6c9 0\tpublic/styles.css100644 db44e76b8ba29ccdc7f46bcacc70ce620fed13c6 0\tscripts/check.mjs100644 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a 0\tscripts/run-browser-gameplay.mjs100644 47d86e0ba213be351751a2c4247fa26d1581d941 0\ttests/browser/gameplay.mjs100644 c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f 0\ttests/records.test.js100644 19b9979c2f7f8772ee764c357699f44a6016e944 0\ttests/ride.test.js100644 8138ba426bea84cb719bf8129dba9b5ab01ed4ca 0\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_status",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_diff",
+      "args": [
+        "git",
+        "-c",
+        "core.filemode=true",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_browser_ignored",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--ignored=matching",
+        "--untracked-files=normal"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_head",
+      "args": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 41,
+          "observedSha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 41,
+            "sha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+            "compressedBytes": 60,
+            "data": "H4sIAAAAAAAAAwXBxwEAIAgEsL/TSJEyDni4/wgmjJ7Nj3typOK2mh+oSZITgvqishjrA1hE93opAAAA"
+          },
+          "head": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n",
+          "tail": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_tree",
+      "args": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-z",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2570,
+          "observedSha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2570,
+            "sha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+            "compressedBytes": 1135,
+            "data": "H4sIAAAAAAAAA5WWy5Kbxw2Fs+Vb+AWGBNAXAEtXPOVKVeJFnBfArce0OMMpkpKst08xslQajlSxlv8C3+lzgG78CDB7/8EPR/8BA2x26UgFPGkNXkZmo/Vl5pNVAKYGbLYP+8v+4el4qr/hF/Wd2bIvQh+ora/eKhtEsgQ2GSDcKNTn5sef73/5z6/bx3xRzlN7E+nSnBKnCqozcVCXXlDcpausHpt//uPv97/8ev+iGKbg6lTUGzi0mW2mYQ2ViZSrM4jjStj8+/7Hn/51f6utIkOZy0zBgsSs0why7Qqig5PWhNVok8c4755Px+fj2Q7nnZ+O7891unuwx3o+2Ie7+K3izfkVnkGncI5y8VY+lzVSn9IdWNnXWlkV/xe/fX88vVmH4/vth8fDtv6wx+fDyx60lCneGyVNb0MUWjHyjNFBg7G03AbmR6VTnd8eLucdAc0dwh3N3fNbP+zDLvvj0/b38/HpBX1kmbrOEsfOPVUWZfYUSoopxKOtxeR/iX6TEUqs4Qgt0dQQJBRnLJzcyzuuJbmolX6TfT6+PUV9owONWpMRvazFMkgbQNiYuy5MZWEl4D7oa3S8g7H73GG7XOrx+XKHX4lnWsaSLu61GnUcNUqqTWVEWzDVNGfW94jc+FhmAxvR4L6y+8opPoXHCk2O4Vosydb/ugS99tE7Uw1ZVgwD0tnRlkVNltmCiBB9tvyOsOiVD56BxrACpKAxQNYYSx1sGEAi8uLWvkOivfYxu+Bw8yBQccGGq0AoI2Z5QYyWy3v76rh+S+TGR7XZGlf1qeQ1vcngsZiQbCS6T104SeefEvusuzg+XU4Wl1vUSAToyyI0m0lhpx4GyTBXV4S12Iy0fUSdnytuCeAp2GwxmwTB6hJNsmkfVRN0NSg3Kdo8W7yxh3qd2BKoZpBThEa7HiQHeUxrbXmWt8AYvWrz8SLvlr3bx/Fpe3738JKzPAyRBls0bOm+gk0BUfsMzJjDyIU+cfZPWX9sf7s8Hl6mO/t0whktwLlXEoP6iDGgAwdw64sN8hPmfIqdvc39cfv7+eUkmEwaM8OFcxnMQCeigdFM0FN1hFPal6Br8285xEhDSCQjoJiprRirBbYUXDzyGl2ofMk5VRxPeb5FqUsOynIfTLimJlfWQq5oDUdbTiqq+BL1lHWq0y2rHEDTeK4JPRMXCivGoGkAGrNU3YPHC9Y+X9nDdZ21Am80sashoSnMJG6zFi/pjDVDP3MuHw513sb5JSa99+Lp4kYakcGrTw+LYIiaBKsSW8zNOU7758t59783e/t4exo1IsthHr7chnGfwzuOBRg+LJfxUrXPmNPbp7tXK/OW2jllFrgRNq82kAcaRad+/d2ZiUMwtePmUufL5xW8+yYvSK4+l0EVi9vIoIrrWFgbMUDlutFw/cn7NA3Xr1fxq6uyBl2jZqYqnj3a4Km6ercJOEt7/4S6dvBrHMEmbp2ml0kPZ1RfgqTppj7MASt72OZdnaIOH5+B/wLsGdpWCgoAAA=="
+          },
+          "head": "100644 blob 1c0a648412e0762f57fa2aa534faab67980069c0\t.gitignore100644 blob 477ad4f21b51934f43ed30cd78c138508732c9b6\tAGENTS.md100644 blob 7694388483b2d169819b727c2484e0e748498f4c\tLICENSE100644 blob 0681f42e2430b036d36da1e598612df4708b1fd0\tREADME.md100644 blob 9885977eaa90ac28aa425c2b94908957d2f60f32\tdocs/proposals/browser-gameplay-checks.md100644 blob 9709687d5eb8b3eb6fa329b684b0797bfffdeec2\tdocs/proposals/browser-gameplay.workflow.yml.example100644 blob 3d868b432d26b358903e7176c5409c71e9eba51d\td",
+          "tail": "5d0d68c98\tpublic/src/records.js100644 blob 9b8d52debb5721f69d7edef17ec33153fb298991\tpublic/src/renderer.js100644 blob eb009da76f604dd1f18791c526a009c6e99bbc75\tpublic/src/ride.js100644 blob 1f06f4e0b326149a121a906d2736ef7f8471e6c9\tpublic/styles.css100644 blob db44e76b8ba29ccdc7f46bcacc70ce620fed13c6\tscripts/check.mjs100644 blob 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a\tscripts/run-browser-gameplay.mjs100644 blob 47d86e0ba213be351751a2c4247fa26d1581d941\ttests/browser/gameplay.mjs100644 blob c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f\ttests/records.test.js100644 blob 19b9979c2f7f8772ee764c357699f44a6016e944\ttests/ride.test.js100644 blob 8138ba426bea84cb719bf8129dba9b5ab01ed4ca\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_index",
+      "args": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2474,
+          "observedSha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2474,
+            "sha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+            "compressedBytes": 1139,
+            "data": "H4sIAAAAAAAAA5XWTXKjxw0G4GznFrqASAD9A2DpSlSpVCVexLkA/lqmhxJVJDXjuX2KmZJEje2UZ8lFP914gf6aCDB7v8EAm106UgFPWoOXkdlofZn5ZBWAqQE38GFzvzvv7h8Px/oLfl3cmS37IvSB2vrqrbJBJEtgkwHCjUJ93sCHH/5+9+N/fto85MtantqbSJfmlDhVUJ2Jg7r0guIuXWX1uIEP//zHX+9+/OnuZSVMwdWpqDdwaDPbTMMaKhMpV2cQx5WXI//77oe//evualcVGcpcZgoWJGadRpBrVxAdnLQmrEY38CEPcdo+HQ9Ph5PtT1s/Hj6f6nh7bw/1tLcvt/FzxcfTtc2gUzhHuXgrn8saqU/pDqzsa62sij9hbz4fjh/X/vB58+Vhv6lf7eFp/xp6S5nivVHS9DZEoRUjzxgdNBhLy21gvmxzrNPz/nzaEtDcItzS3D49+34Xdt4dHje/nA6PL/TIMnWdJY6de6osyuwplBRTiEdbi8n/JP0WDUqs4Qgt0dQQJBRnLJzcyzuuJbmolf4f+HR4Pkb9NvVGrcmIXtZiGaQNIGzMXRemsrAScB/0+zTewti+ttTO53p4Ot/i+1SmZSzp4l6rUcdRo6TaVEa0BVNNc2Z93w5vFSyzgY1ocF/ZfeUUn8JjhSbHcC2WZOvf49O7CnpnqiHLimFAOjvasqjJMlsQEaLPlt+VEV1XwDPQGFaAFDQGyBpjqYMNA0hEXtzad/ntXQWzCw43DwIVF2y4CoQyYpYXxGi5vLc/mMw/2uGtgmqzNa7qU8lrepPBYzEh2Uh0n7pwks5Xf5d1G4fH89HifOWMRIC+LEKzmRR26mGQDHN1RViLzUjbi3N6qrhaDp6CzRazSRCsLtEkm/ZRNUFXg3KTugT5ZPHR7utdSkugmkFOERrtcoQc5DGtteVZ3gJj9LpM6td7ul32aReHx83p0/0rsjwMkQZbNGzpvoJNAVH7DMyYw8iF3pDdY9avm5/PD/vXOGefTjijBTj3SmJQHzEGdOAAbn2xQb4Zp2Ns7Tl3h80vp9emm0waM8OFcxnMQCeigdFM0FN1hFPae+XS5yuEGGkIiWQEFDO1FWO1wJaCi0de4gqV98ix4nDM05WjLjkoy30w4ZqaXFkLuaI1HG05qajit85j1rGOV1A5gKbxXBN6Ji4UVoxB0wA0Zqm6B49voF1eV4XrMlAF3mhiV0NCU5hJ3GYtXtIZa4ZeIecv+zpt4vRqpPdePF3cSCMyePXpYREMUZNgVWKLy8yf4rh7Op+2//v6bh6uzqFGZDnMw5fbMO5zeMexAMOH5TJeqnZlHJ8fb3/z4F2RnVNmgRth82oDeaBRdOqXvyYzcQim9kvQ5zqdX1/P7e9hQXIpbxlUsbiNDKq4TIC1EQNULk8SrlfspfGXX9d5q6uyBl2yZaYqnj3a4Km6ercJOEsvN/jFufTrG0SwiVun6WXSwxnVlyBpuqkPc8DKHpewPtUxav/1cv8XagZ6G6oJAAA="
+          },
+          "head": "100644 1c0a648412e0762f57fa2aa534faab67980069c0 0\t.gitignore100644 477ad4f21b51934f43ed30cd78c138508732c9b6 0\tAGENTS.md100644 7694388483b2d169819b727c2484e0e748498f4c 0\tLICENSE100644 0681f42e2430b036d36da1e598612df4708b1fd0 0\tREADME.md100644 9885977eaa90ac28aa425c2b94908957d2f60f32 0\tdocs/proposals/browser-gameplay-checks.md100644 9709687d5eb8b3eb6fa329b684b0797bfffdeec2 0\tdocs/proposals/browser-gameplay.workflow.yml.example100644 3d868b432d26b358903e7176c5409c71e9eba51d 0\tdocs/results/2026/10-2",
+          "tail": "288dcc0e7723fc5f3c13d81f75d0d68c98 0\tpublic/src/records.js100644 9b8d52debb5721f69d7edef17ec33153fb298991 0\tpublic/src/renderer.js100644 eb009da76f604dd1f18791c526a009c6e99bbc75 0\tpublic/src/ride.js100644 1f06f4e0b326149a121a906d2736ef7f8471e6c9 0\tpublic/styles.css100644 db44e76b8ba29ccdc7f46bcacc70ce620fed13c6 0\tscripts/check.mjs100644 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a 0\tscripts/run-browser-gameplay.mjs100644 47d86e0ba213be351751a2c4247fa26d1581d941 0\ttests/browser/gameplay.mjs100644 c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f 0\ttests/records.test.js100644 19b9979c2f7f8772ee764c357699f44a6016e944 0\ttests/ride.test.js100644 8138ba426bea84cb719bf8129dba9b5ab01ed4ca 0\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_status",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_diff",
+      "args": [
+        "git",
+        "-c",
+        "core.filemode=true",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_ignored",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--ignored=matching",
+        "--untracked-files=normal"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_head",
+      "args": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 41,
+          "observedSha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 41,
+            "sha256": "91f10dd703af4ccec260c2b6b0fd2f88e822d19a02c47b0103c64b5b970eadc3",
+            "compressedBytes": 60,
+            "data": "H4sIAAAAAAAAAwXBxwEAIAgEsL/TSJEyDni4/wgmjJ7Nj3typOK2mh+oSZITgvqishjrA1hE93opAAAA"
+          },
+          "head": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n",
+          "tail": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d\n"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_tree",
+      "args": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-z",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2570,
+          "observedSha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2570,
+            "sha256": "3bc8161c08f047a10e81bd134f6ac01ff3cfd7bf36981bc2365d64cbdcf0114f",
+            "compressedBytes": 1135,
+            "data": "H4sIAAAAAAAAA5WWy5Kbxw2Fs+Vb+AWGBNAXAEtXPOVKVeJFnBfArce0OMMpkpKst08xslQajlSxlv8C3+lzgG78CDB7/8EPR/8BA2x26UgFPGkNXkZmo/Vl5pNVAKYGbLYP+8v+4el4qr/hF/Wd2bIvQh+ora/eKhtEsgQ2GSDcKNTn5sef73/5z6/bx3xRzlN7E+nSnBKnCqozcVCXXlDcpausHpt//uPv97/8ev+iGKbg6lTUGzi0mW2mYQ2ViZSrM4jjStj8+/7Hn/51f6utIkOZy0zBgsSs0why7Qqig5PWhNVok8c4755Px+fj2Q7nnZ+O7891unuwx3o+2Ie7+K3izfkVnkGncI5y8VY+lzVSn9IdWNnXWlkV/xe/fX88vVmH4/vth8fDtv6wx+fDyx60lCneGyVNb0MUWjHyjNFBg7G03AbmR6VTnd8eLucdAc0dwh3N3fNbP+zDLvvj0/b38/HpBX1kmbrOEsfOPVUWZfYUSoopxKOtxeR/iX6TEUqs4Qgt0dQQJBRnLJzcyzuuJbmolX6TfT6+PUV9owONWpMRvazFMkgbQNiYuy5MZWEl4D7oa3S8g7H73GG7XOrx+XKHX4lnWsaSLu61GnUcNUqqTWVEWzDVNGfW94jc+FhmAxvR4L6y+8opPoXHCk2O4Vosydb/ugS99tE7Uw1ZVgwD0tnRlkVNltmCiBB9tvyOsOiVD56BxrACpKAxQNYYSx1sGEAi8uLWvkOivfYxu+Bw8yBQccGGq0AoI2Z5QYyWy3v76rh+S+TGR7XZGlf1qeQ1vcngsZiQbCS6T104SeefEvusuzg+XU4Wl1vUSAToyyI0m0lhpx4GyTBXV4S12Iy0fUSdnytuCeAp2GwxmwTB6hJNsmkfVRN0NSg3Kdo8W7yxh3qd2BKoZpBThEa7HiQHeUxrbXmWt8AYvWrz8SLvlr3bx/Fpe3738JKzPAyRBls0bOm+gk0BUfsMzJjDyIU+cfZPWX9sf7s8Hl6mO/t0whktwLlXEoP6iDGgAwdw64sN8hPmfIqdvc39cfv7+eUkmEwaM8OFcxnMQCeigdFM0FN1hFPal6Br8285xEhDSCQjoJiprRirBbYUXDzyGl2ofMk5VRxPeb5FqUsOynIfTLimJlfWQq5oDUdbTiqq+BL1lHWq0y2rHEDTeK4JPRMXCivGoGkAGrNU3YPHC9Y+X9nDdZ21Am80sashoSnMJG6zFi/pjDVDP3MuHw513sb5JSa99+Lp4kYakcGrTw+LYIiaBKsSW8zNOU7758t59783e/t4exo1IsthHr7chnGfwzuOBRg+LJfxUrXPmNPbp7tXK/OW2jllFrgRNq82kAcaRad+/d2ZiUMwtePmUufL5xW8+yYvSK4+l0EVi9vIoIrrWFgbMUDlutFw/cn7NA3Xr1fxq6uyBl2jZqYqnj3a4Km6ercJOEt7/4S6dvBrHMEmbp2ml0kPZ1RfgqTppj7MASt72OZdnaIOH5+B/wLsGdpWCgoAAA=="
+          },
+          "head": "100644 blob 1c0a648412e0762f57fa2aa534faab67980069c0\t.gitignore100644 blob 477ad4f21b51934f43ed30cd78c138508732c9b6\tAGENTS.md100644 blob 7694388483b2d169819b727c2484e0e748498f4c\tLICENSE100644 blob 0681f42e2430b036d36da1e598612df4708b1fd0\tREADME.md100644 blob 9885977eaa90ac28aa425c2b94908957d2f60f32\tdocs/proposals/browser-gameplay-checks.md100644 blob 9709687d5eb8b3eb6fa329b684b0797bfffdeec2\tdocs/proposals/browser-gameplay.workflow.yml.example100644 blob 3d868b432d26b358903e7176c5409c71e9eba51d\td",
+          "tail": "5d0d68c98\tpublic/src/records.js100644 blob 9b8d52debb5721f69d7edef17ec33153fb298991\tpublic/src/renderer.js100644 blob eb009da76f604dd1f18791c526a009c6e99bbc75\tpublic/src/ride.js100644 blob 1f06f4e0b326149a121a906d2736ef7f8471e6c9\tpublic/styles.css100644 blob db44e76b8ba29ccdc7f46bcacc70ce620fed13c6\tscripts/check.mjs100644 blob 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a\tscripts/run-browser-gameplay.mjs100644 blob 47d86e0ba213be351751a2c4247fa26d1581d941\ttests/browser/gameplay.mjs100644 blob c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f\ttests/records.test.js100644 blob 19b9979c2f7f8772ee764c357699f44a6016e944\ttests/ride.test.js100644 blob 8138ba426bea84cb719bf8129dba9b5ab01ed4ca\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_index",
+      "args": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 2474,
+          "observedSha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 2474,
+            "sha256": "8bc832bbbbdd56da281a0ef7a5b091abf538b6d1ee276f5d79dcc14fa8a77f68",
+            "compressedBytes": 1139,
+            "data": "H4sIAAAAAAAAA5XWTXKjxw0G4GznFrqASAD9A2DpSlSpVCVexLkA/lqmhxJVJDXjuX2KmZJEje2UZ8lFP914gf6aCDB7v8EAm106UgFPWoOXkdlofZn5ZBWAqQE38GFzvzvv7h8Px/oLfl3cmS37IvSB2vrqrbJBJEtgkwHCjUJ93sCHH/5+9+N/fto85MtantqbSJfmlDhVUJ2Jg7r0guIuXWX1uIEP//zHX+9+/OnuZSVMwdWpqDdwaDPbTMMaKhMpV2cQx5WXI//77oe//evualcVGcpcZgoWJGadRpBrVxAdnLQmrEY38CEPcdo+HQ9Ph5PtT1s/Hj6f6nh7bw/1tLcvt/FzxcfTtc2gUzhHuXgrn8saqU/pDqzsa62sij9hbz4fjh/X/vB58+Vhv6lf7eFp/xp6S5nivVHS9DZEoRUjzxgdNBhLy21gvmxzrNPz/nzaEtDcItzS3D49+34Xdt4dHje/nA6PL/TIMnWdJY6de6osyuwplBRTiEdbi8n/JP0WDUqs4Qgt0dQQJBRnLJzcyzuuJbmolf4f+HR4Pkb9NvVGrcmIXtZiGaQNIGzMXRemsrAScB/0+zTewti+ttTO53p4Ot/i+1SmZSzp4l6rUcdRo6TaVEa0BVNNc2Z93w5vFSyzgY1ocF/ZfeUUn8JjhSbHcC2WZOvf49O7CnpnqiHLimFAOjvasqjJMlsQEaLPlt+VEV1XwDPQGFaAFDQGyBpjqYMNA0hEXtzad/ntXQWzCw43DwIVF2y4CoQyYpYXxGi5vLc/mMw/2uGtgmqzNa7qU8lrepPBYzEh2Uh0n7pwks5Xf5d1G4fH89HifOWMRIC+LEKzmRR26mGQDHN1RViLzUjbi3N6qrhaDp6CzRazSRCsLtEkm/ZRNUFXg3KTugT5ZPHR7utdSkugmkFOERrtcoQc5DGtteVZ3gJj9LpM6td7ul32aReHx83p0/0rsjwMkQZbNGzpvoJNAVH7DMyYw8iF3pDdY9avm5/PD/vXOGefTjijBTj3SmJQHzEGdOAAbn2xQb4Zp2Ns7Tl3h80vp9emm0waM8OFcxnMQCeigdFM0FN1hFPae+XS5yuEGGkIiWQEFDO1FWO1wJaCi0de4gqV98ix4nDM05WjLjkoy30w4ZqaXFkLuaI1HG05qajit85j1rGOV1A5gKbxXBN6Ji4UVoxB0wA0Zqm6B49voF1eV4XrMlAF3mhiV0NCU5hJ3GYtXtIZa4ZeIecv+zpt4vRqpPdePF3cSCMyePXpYREMUZNgVWKLy8yf4rh7Op+2//v6bh6uzqFGZDnMw5fbMO5zeMexAMOH5TJeqnZlHJ8fb3/z4F2RnVNmgRth82oDeaBRdOqXvyYzcQim9kvQ5zqdX1/P7e9hQXIpbxlUsbiNDKq4TIC1EQNULk8SrlfspfGXX9d5q6uyBl2yZaYqnj3a4Km6ercJOEsvN/jFufTrG0SwiVun6WXSwxnVlyBpuqkPc8DKHpewPtUxav/1cv8XagZ6G6oJAAA="
+          },
+          "head": "100644 1c0a648412e0762f57fa2aa534faab67980069c0 0\t.gitignore100644 477ad4f21b51934f43ed30cd78c138508732c9b6 0\tAGENTS.md100644 7694388483b2d169819b727c2484e0e748498f4c 0\tLICENSE100644 0681f42e2430b036d36da1e598612df4708b1fd0 0\tREADME.md100644 9885977eaa90ac28aa425c2b94908957d2f60f32 0\tdocs/proposals/browser-gameplay-checks.md100644 9709687d5eb8b3eb6fa329b684b0797bfffdeec2 0\tdocs/proposals/browser-gameplay.workflow.yml.example100644 3d868b432d26b358903e7176c5409c71e9eba51d 0\tdocs/results/2026/10-2",
+          "tail": "288dcc0e7723fc5f3c13d81f75d0d68c98 0\tpublic/src/records.js100644 9b8d52debb5721f69d7edef17ec33153fb298991 0\tpublic/src/renderer.js100644 eb009da76f604dd1f18791c526a009c6e99bbc75 0\tpublic/src/ride.js100644 1f06f4e0b326149a121a906d2736ef7f8471e6c9 0\tpublic/styles.css100644 db44e76b8ba29ccdc7f46bcacc70ce620fed13c6 0\tscripts/check.mjs100644 19a22ad5abcbfba5a7465b415f01cb5adfa7f99a 0\tscripts/run-browser-gameplay.mjs100644 47d86e0ba213be351751a2c4247fa26d1581d941 0\ttests/browser/gameplay.mjs100644 c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f 0\ttests/records.test.js100644 19b9979c2f7f8772ee764c357699f44a6016e944 0\ttests/ride.test.js100644 8138ba426bea84cb719bf8129dba9b5ab01ed4ca 0\tvercel.json"
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_status",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 28,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_diff",
+      "args": [
+        "git",
+        "-c",
+        "core.filemode=true",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 27,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    },
+    {
+      "label": "after_cleanup_ignored",
+      "args": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "-z",
+        "--ignored=matching",
+        "--untracked-files=normal"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stopReason": null,
+      "exitObservedAndReaped": true,
+      "closeObserved": true,
+      "pipesEOF": [
+        true,
+        true
+      ],
+      "forcedDrain": false,
+      "originalProcessGroupAbsent": true,
+      "termSent": false,
+      "killSent": false,
+      "durationMs": 29,
+      "streams": [
+        {
+          "name": "stdout",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        },
+        {
+          "name": "stderr",
+          "observedBytes": 0,
+          "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "raw": {
+            "encoding": "gzip-base64",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "compressedBytes": 20,
+            "data": "H4sIAAAAAAAAAwMAAAAAAAAAAAA="
+          },
+          "head": "",
+          "tail": ""
+        }
+      ],
+      "released": true
+    }
+  ],
+  "guards": [
+    {
+      "label": "before",
+      "passed": true,
+      "trackedFiles": 32,
+      "sourceBytes": 529918,
+      "vectorSha256": "6c8a18753dcf05a5b249f1840d2332ee80f3ffc25d40e740a09626b945028cd7",
+      "fullHeadIndexModesAndBytes": true,
+      "noUntrackedOrIgnoredOutput": true
+    },
+    {
+      "label": "before_browser",
+      "passed": true,
+      "trackedFiles": 32,
+      "sourceBytes": 529918,
+      "vectorSha256": "6c8a18753dcf05a5b249f1840d2332ee80f3ffc25d40e740a09626b945028cd7",
+      "fullHeadIndexModesAndBytes": true,
+      "noUntrackedOrIgnoredOutput": true
+    },
+    {
+      "label": "after_browser",
+      "passed": true,
+      "trackedFiles": 32,
+      "sourceBytes": 529918,
+      "vectorSha256": "6c8a18753dcf05a5b249f1840d2332ee80f3ffc25d40e740a09626b945028cd7",
+      "fullHeadIndexModesAndBytes": true,
+      "noUntrackedOrIgnoredOutput": true
+    },
+    {
+      "label": "after",
+      "passed": true,
+      "trackedFiles": 32,
+      "sourceBytes": 529918,
+      "vectorSha256": "6c8a18753dcf05a5b249f1840d2332ee80f3ffc25d40e740a09626b945028cd7",
+      "fullHeadIndexModesAndBytes": true,
+      "noUntrackedOrIgnoredOutput": true
+    },
+    {
+      "label": "after_cleanup",
+      "passed": true,
+      "trackedFiles": 32,
+      "sourceBytes": 529918,
+      "vectorSha256": "6c8a18753dcf05a5b249f1840d2332ee80f3ffc25d40e740a09626b945028cd7",
+      "fullHeadIndexModesAndBytes": true,
+      "noUntrackedOrIgnoredOutput": true
+    }
+  ],
+  "errors": [],
+  "sourceFiles": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "gitBlob": "1c0a648412e0762f57fa2aa534faab67980069c0",
+      "bytes": 49,
+      "sha256": "a3d41eee23becd43a1e85427c13fd2615685089315e894882cd5277cdd52d9c2"
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": "100644",
+      "gitBlob": "477ad4f21b51934f43ed30cd78c138508732c9b6",
+      "bytes": 2102,
+      "sha256": "5b0a0a8f3c4625ffcf3588d92300b74e977e6433e59fde30e53ea47fa7a1732f"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "gitBlob": "7694388483b2d169819b727c2484e0e748498f4c",
+      "bytes": 1078,
+      "sha256": "6e3ae862a0f98e9f377f98f71fd86160932dad7186416f5509a335703c6fe3b5"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "gitBlob": "0681f42e2430b036d36da1e598612df4708b1fd0",
+      "bytes": 1930,
+      "sha256": "69f671660da7ab0da53ece97606e2fda511d6a9437220f482573122c8320be1b"
+    },
+    {
+      "path": "docs/proposals/browser-gameplay-checks.md",
+      "mode": "100644",
+      "gitBlob": "9885977eaa90ac28aa425c2b94908957d2f60f32",
+      "bytes": 11479,
+      "sha256": "37afefd50def7cb648ac038e5091c6d75ef9bd8772987e3ce8242ae70c924df8"
+    },
+    {
+      "path": "docs/proposals/browser-gameplay.workflow.yml.example",
+      "mode": "100644",
+      "gitBlob": "9709687d5eb8b3eb6fa329b684b0797bfffdeec2",
+      "bytes": 1548,
+      "sha256": "2e69e1ea872e15e5a68b2bd1f770b0ce81b3236d1191c68a17f591f5d5b2b306"
+    },
+    {
+      "path": "docs/results/2026/10-26/publication.json",
+      "mode": "100644",
+      "gitBlob": "3d868b432d26b358903e7176c5409c71e9eba51d",
+      "bytes": 1925,
+      "sha256": "0fba15f5eab02d0e7e34ff9c428ef06bdc236c988f502ec08cabfd01a165e849"
+    },
+    {
+      "path": "docs/results/2026/10-26/publication.md",
+      "mode": "100644",
+      "gitBlob": "5dea9b96e8b1474d98f2dd4d82d2c682753ff72b",
+      "bytes": 2796,
+      "sha256": "7c9829ba1a4c69c541e1d7bdfedd7225557c26c4f1244697ac7cc6c98c8f9087"
+    },
+    {
+      "path": "docs/results/2026/10-26/source-checks.md",
+      "mode": "100644",
+      "gitBlob": "18cf5b103d1a9a108c916cf1674eb41ff8df23e9",
+      "bytes": 3026,
+      "sha256": "4f2fe630f487e3fa7dbfc7b48af7fa94c3ddef6f8ea5bfea33326067d6381b40"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-1.json",
+      "mode": "100644",
+      "gitBlob": "323385c4ea3cfa0da502137749f1d97879207452",
+      "bytes": 20818,
+      "sha256": "2757b3a70a836ca6a6661787031222bdd838c9dcea111d31c7c3f4166576530f"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-1.md",
+      "mode": "100644",
+      "gitBlob": "56adcf848bbef32415e5e8e369711af069a9d6de",
+      "bytes": 1503,
+      "sha256": "df8cad15387ee323ad0fd94ab6d2b0418cd65564e66c45013085469f17502028"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-2.json",
+      "mode": "100644",
+      "gitBlob": "faa51322574fd4bfd68b6875fc9d7c5b9e78d7a4",
+      "bytes": 178074,
+      "sha256": "41fa780c980b51b33a1c2ecc2affdabe87d886fabfd02931d2d6591853d46b06"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-2.md",
+      "mode": "100644",
+      "gitBlob": "4472e58fae7050db7b1aface67863c22211b63d2",
+      "bytes": 2639,
+      "sha256": "593f707faf73ec8e2f478b0c9e5af4450a76deaeb5819f460a2df7f831190b96"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-3.json",
+      "mode": "100644",
+      "gitBlob": "f76c1a70fc08e03700de55f9b0a5a00d117f7332",
+      "bytes": 104146,
+      "sha256": "82bc0f62511b95d15edc683b6b2c58bdc9f1b663da7803e850f188f668ccdcf4"
+    },
+    {
+      "path": "docs/results/2026/11-05/gameplay-attempt-3.md",
+      "mode": "100644",
+      "gitBlob": "64815babc2098b8131fe082dcc6ebe0c53dfb43b",
+      "bytes": 2113,
+      "sha256": "c23591d495968d54855c05569d2b10e10e434aa7443f8546b381e0c9f4421caf"
+    },
+    {
+      "path": "docs/ride-contract.md",
+      "mode": "100644",
+      "gitBlob": "e36337ee4692be6b38575f7212a5d1bb69f16296",
+      "bytes": 3635,
+      "sha256": "70b2bbcf6ba27cb2fe9c7df74051144f9c9b41377a321be5f7c68276d386c8bf"
+    },
+    {
+      "path": "docs/spec.md",
+      "mode": "100644",
+      "gitBlob": "5d1004facc9d3a8e1424ca0d706f4910ff7aa293",
+      "bytes": 2244,
+      "sha256": "37418bf1d1c8909d2ed4fe45abef560f774f56f75b5501ddc7e86f67dc5f76dd"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "gitBlob": "0bd813af77a8c20f48c38d3945ee609f30eba8e2",
+      "bytes": 334,
+      "sha256": "446d66eb306357e69667628f07bf1de9c3416ce623ddb45ab015e7b06536f6e6"
+    },
+    {
+      "path": "public/favicon.svg",
+      "mode": "100644",
+      "gitBlob": "f80e3a0d688253c9d3d52bc6a33fbdeb3c1c54ee",
+      "bytes": 326,
+      "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2"
+    },
+    {
+      "path": "public/index.html",
+      "mode": "100644",
+      "gitBlob": "ffbca11257ac313dbbfc7a9011946c1dc65a2b82",
+      "bytes": 10072,
+      "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105"
+    },
+    {
+      "path": "public/src/audio.js",
+      "mode": "100644",
+      "gitBlob": "e646b216c3c0b74ed2709b5c550407c0734f7a0d",
+      "bytes": 5028,
+      "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17"
+    },
+    {
+      "path": "public/src/game.js",
+      "mode": "100644",
+      "gitBlob": "6a86256dcb87dfa06c1b22251c3a81bd995cb2da",
+      "bytes": 16039,
+      "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723"
+    },
+    {
+      "path": "public/src/records.js",
+      "mode": "100644",
+      "gitBlob": "271258288dcc0e7723fc5f3c13d81f75d0d68c98",
+      "bytes": 3141,
+      "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9"
+    },
+    {
+      "path": "public/src/renderer.js",
+      "mode": "100644",
+      "gitBlob": "9b8d52debb5721f69d7edef17ec33153fb298991",
+      "bytes": 27898,
+      "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67"
+    },
+    {
+      "path": "public/src/ride.js",
+      "mode": "100644",
+      "gitBlob": "eb009da76f604dd1f18791c526a009c6e99bbc75",
+      "bytes": 15178,
+      "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e"
+    },
+    {
+      "path": "public/styles.css",
+      "mode": "100644",
+      "gitBlob": "1f06f4e0b326149a121a906d2736ef7f8471e6c9",
+      "bytes": 17132,
+      "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632"
+    },
+    {
+      "path": "scripts/check.mjs",
+      "mode": "100644",
+      "gitBlob": "db44e76b8ba29ccdc7f46bcacc70ce620fed13c6",
+      "bytes": 1633,
+      "sha256": "a243741ff16f56759e9aa65b864926bc8a9256cf766cafd5f123db8e3e010065"
+    },
+    {
+      "path": "scripts/run-browser-gameplay.mjs",
+      "mode": "100644",
+      "gitBlob": "19a22ad5abcbfba5a7465b415f01cb5adfa7f99a",
+      "bytes": 36452,
+      "sha256": "94301faefbd9e29dae612e9548bafe571676525b98b80966c4038758ab59d5da"
+    },
+    {
+      "path": "tests/browser/gameplay.mjs",
+      "mode": "100644",
+      "gitBlob": "47d86e0ba213be351751a2c4247fa26d1581d941",
+      "bytes": 34071,
+      "sha256": "20c1262f3cde3cd37254659fcb51696535e1a20e386de119afa52c482b07ecfa"
+    },
+    {
+      "path": "tests/records.test.js",
+      "mode": "100644",
+      "gitBlob": "c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f",
+      "bytes": 8269,
+      "sha256": "001f33bf19c4c8a08497e2efddd50cc6c484868b7e3fa00fa6a815bdd00f7a38"
+    },
+    {
+      "path": "tests/ride.test.js",
+      "mode": "100644",
+      "gitBlob": "19b9979c2f7f8772ee764c357699f44a6016e944",
+      "bytes": 12549,
+      "sha256": "241e0a375ca916d0474830a5742d62edabd8e84c60a974a494116b8f134ebbb4"
+    },
+    {
+      "path": "vercel.json",
+      "mode": "100644",
+      "gitBlob": "8138ba426bea84cb719bf8129dba9b5ab01ed4ca",
+      "bytes": 691,
+      "sha256": "a746a59e157185e859141597b39b4e0b2e2d258d9a837f7ec96117dc8a1998b8"
+    }
+  ],
+  "proofLimits": [
+    "Actual public game through browser controls, Canvas, HUD, terminal views and app-owned storage; no account, backend, provider, model or app dependency.",
+    "Virtual RAF, emulated Chromium touch and headless graphics do not establish human comfort, physical devices, audible sound or real-time performance.",
+    "The provider deployment ID is a metadata pin. Eight served-source assets are compared before and after the browser run; later documentation-only deployment is separate.",
+    "Only Playwright1.64.1 is installed in owned runner storage. Chromium Linux packages are disposable runner setup, not independently uninstalled.",
+    "Child exit/close/EOF/groups plus same-UID browser binary/profile paths and Linux starttime prove scoped cleanup, not a host-wide process inventory.",
+    "Registry/browser downloads and anonymous public asset GETs are setup/acceptance traffic, not a network sandbox."
+  ],
+  "expectedAssets": [
+    {
+      "route": "/",
+      "bytes": 10072,
+      "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105"
+    },
+    {
+      "route": "/styles.css",
+      "bytes": 17132,
+      "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632"
+    },
+    {
+      "route": "/favicon.svg",
+      "bytes": 326,
+      "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2"
+    },
+    {
+      "route": "/src/game.js",
+      "bytes": 16039,
+      "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723"
+    },
+    {
+      "route": "/src/ride.js",
+      "bytes": 15178,
+      "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e"
+    },
+    {
+      "route": "/src/renderer.js",
+      "bytes": 27898,
+      "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67"
+    },
+    {
+      "route": "/src/records.js",
+      "bytes": 3141,
+      "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9"
+    },
+    {
+      "route": "/src/audio.js",
+      "bytes": 5028,
+      "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17"
+    }
+  ],
+  "carried": {
+    "editions": [
+      {
+        "receipt": "docs/results/2026/11-05/gameplay-attempt-2.json",
+        "bytes": 178074,
+        "sha256": "41fa780c980b51b33a1c2ecc2affdabe87d886fabfd02931d2d6591853d46b06",
+        "sourceCommit": "6a4c1cd282fdbe386b553cca18d72f0cec803155",
+        "runId": 42016760768,
+        "jobId": 127209104068,
+        "cases": [
+          {
+            "id": "F01",
+            "title": "desktop menu guide and keyboard controls affect the ride"
+          },
+          {
+            "id": "F02",
+            "title": "three neutral descents finish with exact penalties frozen results and reloaded records"
+          }
+        ],
+        "verifiedStreams": 56,
+        "protectedFiles": [
+          {
+            "path": "public/index.html",
+            "mode": "100644",
+            "gitBlob": "ffbca11257ac313dbbfc7a9011946c1dc65a2b82",
+            "bytes": 10072,
+            "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+            "byteExact": true
+          },
+          {
+            "path": "public/styles.css",
+            "mode": "100644",
+            "gitBlob": "1f06f4e0b326149a121a906d2736ef7f8471e6c9",
+            "bytes": 17132,
+            "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+            "byteExact": true
+          },
+          {
+            "path": "public/favicon.svg",
+            "mode": "100644",
+            "gitBlob": "f80e3a0d688253c9d3d52bc6a33fbdeb3c1c54ee",
+            "bytes": 326,
+            "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/game.js",
+            "mode": "100644",
+            "gitBlob": "6a86256dcb87dfa06c1b22251c3a81bd995cb2da",
+            "bytes": 16039,
+            "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+            "byteExact": false,
+            "historicalSha256": "a5ce5b2530b6e6528ccd152c52f256c88a06ef1b845fdcde6fd882aaa08876a2",
+            "reviewedDifference": "Exactly one updateHud() after entering pause; whole-file reversal matches historical bytes/mode/blob."
+          },
+          {
+            "path": "public/src/ride.js",
+            "mode": "100644",
+            "gitBlob": "eb009da76f604dd1f18791c526a009c6e99bbc75",
+            "bytes": 15178,
+            "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/renderer.js",
+            "mode": "100644",
+            "gitBlob": "9b8d52debb5721f69d7edef17ec33153fb298991",
+            "bytes": 27898,
+            "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/records.js",
+            "mode": "100644",
+            "gitBlob": "271258288dcc0e7723fc5f3c13d81f75d0d68c98",
+            "bytes": 3141,
+            "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/audio.js",
+            "mode": "100644",
+            "gitBlob": "e646b216c3c0b74ed2709b5c550407c0734f7a0d",
+            "bytes": 5028,
+            "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+            "byteExact": true
+          },
+          {
+            "path": "package.json",
+            "mode": "100644",
+            "gitBlob": "0bd813af77a8c20f48c38d3945ee609f30eba8e2",
+            "bytes": 334,
+            "sha256": "446d66eb306357e69667628f07bf1de9c3416ce623ddb45ab015e7b06536f6e6",
+            "byteExact": true
+          },
+          {
+            "path": "vercel.json",
+            "mode": "100644",
+            "gitBlob": "8138ba426bea84cb719bf8129dba9b5ab01ed4ca",
+            "bytes": 691,
+            "sha256": "a746a59e157185e859141597b39b4e0b2e2d258d9a837f7ec96117dc8a1998b8",
+            "byteExact": true
+          },
+          {
+            "path": "tests/ride.test.js",
+            "mode": "100644",
+            "gitBlob": "19b9979c2f7f8772ee764c357699f44a6016e944",
+            "bytes": 12549,
+            "sha256": "241e0a375ca916d0474830a5742d62edabd8e84c60a974a494116b8f134ebbb4",
+            "byteExact": true
+          },
+          {
+            "path": "tests/records.test.js",
+            "mode": "100644",
+            "gitBlob": "c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f",
+            "bytes": 8269,
+            "sha256": "001f33bf19c4c8a08497e2efddd50cc6c484868b7e3fa00fa6a815bdd00f7a38",
+            "byteExact": true
+          }
+        ],
+        "unchangedFiles": 11,
+        "reviewedChangedFiles": [
+          "public/src/game.js"
+        ]
+      },
+      {
+        "receipt": "docs/results/2026/11-05/gameplay-attempt-3.json",
+        "bytes": 104146,
+        "sha256": "82bc0f62511b95d15edc683b6b2c58bdc9f1b663da7803e850f188f668ccdcf4",
+        "sourceCommit": "9dfed1a5522697befb870c023ee76e1de34146ca",
+        "runId": 42018708772,
+        "jobId": 127215667692,
+        "cases": [
+          {
+            "id": "F03",
+            "title": "an intentional edge crash preserves the earned course record"
+          }
+        ],
+        "verifiedStreams": 56,
+        "protectedFiles": [
+          {
+            "path": "public/index.html",
+            "mode": "100644",
+            "gitBlob": "ffbca11257ac313dbbfc7a9011946c1dc65a2b82",
+            "bytes": 10072,
+            "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+            "byteExact": true
+          },
+          {
+            "path": "public/styles.css",
+            "mode": "100644",
+            "gitBlob": "1f06f4e0b326149a121a906d2736ef7f8471e6c9",
+            "bytes": 17132,
+            "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+            "byteExact": true
+          },
+          {
+            "path": "public/favicon.svg",
+            "mode": "100644",
+            "gitBlob": "f80e3a0d688253c9d3d52bc6a33fbdeb3c1c54ee",
+            "bytes": 326,
+            "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/game.js",
+            "mode": "100644",
+            "gitBlob": "6a86256dcb87dfa06c1b22251c3a81bd995cb2da",
+            "bytes": 16039,
+            "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+            "byteExact": false,
+            "historicalSha256": "a5ce5b2530b6e6528ccd152c52f256c88a06ef1b845fdcde6fd882aaa08876a2",
+            "reviewedDifference": "Exactly one updateHud() after entering pause; whole-file reversal matches historical bytes/mode/blob."
+          },
+          {
+            "path": "public/src/ride.js",
+            "mode": "100644",
+            "gitBlob": "eb009da76f604dd1f18791c526a009c6e99bbc75",
+            "bytes": 15178,
+            "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/renderer.js",
+            "mode": "100644",
+            "gitBlob": "9b8d52debb5721f69d7edef17ec33153fb298991",
+            "bytes": 27898,
+            "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/records.js",
+            "mode": "100644",
+            "gitBlob": "271258288dcc0e7723fc5f3c13d81f75d0d68c98",
+            "bytes": 3141,
+            "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+            "byteExact": true
+          },
+          {
+            "path": "public/src/audio.js",
+            "mode": "100644",
+            "gitBlob": "e646b216c3c0b74ed2709b5c550407c0734f7a0d",
+            "bytes": 5028,
+            "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+            "byteExact": true
+          },
+          {
+            "path": "package.json",
+            "mode": "100644",
+            "gitBlob": "0bd813af77a8c20f48c38d3945ee609f30eba8e2",
+            "bytes": 334,
+            "sha256": "446d66eb306357e69667628f07bf1de9c3416ce623ddb45ab015e7b06536f6e6",
+            "byteExact": true
+          },
+          {
+            "path": "vercel.json",
+            "mode": "100644",
+            "gitBlob": "8138ba426bea84cb719bf8129dba9b5ab01ed4ca",
+            "bytes": 691,
+            "sha256": "a746a59e157185e859141597b39b4e0b2e2d258d9a837f7ec96117dc8a1998b8",
+            "byteExact": true
+          },
+          {
+            "path": "tests/ride.test.js",
+            "mode": "100644",
+            "gitBlob": "19b9979c2f7f8772ee764c357699f44a6016e944",
+            "bytes": 12549,
+            "sha256": "241e0a375ca916d0474830a5742d62edabd8e84c60a974a494116b8f134ebbb4",
+            "byteExact": true
+          },
+          {
+            "path": "tests/records.test.js",
+            "mode": "100644",
+            "gitBlob": "c288ba2fa0ee78ba5dc2ecfc5fa35c50983d1a1f",
+            "bytes": 8269,
+            "sha256": "001f33bf19c4c8a08497e2efddd50cc6c484868b7e3fa00fa6a815bdd00f7a38",
+            "byteExact": true
+          }
+        ],
+        "unchangedFiles": 11,
+        "reviewedChangedFiles": [
+          "public/src/game.js"
+        ]
+      }
+    ],
+    "cases": [
+      "F01",
+      "F02",
+      "F03"
+    ],
+    "acceptedCasesRepeated": 0,
+    "limit": "Historical accepted journeys remain at their recorded editions. Current F04–F06 exercise the reviewed pause-HUD repair; no single six-case invocation is claimed."
+  },
+  "generated": {
+    "sourceSpec": "tests/browser/gameplay.mjs",
+    "sourceSha256": "20c1262f3cde3cd37254659fcb51696535e1a20e386de119afa52c482b07ecfa",
+    "generatedSha256": "20c1262f3cde3cd37254659fcb51696535e1a20e386de119afa52c482b07ecfa",
+    "copiedByteExact": true
+  },
+  "servedAssets": [
+    {
+      "phase": "before_browser",
+      "route": "/",
+      "expectedBytes": 10072,
+      "expectedSha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 10072,
+      "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/styles.css",
+      "expectedBytes": 17132,
+      "expectedSha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 17132,
+      "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/favicon.svg",
+      "expectedBytes": 326,
+      "expectedSha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 326,
+      "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/src/game.js",
+      "expectedBytes": 16039,
+      "expectedSha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 16039,
+      "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/src/ride.js",
+      "expectedBytes": 15178,
+      "expectedSha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 15178,
+      "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/src/renderer.js",
+      "expectedBytes": 27898,
+      "expectedSha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 27898,
+      "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/src/records.js",
+      "expectedBytes": 3141,
+      "expectedSha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 3141,
+      "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "before_browser",
+      "route": "/src/audio.js",
+      "expectedBytes": 5028,
+      "expectedSha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 5028,
+      "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/",
+      "expectedBytes": 10072,
+      "expectedSha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 10072,
+      "sha256": "41529a634ddb4be58f834cfd00c8bc9c1fb56afa6ecac1a77abc40ae5c458105",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/styles.css",
+      "expectedBytes": 17132,
+      "expectedSha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 17132,
+      "sha256": "d01c36302546ecabe1c68e4d80ed8cf606577addce5e569977d2b09eb5767632",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/favicon.svg",
+      "expectedBytes": 326,
+      "expectedSha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 326,
+      "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/src/game.js",
+      "expectedBytes": 16039,
+      "expectedSha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 16039,
+      "sha256": "c93f34f5d9d7b2449190568ac98869236d53f173418295088607d6686c95d723",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/src/ride.js",
+      "expectedBytes": 15178,
+      "expectedSha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 15178,
+      "sha256": "fccd31a81f68b876a15a5f106261bcf0173ec67d0b0beccc7bafb33cdc4c681e",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/src/renderer.js",
+      "expectedBytes": 27898,
+      "expectedSha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 27898,
+      "sha256": "3009ea7520304f70a88275f26c978d575c8ae18269775a015330c5b782637f67",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/src/records.js",
+      "expectedBytes": 3141,
+      "expectedSha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 3141,
+      "sha256": "f3d11b1d27ae38a811690fa5127faa43d452f76cdeebcfb22c00afd9b44b10d9",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    },
+    {
+      "phase": "after_browser",
+      "route": "/src/audio.js",
+      "expectedBytes": 5028,
+      "expectedSha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+      "status": 200,
+      "sameOrigin": true,
+      "redirect": false,
+      "complete": true,
+      "bytes": 5028,
+      "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+      "matchesExpected": true,
+      "credentials": "omit",
+      "readerReleased": true,
+      "aborted": true
+    }
+  ],
+  "browser": {
+    "accepted": true,
+    "result": {
+      "schemaVersion": 1,
+      "origin": "https://fallline-alvaro.vercel.app",
+      "browserVersion": "156.0.8078.4",
+      "profile": {
+        "clock": "Playwright clock.runFor; actual requestAnimationFrame callbacks",
+        "maxAdvanceMs": 1000,
+        "totalVirtualLimitMs": 900000,
+        "desktop": {
+          "width": 1440,
+          "height": 1000
+        },
+        "narrow": {
+          "width": 390,
+          "height": 844,
+          "hasTouch": true,
+          "isMobile": true
+        },
+        "physicalDevice": false
+      },
+      "cases": [
+        {
+          "id": "F04",
+          "title": "pause guide restart and resume clear held keyboard input",
+          "accepted": true,
+          "observations": {
+            "paused": {
+              "mode": "paused",
+              "time": "00:00.2",
+              "speed": 35,
+              "next": "Flag 1 · 137 m ahead",
+              "status": "IN THE AIR",
+              "penalty": "No penalties",
+              "progress": "0.251926%"
+            },
+            "resumed": {
+              "mode": "riding",
+              "time": "00:04.1",
+              "speed": 37,
+              "next": "Flag 1 · 100 m ahead",
+              "status": "RIDING",
+              "penalty": "No penalties",
+              "progress": "3.67013%"
+            },
+            "pausedTimeFrozen": true,
+            "heldKeyboardClearedAcrossPause": true,
+            "guideRequiresExplicitResume": true,
+            "restartObserved": true
+          },
+          "error": null
+        },
+        {
+          "id": "F05",
+          "title": "narrow touch holds multitouch cancellation and jump affect gameplay",
+          "accepted": true,
+          "observations": {
+            "bounds": {
+              "left": {
+                "x": 26,
+                "y": 697,
+                "width": 48,
+                "height": 55
+              },
+              "right": {
+                "x": 82,
+                "y": 697,
+                "width": 48,
+                "height": 55
+              },
+              "brake": {
+                "x": 204,
+                "y": 697,
+                "width": 48,
+                "height": 55
+              },
+              "tuck": {
+                "x": 260,
+                "y": 697,
+                "width": 48,
+                "height": 55
+              },
+              "jump": {
+                "x": 316,
+                "y": 697,
+                "width": 48,
+                "height": 55
+              }
+            },
+            "initial": {
+              "mode": "riding",
+              "time": "00:00.0",
+              "speed": 36,
+              "next": "Flag 1 · 140 m ahead",
+              "status": "RIDING",
+              "penalty": "No penalties",
+              "progress": "0%"
+            },
+            "braked": {
+              "mode": "riding",
+              "time": "00:00.8",
+              "speed": 20,
+              "next": "Flag 1 · 133 m ahead",
+              "status": "RIDING",
+              "penalty": "No penalties",
+              "progress": "0.622647%"
+            },
+            "tucked": {
+              "mode": "riding",
+              "time": "00:03.9",
+              "speed": 45,
+              "next": "Flag 1 · 96 m ahead",
+              "status": "RIDING",
+              "penalty": "No penalties",
+              "progress": "4.04184%"
+            },
+            "multitouchHeld": [
+              "left",
+              "right"
+            ],
+            "cancelClearedAll": true,
+            "heldJumpReturnedToSnow": true,
+            "releaseAllowedSecondJump": true,
+            "canvas": {
+              "width": 366,
+              "height": 700,
+              "total": 384,
+              "opaque": 384,
+              "distinctColors": 164,
+              "channelSumRange": 512
+            },
+            "layout": {
+              "width": 390,
+              "documentWidth": 390,
+              "bodyWidth": 390
+            },
+            "ridingImage": {
+              "label": "narrow touch riding",
+              "type": "image/jpeg",
+              "width": 390,
+              "height": 844,
+              "bytes": 13281,
+              "sha256": "223771f5c9617f45c29b6a03d895915f8679625459366b2c00ae8769071f56f9",
+              "base64": "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"
+            },
+            "input": "CDP Input.dispatchTouchEvent; real Chromium pointer events",
+            "physicalTouchDevice": false
+          },
+          "error": null
+        },
+        {
+          "id": "F06",
+          "title": "corrupt and disabled storage keep play available with honest record notices",
+          "accepted": true,
+          "observations": {
+            "corruptJSONRecovered": true,
+            "recoveredRecord": {
+              "time": 81.82282607218657,
+              "adjustedTime": 89.82282607218657,
+              "passed": 6,
+              "missed": 2,
+              "airTime": 0,
+              "jumps": 0
+            },
+            "unrelatedLocalStoragePreserved": true,
+            "deniedBrowserVersion": "156.0.8078.4",
+            "denial": {
+              "getterFailed": false,
+              "readFailed": true,
+              "writeFailed": true,
+              "objectPresent": false
+            },
+            "deniedVirtualMs": 82000,
+            "deniedRunCompleted": true,
+            "truthfulVisitOnlyRecord": true,
+            "recordNotPromisedAfterReload": true,
+            "unrelatedSessionStoragePreserved": true,
+            "inaccessibleLocalStoragePreservation": "not observable or claimed"
+          },
+          "error": null
+        }
+      ],
+      "errors": [],
+      "cleanup": {
+        "contextsCreated": 4,
+        "contextsClosed": 4,
+        "browsersCreated": 2,
+        "browsersClosed": 2,
+        "browserClosed": true,
+        "lateChecksComplete": true,
+        "failures": []
+      },
+      "boundaries": {
+        "consoleErrors": 0,
+        "consoleWarnings": 1,
+        "pageErrors": 0,
+        "unhandledRejections": 0,
+        "failedSameOriginRequests": 0,
+        "unexpectedRequests": 0,
+        "webSockets": 0,
+        "credentialRequests": 0,
+        "events": [],
+        "totalVirtualMs": 185600,
+        "network": "only eight exact own-origin GET/HEAD resources; no fulfillment or API calls"
+      },
+      "proofLimits": [
+        "clock-controlled Chromium RAF gameplay is not real-time performance evidence",
+        "390x844 touch emulation is not a physical-device result",
+        "driver closes observed contexts and browsers; outer CI owns independent browser-process and filesystem cleanup",
+        "no audio audibility, reputation, account, native/store or full-product claim"
+      ]
+    },
+    "rawSha256": "a52e8af4d5df751055fd9d57f6e1609c4c949d12ad49cebd76a89e8d58a9165f",
+    "rawBytes": 21569
+  },
+  "processCleanup": {
+    "passed": true,
+    "started": 34
+  },
+  "networkCleanup": {
+    "passed": true,
+    "basis": "Asset response streams aborted/cancelled and reader locks released, not shared agent socket inventory."
+  },
+  "browserProcessCleanup": {
+    "passed": true,
+    "basis": "Same UID, unique owned-root argv attribution and revalidated Linux kernel PID starttime; no argv/env output.",
+    "observed": [
+      {
+        "pid": 2897,
+        "ppid": 2222,
+        "pgid": 2897,
+        "session": 2897,
+        "state": "R",
+        "starttime": "6865",
+        "owned": true,
+        "executable": "node",
+        "firstSeenAtUtc": "2026-11-05T11:36:01.492Z"
+      },
+      {
+        "pid": 2909,
+        "ppid": 2897,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6884",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.000Z"
+      },
+      {
+        "pid": 2911,
+        "ppid": 2909,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6886",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.000Z"
+      },
+      {
+        "pid": 2912,
+        "ppid": 2909,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6886",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.000Z"
+      },
+      {
+        "pid": 2930,
+        "ppid": 2911,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6901",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.000Z"
+      },
+      {
+        "pid": 2932,
+        "ppid": 2909,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6901",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.000Z"
+      },
+      {
+        "pid": 2958,
+        "ppid": 2912,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "6903",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:02.001Z"
+      },
+      {
+        "pid": 2979,
+        "ppid": 2912,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "7667",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:09.587Z"
+      },
+      {
+        "pid": 2994,
+        "ppid": 2912,
+        "pgid": 2909,
+        "session": 2909,
+        "state": "S",
+        "starttime": "8317",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:36:16.159Z"
+      },
+      {
+        "pid": 3026,
+        "ppid": 2897,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "S",
+        "starttime": "15102",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      },
+      {
+        "pid": 3028,
+        "ppid": 3026,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "S",
+        "starttime": "15104",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      },
+      {
+        "pid": 3029,
+        "ppid": 3026,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "S",
+        "starttime": "15104",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      },
+      {
+        "pid": 3052,
+        "ppid": 3028,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "S",
+        "starttime": "15106",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      },
+      {
+        "pid": 3054,
+        "ppid": 3026,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "S",
+        "starttime": "15106",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      },
+      {
+        "pid": 3068,
+        "ppid": 3029,
+        "pgid": 3026,
+        "session": 3026,
+        "state": "R",
+        "starttime": "15107",
+        "owned": true,
+        "executable": "chrome-headless-shell",
+        "firstSeenAtUtc": "2026-11-05T11:37:24.289Z"
+      }
+    ],
+    "remaining": [],
+    "termSent": 0,
+    "killSent": 0,
+    "scanUncertain": false
+  },
+  "scratchCleanup": "passed",
+  "interrupted": false,
+  "completedAtUtc": "2026-11-05T11:38:32.912Z",
+  "owningWorkflow": {
+    "runId": 42020209360,
+    "jobId": 127220763970,
+    "activationCommit": "a2d4705f25a6aa89d051b9183b630890fb804113",
+    "preparationCommit": "2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d",
+    "startedAt": "2026-11-05T11:35:35Z",
+    "completedAt": "2026-11-05T11:38:35Z",
+    "conclusion": "success"
+  }
+}

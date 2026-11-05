@@ -2,6 +2,12 @@
 
 An original downhill snowboard browser game. `docs/spec.md` owns source scope and choices; `docs/ride-contract.md` owns module boundaries.
 
+- Accepted gameplay: `docs/results/2026/11-05/gameplay-checks.md`. Six journeys
+  have evidence across editions; three historical cases were carried while the
+  repaired pause/touch/storage cases ran freshly. Preserve all failed/cancelled
+  receipts and source qualification. Do not repeat closed scopes without a
+  changed input or concrete concern. The earlier29 pure cases stay separate.
+
 - The later standing owner approval ("approve everything", "you choose", "keep
   going", "do all the work") covers the six focused public gameplay scenarios
   and one temporary public CI runner capped at twenty minutes in
