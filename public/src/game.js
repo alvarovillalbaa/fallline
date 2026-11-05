@@ -123,6 +123,7 @@ function start(free = false) {
 function pause(reason = 'Your run is paused.', focus = true) {
   if (mode !== 'riding') return;
   byId('pause-reason').textContent = reason; showMode('paused');
+  updateHud();
   if (focus && !document.hidden) byId('resume-button').focus({ preventScroll: true });
 }
 function resume() {

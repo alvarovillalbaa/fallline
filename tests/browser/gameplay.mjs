@@ -14,7 +14,8 @@ const TITLES = [
 ];
 const origin = process.env.FALLLINE_GAMEPLAY_ORIGIN;
 const requestedCases = process.env.FALLLINE_GAMEPLAY_CASE_IDS;
-const selectedIds = requestedCases === undefined ? ['F01', 'F02', 'F03', 'F04', 'F05', 'F06'] : ['F03', 'F04', 'F05', 'F06'];
+const selectedIds = requestedCases === undefined ? ['F01', 'F02', 'F03', 'F04', 'F05', 'F06']
+  : requestedCases === 'F04,F05,F06' ? ['F04', 'F05', 'F06'] : ['F03', 'F04', 'F05', 'F06'];
 const allowedPaths = new Set(['/', '/styles.css', '/favicon.svg', '/src/game.js', '/src/ride.js', '/src/renderer.js', '/src/audio.js', '/src/records.js']);
 const report = { schemaVersion: 1, origin, browserVersion: null,
   profile: { clock: 'Playwright clock.runFor; actual requestAnimationFrame callbacks', maxAdvanceMs: 1000, totalVirtualLimitMs: 900000,
@@ -198,7 +199,7 @@ function criticalCount() { return Object.entries(counters).reduce((sum, [key, va
 
 try {
   assert.equal(process.env.CI, 'true', 'owned CI execution is required');
-  assert(requestedCases === undefined || requestedCases === 'F03,F04,F05,F06', 'unsupported fixed gameplay case selection');
+  assert(requestedCases === undefined || requestedCases === 'F03,F04,F05,F06' || requestedCases === 'F04,F05,F06', 'unsupported fixed gameplay case selection');
   assert.equal(origin, 'https://fallline-alvaro.vercel.app', 'only the selected public Fallline origin is allowed');
   const root = process.env.FALLLINE_PLAYWRIGHT_ROOT;
   assert(root && isAbsolute(root), 'absolute CI-owned Playwright installation is required');

@@ -7,7 +7,24 @@ job `127209104068`, accepted F01/F02, including all three actual course finishes
 and record reload, then failed F03: held-right input was still riding after its
 40-second bound. F04–F06 were UNRUN. Source, served-asset and owned cleanup
 guards passed; no late critical browser error was reported. Those outcomes are
-retained, not relabelled by this fixture repair. The owner's standing “approve everything”,
+retained, not relabelled by this fixture repair.
+
+[Run 42018708772](https://github.com/alvarovillalbaa/fallline/actions/runs/42018708772),
+job `127215667692`, then accepted F03: it earned one real Meadow record, took
+the ten-second tuck run-up and reached the edge crash after 9.6 seconds of
+right/tuck input, with the warning observed and earned records unchanged.
+F04 failed its unchanged paused-HUD equality assertion: mode, displayed time
+and speed stayed paused, but the next-flag distance/progress changed on the next
+paused frame. F05/F06 were UNRUN. Late critical browser errors were zero and
+source, served-asset and owned cleanup guards passed. Root identified the
+display defect: pause did not refresh the final ride state into the HUD until
+a later animation frame. The application repair refreshes HUD immediately
+after entering paused mode; it does not relax the freeze assertion or add a
+test wait. A new published application edition and actual F04 result are
+required before acceptance. Root retains historical proof and the exact
+one-line edition difference separately.
+
+The owner's standing “approve everything”,
 “you choose”, “keep going” and “do all the work” authorizes this scoped public
 CI browser packet and necessary temporary workflow/publication. It resolves the
 older new-game browser-approval wording in the repository. It does not authorize
@@ -63,17 +80,19 @@ remain required. The failed browser outcome did not retain a final HUD; a later
 focused model diagnostic corroborated a held-right stall near the edge, without
 proving the exact browser cause. No application physics or collision is changed.
 
-For the remaining acceptance, set exactly
-`FALLLINE_GAMEPLAY_CASE_IDS=F03,F04,F05,F06`. Any other supplied selection is
-rejected; omitting it retains the original six-case execution. In the fixed
-four-case selection, F01/F02 bodies are not executed and are absent from the
-new result array. Their accepted proof must be pinned separately to the actual
-prior run; no accepted result is fabricated or carried into the driver's JSON.
+For the current remaining acceptance, set exactly
+`FALLLINE_GAMEPLAY_CASE_IDS=F04,F05,F06`. That result contains only these three
+actual cases and executes neither F01/F02 nor F03 or its earned-record setup.
+The earlier exact four-case selection `F03,F04,F05,F06` remains available;
+omitting the variable retains the original six-case execution. All other
+supplied selections are rejected. Previously accepted cases are absent from a
+new selected result array; their proof must be pinned separately to the actual
+prior runs. No accepted result is fabricated or carried into the driver's JSON.
 If a fresh F03 context lacks a Meadow record, it earns exactly one real neutral
 Meadow finish using the existing assertions before returning to the menu for
 the crash journey. This is its necessary precondition, not a replay of F02's
 three-course journey. F03 records that setup, run-up and final public HUD before
-the crash assertions. F04–F06 bodies are unchanged.
+the crash assertions. F04–F06 bodies are unchanged in both selection repairs.
 
 F05 uses a fresh 390×844 context with `hasTouch:true` and `isMobile:true`.
 Actual `Input.dispatchTouchEvent` contacts use visible button centers and stable
@@ -151,8 +170,10 @@ missing/failed cases cannot be accepted. Every observed context/browser must
 close in `finally`, late event checks complete after closure and pending
 operations remain a failure. Driver success requires every selected case accepted, no
 critical errors and verified cleanup plus the independent root controller.
-Overall six-journey closure also requires the separately pinned F01/F02 proof
-when the remaining four-case selection is used.
+Overall six-journey closure also requires the separately pinned earlier proof:
+F01/F02 for the four-case selection, and F01/F02/F03 for the three-case selection.
+The application edition difference remains explicit rather than implying all
+six cases ran against the pause-HUD repair.
 
 No local browser launch, test execution, game import, installation or build is
 part of authoring. Syntax, source/link checks and `git diff --check` are allowed.
