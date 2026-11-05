@@ -2,6 +2,13 @@
 
 An original downhill snowboard browser game. `docs/spec.md` owns source scope and choices; `docs/ride-contract.md` owns module boundaries.
 
+- The later standing owner approval ("approve everything", "you choose", "keep
+  going", "do all the work") covers the six focused public gameplay scenarios
+  and one temporary public CI runner capped at twenty minutes in
+  `docs/proposals/browser-gameplay-checks.md`. Do not repeat the historical
+  browser-approval question for that scope. Physical devices, accounts,
+  enrollment and paid services are outside it.
+
 - `public/src/ride.js` owns terrain, runs, world objects, physics, collisions and timing. Rendering reads that model; it never awards flags or moves the rider.
 - Use native JavaScript modules and original procedural Canvas/SVG geometry. No runtime dependencies, external art, tracking, backend, accounts, paid resources or CI workflow is needed.
 - Preserve keyboard and touch input, pause/resume/restart, focus states, instructions, optional user-enabled sound, stable camera and interruption handling. Clear held input on pause/blur/hide and avoid simulation catch-up after a hidden tab.
