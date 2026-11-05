@@ -1,8 +1,13 @@
 # Published gameplay checks
 
-5 November 2026. Acceptance unverified. The [initial cancelled run](../results/2026/11-05/gameplay-attempt-1.md)
-has no accepted browser receipt; the once-only storage sentinel correction is
-prepared for a bounded replacement attempt. The owner's standing “approve everything”,
+5 November 2026. The [initial cancelled run](../results/2026/11-05/gameplay-attempt-1.md)
+has no accepted browser receipt. The replacement
+[run 42016760768](https://github.com/alvarovillalbaa/fallline/actions/runs/42016760768),
+job `127209104068`, accepted F01/F02, including all three actual course finishes
+and record reload, then failed F03: held-right input was still riding after its
+40-second bound. F04–F06 were UNRUN. Source, served-asset and owned cleanup
+guards passed; no late critical browser error was reported. Those outcomes are
+retained, not relabelled by this fixture repair. The owner's standing “approve everything”,
 “you choose”, “keep going” and “do all the work” authorizes this scoped public
 CI browser packet and necessary temporary workflow/publication. It resolves the
 older new-game browser-approval wording in the repository. It does not authorize
@@ -51,7 +56,24 @@ frozen result text, real restart and record restoration after reload. F03 then
 uses those **actually earned** records, deliberately carves past the edge,
 observes the warning/crash and requires the records to remain unchanged. No
 valid score is seeded or substituted. Shared context is an explicit proof
-dependency rather than independent-case isolation.
+dependency rather than independent-case isolation. F03 now uses ten seconds of
+real tuck input before holding right **and tuck** for at most the same 40-second
+carve bound. The warning, edge-crash, result and unchanged-record assertions
+remain required. The failed browser outcome did not retain a final HUD; a later
+focused model diagnostic corroborated a held-right stall near the edge, without
+proving the exact browser cause. No application physics or collision is changed.
+
+For the remaining acceptance, set exactly
+`FALLLINE_GAMEPLAY_CASE_IDS=F03,F04,F05,F06`. Any other supplied selection is
+rejected; omitting it retains the original six-case execution. In the fixed
+four-case selection, F01/F02 bodies are not executed and are absent from the
+new result array. Their accepted proof must be pinned separately to the actual
+prior run; no accepted result is fabricated or carried into the driver's JSON.
+If a fresh F03 context lacks a Meadow record, it earns exactly one real neutral
+Meadow finish using the existing assertions before returning to the menu for
+the crash journey. This is its necessary precondition, not a replay of F02's
+three-course journey. F03 records that setup, run-up and final public HUD before
+the crash assertions. F04–F06 bodies are unchanged.
 
 F05 uses a fresh 390×844 context with `hasTouch:true` and `isMobile:true`.
 Actual `Input.dispatchTouchEvent` contacts use visible button centers and stable
@@ -122,13 +144,15 @@ tree and verifies owned browser processes and filesystem cleanup; the driver
 does not kill an unproven process or recursively delete browser directories.
 
 One line, `FALLLINE_GAMEPLAY_RESULT=<JSON>`, is capped at 128 KiB. It includes
-schema version, actual browser version, origin, all six exact identities and
+schema version, actual browser version, origin, only the selected exact identities and
 accepted flags, bounded observations/failure stages, errors, virtual time,
 network/error counts and cleanup. A first failure may leave later cases UNRUN;
 missing/failed cases cannot be accepted. Every observed context/browser must
 close in `finally`, late event checks complete after closure and pending
-operations remain a failure. Final success requires all six accepted, no
+operations remain a failure. Driver success requires every selected case accepted, no
 critical errors and verified cleanup plus the independent root controller.
+Overall six-journey closure also requires the separately pinned F01/F02 proof
+when the remaining four-case selection is used.
 
 No local browser launch, test execution, game import, installation or build is
 part of authoring. Syntax, source/link checks and `git diff --check` are allowed.

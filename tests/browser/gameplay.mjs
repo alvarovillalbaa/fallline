@@ -13,11 +13,13 @@ const TITLES = [
   'corrupt and disabled storage keep play available with honest record notices',
 ];
 const origin = process.env.FALLLINE_GAMEPLAY_ORIGIN;
+const requestedCases = process.env.FALLLINE_GAMEPLAY_CASE_IDS;
+const selectedIds = requestedCases === undefined ? ['F01', 'F02', 'F03', 'F04', 'F05', 'F06'] : ['F03', 'F04', 'F05', 'F06'];
 const allowedPaths = new Set(['/', '/styles.css', '/favicon.svg', '/src/game.js', '/src/ride.js', '/src/renderer.js', '/src/audio.js', '/src/records.js']);
 const report = { schemaVersion: 1, origin, browserVersion: null,
   profile: { clock: 'Playwright clock.runFor; actual requestAnimationFrame callbacks', maxAdvanceMs: 1000, totalVirtualLimitMs: 900000,
     desktop: { width: 1440, height: 1000 }, narrow: { width: 390, height: 844, hasTouch: true, isMobile: true }, physicalDevice: false },
-  cases: TITLES.map((title, index) => ({ id: `F0${index + 1}`, title, accepted: false, observations: {}, error: 'unrun' })), errors: [],
+  cases: TITLES.map((title, index) => ({ id: `F0${index + 1}`, title, accepted: false, observations: {}, error: 'unrun' })).filter(item => selectedIds.includes(item.id)), errors: [],
   cleanup: { contextsCreated: 0, contextsClosed: 0, browsersCreated: 0, browsersClosed: 0, browserClosed: false, lateChecksComplete: false, failures: [] } };
 const browsers = [], contexts = [], events = [], jobs = new Set();
 let currentCase = null, virtualMs = 0, imageBytes = 0;
@@ -186,7 +188,9 @@ async function finish(page, runId, expectedPassed, expectedMissed) {
   return { virtualMs: virtual, record, result: { adjusted: await text(page, '#result-time'), flags: await text(page, '#result-flags'), detail: await text(page, '#result-detail') } };
 }
 async function runCase(index, action) {
-  const item = report.cases[index]; currentCase = item; const initialEvents = criticalCount();
+  const item = report.cases.find(item => item.id === `F0${index + 1}`);
+  if (!item) return;
+  currentCase = item; const initialEvents = criticalCount();
   try { item.observations = { ...item.observations, ...await action() }; assert.equal(criticalCount(), initialEvents, 'browser error or network boundary violation'); item.accepted = true; item.error = null; }
   catch (error) { item.accepted = false; item.error = clean(error?.message ?? error, 1600); throw error; }
 }
@@ -194,6 +198,7 @@ function criticalCount() { return Object.entries(counters).reduce((sum, [key, va
 
 try {
   assert.equal(process.env.CI, 'true', 'owned CI execution is required');
+  assert(requestedCases === undefined || requestedCases === 'F03,F04,F05,F06', 'unsupported fixed gameplay case selection');
   assert.equal(origin, 'https://fallline-alvaro.vercel.app', 'only the selected public Fallline origin is allowed');
   const root = process.env.FALLLINE_PLAYWRIGHT_ROOT;
   assert(root && isAbsolute(root), 'absolute CI-owned Playwright installation is required');
@@ -256,17 +261,32 @@ try {
   });
 
   await runCase(2, async () => {
-    stage('deliberate edge crash');
-    await select(desktop, 'Meadow'); const before = (await saved(desktop)).records; assert(before.meadow);
-    await start(desktop); await desktop.keyboard.down('ArrowRight'); let warningObserved = false, virtual = 0;
+    stage('edge-crash earned-record precondition');
+    await select(desktop, 'Meadow'); let before = (await saved(desktop)).records;
+    const setup = { earnedMeadowRequired: !before.meadow, earnedMeadow: null };
+    stage('edge-crash earned-record precondition', { setup });
+    if (!before.meadow) {
+      await start(desktop); setup.earnedMeadow = await finish(desktop, 'meadow', 6, 2);
+      await desktop.locator('#result-menu-button').click();
+      before = (await saved(desktop)).records;
+    }
+    assert(before.meadow);
+    await start(desktop); await desktop.keyboard.down('ArrowUp');
+    let warningObserved = false, virtual = 0, runUp = null;
     try {
+      stage('ten-second actual tuck run-up', { setup });
+      for (let index = 0; index < 10; index++) await advance(desktop, 1000);
+      runUp = await hud(desktop); stage('held right and tuck edge carve', { setup, runUp });
+      await desktop.keyboard.down('ArrowRight');
       while (await mode(desktop) === 'riding' && virtual < 40000) { await advance(desktop, 200); virtual += 200; warningObserved ||= await desktop.locator('#ride-warning').isVisible(); }
-    } finally { await desktop.keyboard.up('ArrowRight'); }
+    } finally { await desktop.keyboard.up('ArrowRight'); await desktop.keyboard.up('ArrowUp'); }
+    const finalHud = await hud(desktop);
+    stage('edge result and unchanged-record verification', { setup, runUp, finalHud, virtualMs: virtual, warningObserved });
     assert.equal(await mode(desktop), 'result'); assert.match(await text(desktop, '#result-message'), /Beyond the marked snow/u);
     assert.match(await text(desktop, '#record-message'), /Only completed course runs/u); assert.equal(warningObserved, true);
     assert.deepEqual((await saved(desktop)).records, before); assert.equal(await text(desktop, '#result-time-label'), 'TIME ON THE SLOPE');
     await healthy(desktop); await desktop.locator('#result-menu-button').click();
-    return { virtualMs: virtual, warningObserved, crashMessage: 'Beyond the marked snow', earnedRecordsUnchanged: true };
+    return { setup, runUp, finalHud, runUpVirtualMs: 10000, virtualMs: virtual, warningObserved, crashMessage: 'Beyond the marked snow', earnedRecordsUnchanged: true };
   });
 
   await runCase(3, async () => {

@@ -4,12 +4,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { gzipSync } from 'node:zlib';
+import { gzipSync, gunzipSync } from 'node:zlib';
 const REPOSITORY = 'alvarovillalbaa/fallline';
 const BRANCH = 'refs/heads/qa/fallline-gameplay-20261105';
 const ACTIVE = '.github/workflows/browser-gameplay.yml';
 const SPEC = 'tests/browser/gameplay.mjs';
-const SPEC_SHA = '95f07bd11ecf6541973952be384b39d4ccf278a622258314325b7a1643dca495';
+const SPEC_SHA = '2a2f1888f6f068524cf7863b491d204180bf19251a6cbb76bc0636d961709e95';
+const CARRY = 'docs/results/2026/11-05/gameplay-attempt-2.json';
+const CARRY_SHA = '41fa780c980b51b33a1c2ecc2affdabe87d886fabfd02931d2d6591853d46b06';
 const ORIGIN = 'https://fallline-alvaro.vercel.app';
 const TITLES = [
   'desktop menu guide and keyboard controls affect the ride',
@@ -58,12 +60,13 @@ const env = {
   GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0',
   PLAYWRIGHT_BROWSERS_PATH: path.join(root, 'browsers'), PLAYWRIGHT_HTML_OPEN: 'never',
   FALLLINE_EXPECTED_DEPLOYMENT: deployment, FALLLINE_GAMEPLAY_ORIGIN: ORIGIN, FALLLINE_PLAYWRIGHT_ROOT: tools,
+  FALLLINE_GAMEPLAY_CASE_IDS: 'F03,F04,F05,F06',
 };
 const report = {
   schemaVersion: 'fallline.browser-gameplay.v1', sourceCommit, expectedDeployment: deployment, origin: ORIGIN,
   status: 'failed', startedAtUtc: new Date().toISOString(),
   runtime: { node: process.version, platform: process.platform, architecture: process.arch },
-  scope: { scenarios: TITLES, cases: 6, retries: 0, workers: 1, appBuild: false, appDependencies: false,
+  scope: { scenarios: TITLES.slice(2), cases: 4, carriedCases: ['F01', 'F02'], retries: 0, workers: 1, appBuild: false, appDependencies: false,
     accounts: false, backend: false, models: false, realTimePerformance: false, physicalTouch: false,
     profiles: ['desktop1440x1000', 'touch-emulated390x844', 'storage-disabled-chromium'],
     clock: 'Actual application RAF advanced through Playwright clock.runFor; no state injection or score replacement.' },
@@ -324,6 +327,46 @@ function prepareManifest() {
   env.FALLLINE_EXPECTED_ASSETS = JSON.stringify(assetManifest);
   report.expectedAssets = assetManifest;
 }
+function carryAccepted() {
+  const bytes = read(path.join(repo, CARRY), 524288);
+  need(sha(bytes) === CARRY_SHA, 'carry_receipt_hash');
+  const old = JSON.parse(bytes);
+  need(old.sourceCommit === '6a4c1cd282fdbe386b553cca18d72f0cec803155'
+    && old.owningWorkflow?.runId === 42016760768 && old.owningWorkflow?.jobId === 127209104068
+    && old.commands?.length === 28 && old.guards?.length === 4 && old.guards.every(item => item.passed)
+    && old.scratchCleanup === 'passed' && old.processCleanup?.passed === true
+    && old.browserProcessCleanup?.passed === true && old.browserProcessCleanup.termSent === 0
+    && old.browserProcessCleanup.killSent === 0, 'carry_receipt_boundary');
+  let verifiedStreams = 0;
+  for (const command of old.commands) {
+    need(command.released && command.closeObserved && command.exitObservedAndReaped
+      && command.originalProcessGroupAbsent && !command.forcedDrain && command.stopReason === null, 'carry_command_cleanup');
+    for (const stream of command.streams) {
+      const zipped = Buffer.from(stream.raw.data, 'base64'), decoded = gunzipSync(zipped, { maxOutputLength: STREAM_LIMIT });
+      need(stream.complete && zipped.length === stream.raw.compressedBytes && decoded.length === stream.raw.bytes
+        && sha(decoded) === stream.raw.sha256 && decoded.length === stream.observedBytes
+        && sha(decoded) === stream.observedSha256, 'carry_stream_identity'); verifiedStreams++;
+    }
+  }
+  const result = old.browser?.result, cleanup = result?.cleanup;
+  need(result?.errors?.length === 1 && result.cases?.length === 6 && cleanup?.contextsCreated === cleanup?.contextsClosed
+    && cleanup.browserClosed && cleanup.lateChecksComplete && cleanup.failures?.length === 0, 'carry_browser_boundary');
+  for (const key of ['consoleErrors', 'pageErrors', 'unhandledRejections', 'failedSameOriginRequests', 'unexpectedRequests', 'webSockets', 'credentialRequests'])
+    need(result.boundaries?.[key] === 0, 'carry_browser_error');
+  const accepted = result.cases.slice(0, 2);
+  need(accepted.every((item, index) => item.id === `F0${index + 1}` && item.title === TITLES[index]
+    && item.accepted === true && item.error === null), 'carry_case_identity');
+  const protectedPaths = [...ASSETS.map(([, file]) => file), 'package.json', 'vercel.json', 'tests/ride.test.js', 'tests/records.test.js'];
+  const oldFiles = new Map(old.sourceFiles.map(item => [item.path, item]));
+  const protectedFiles = protectedPaths.map(name => {
+    const actual = fileVector(name), expected = oldFiles.get(name);
+    need(expected && JSON.stringify(actual) === JSON.stringify(expected), 'carry_product_changed'); return actual;
+  });
+  report.carried = { receipt: CARRY, bytes: bytes.length, sha256: CARRY_SHA, sourceCommit: old.sourceCommit,
+    runId: 42016760768, jobId: 127209104068, cases: accepted.map(({ id, title }) => ({ id, title })),
+    verifiedStreams, protectedFiles, acceptedCasesRepeated: 0,
+    limit: 'Historical F01/F02 at their recorded edition; current run executes only F03–F06. One actual Meadow finish is necessary F03 fixture setup.' };
+}
 function generate() {
   const bytes = read(path.join(repo, SPEC), 131072); need(sha(bytes) === SPEC_SHA, 'browser_source_hash');
   fs.writeFileSync(specFile, bytes, { flag: 'wx', mode: 0o600 });
@@ -338,10 +381,10 @@ function browserResults(bytes) {
   const value = JSON.parse(lines[0].slice('FALLLINE_GAMEPLAY_RESULT='.length));
   report.browser = { accepted: false, result: value, rawSha256: sha(bytes), rawBytes: bytes.length };
   need(value.schemaVersion === 1 && value.origin === ORIGIN && typeof value.browserVersion === 'string'
-    && Array.isArray(value.cases) && value.cases.length === 6 && Array.isArray(value.errors) && value.errors.length === 0, 'browser_receipt_shape');
+    && Array.isArray(value.cases) && value.cases.length === 4 && Array.isArray(value.errors) && value.errors.length === 0, 'browser_receipt_shape');
   const seen = new Set();
   for (const item of value.cases) {
-    need(/^F0[1-6]$/.test(item.id) && !seen.has(item.id), 'browser_case_identity'); seen.add(item.id);
+    need(/^F0[3-6]$/.test(item.id) && !seen.has(item.id), 'browser_case_identity'); seen.add(item.id);
     need(item.title === TITLES[Number(item.id.slice(1)) - 1] && item.accepted === true
       && (item.error === null || item.error === undefined) && item.observations && typeof item.observations === 'object', 'browser_case_failure');
   }
@@ -355,6 +398,7 @@ try {
   await guard('before');
   need(JSON.parse(read(path.join(repo, 'package.json'), 32768)).name === 'fallline', 'package_identity');
   prepareManifest();
+  carryAccepted();
   report.runtime.nodeSha256 = sha(read(process.execPath, 268435456));
   const npm = fs.realpathSync(path.join(path.dirname(process.execPath), 'npm'));
   need(fs.statSync(npm).isFile(), 'npm_cli_missing'); report.runtime.npmCliSha256 = sha(read(npm, 1048576));
