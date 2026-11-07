@@ -51,3 +51,16 @@ remain separate. Their receipt/native product vectors were pinned and unchanged;
 none was rerun or counted as a fresh result here. This is controlled-RAF functional
 evidence, not real-time performance, physical touch, audible sound or native/store
 proof. No local app install/build/server/browser, account, payment or model call.
+
+Root publication follow-up: the raw JSON and original 3,485-byte Markdown receipt
+were published in `a0ccfb4a03386babe4af3692fa91a39b77e76c6b`. QA retirement
+`5ebe22ca2a719f1801b167c5988f23d4868791b3` has the same canonical tree
+`fbb679f1ffaee09959484238f401251c6e30821f`, with activation/canonical parents and
+no active workflow file. The atomic push completed and a fresh GitHub ref read
+confirmed retirement. All 12 protected product/config/pure-test inputs remain
+exact; the three later changed status documents are outside the tested edition.
+Filtered Vercel metadata and fresh deployment detail report
+`dpl_9FmQeu4E32ivQ7kwsRAETPrtLePG` READY/production at `a0ccfb4`, with the canonical
+alias. That is publication metadata; actual HTTP/browser evidence remains at
+source `35fc99a` / deployment `dpl_3WyQDkUofoJNkqB8TP55xkZo9Xv5`. The original
+receipt prefix is preserved.
