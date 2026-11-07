@@ -1,4 +1,8 @@
-# Free-ride browser checks — prepared, not executed
+# Free-ride browser checks
+
+Current status: [F07/F08 passed in one execution](../results/2026/11-07/free-ride-attempt-1.md)
+at source `35fc99ad9447d245fcb122a9daf78d44e8db443a`. The temporary workflow is
+disabled. The preparation text below preserves the tested scope, not a new run request.
 
 7 November 2026. The [brief](../spec.md) requires free riding without a course
 finish. The existing [UI](../../public/src/game.js) already provides free start,
