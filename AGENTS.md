@@ -7,6 +7,10 @@ An original downhill snowboard browser game. `docs/spec.md` owns source scope an
   repaired pause/touch/storage cases ran freshly. Preserve all failed/cancelled
   receipts and source qualification. Do not repeat closed scopes without a
   changed input or concrete concern. The earlier29 pure cases stay separate.
+- Free-ride F07/F08 are accepted separately in
+  `docs/results/2026/11-07/free-ride-attempt-1.md`. Preserve their two-profile
+  source/served-byte and lifecycle boundaries; do not repeat these closed cases
+  unchanged or combine them with the historical six as one execution.
 
 - The later standing owner approval ("approve everything", "you choose", "keep
   going", "do all the work") covers the six focused public gameplay scenarios
