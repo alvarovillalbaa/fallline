@@ -11,11 +11,14 @@ const TITLES = [
   'pause guide restart and resume clear held keyboard input',
   'narrow touch holds multitouch cancellation and jump affect gameplay',
   'corrupt and disabled storage keep play available with honest record notices',
+  'desktop free ride passes the course end and preserves earned records across its lifecycle',
+  'narrow touch free ride passes the course end and preserves earned records across its lifecycle',
 ];
 const origin = process.env.FALLLINE_GAMEPLAY_ORIGIN;
 const requestedCases = process.env.FALLLINE_GAMEPLAY_CASE_IDS;
 const selectedIds = requestedCases === undefined ? ['F01', 'F02', 'F03', 'F04', 'F05', 'F06']
-  : requestedCases === 'F04,F05,F06' ? ['F04', 'F05', 'F06'] : ['F03', 'F04', 'F05', 'F06'];
+  : requestedCases === 'F07,F08' ? ['F07', 'F08']
+    : requestedCases === 'F04,F05,F06' ? ['F04', 'F05', 'F06'] : ['F03', 'F04', 'F05', 'F06'];
 const allowedPaths = new Set(['/', '/styles.css', '/favicon.svg', '/src/game.js', '/src/ride.js', '/src/renderer.js', '/src/audio.js', '/src/records.js']);
 const report = { schemaVersion: 1, origin, browserVersion: null,
   profile: { clock: 'Playwright clock.runFor; actual requestAnimationFrame callbacks', maxAdvanceMs: 1000, totalVirtualLimitMs: 900000,
@@ -197,9 +200,113 @@ async function runCase(index, action) {
 }
 function criticalCount() { return Object.entries(counters).reduce((sum, [key, value]) => sum + (key === 'consoleWarnings' ? 0 : value), 0); }
 
+async function freeRideJourney(browser, mobile) {
+  const context = await contextFor(browser, mobile), page = await open(context);
+  const activate = selector => mobile ? page.locator(selector).tap() : page.locator(selector).click();
+  const rawSave = () => page.evaluate(() => localStorage.getItem('fallline.v1'));
+  let session;
+  try {
+    stage('earn an actual Meadow course record');
+    assert.equal(await rawSave(), null, 'fresh profile unexpectedly contains a save');
+    await select(page, 'Meadow'); await activate('#start-button');
+    const earned = await finish(page, 'meadow', 6, 2);
+    await activate('#result-menu-button');
+    const before = await rawSave(); assert.equal(typeof before, 'string');
+    const unchanged = async () => assert.equal(await rawSave(), before, 'free ride changed earned save bytes');
+    const distance = async () => {
+      const match = /^(\d+\.\d{2}) km · Find your own line$/u.exec(await text(page, '#next-flag'));
+      assert(match, 'free-ride distance HUD is missing'); return Number(match[1]);
+    };
+    const freeHud = async () => {
+      assert.equal(await mode(page), 'riding'); assert.equal(await text(page, '#run-tag'), 'Meadow / Free ride');
+      assert.equal(await text(page, '#penalty'), 'Free ride'); assert.match(await text(page, '#flags'), /^—\s+free$/u);
+      assert.equal(await page.locator('#progress-rail').isVisible(), false);
+      assert.equal(await page.locator('#result-overlay').isVisible(), false); return distance();
+    };
+    const pauseToMenu = async () => {
+      await activate('#pause-button'); assert.equal(await mode(page), 'paused');
+      await activate('#pause-menu-button'); assert.equal(await mode(page), 'menu'); await unchanged();
+    };
+    stage('ordinary free-ride start and visible distance checkpoints', { earned });
+    await buttonBounds(page, '#free-button'); await activate('#free-button'); await freeHud();
+    const points = {};
+    if (mobile) {
+      session = await context.newCDPSession(page);
+      for (const action of ['jump', 'right', 'tuck']) {
+        const rect = await buttonBounds(page, `[data-action="${action}"]`);
+        points[action] = { id: Object.keys(points).length + 1, x: rect.x + rect.width / 2, y: rect.y + rect.height / 2, radiusX: 5, radiusY: 5, force: 1 };
+      }
+    }
+    const hold = async actions => {
+      if (mobile) await session.send('Input.dispatchTouchEvent', { type: actions.length ? 'touchStart' : 'touchEnd', touchPoints: actions.map(action => points[action]) });
+      else for (const [action, key] of [['jump', 'Space'], ['right', 'ArrowRight'], ['tuck', 'ArrowUp']]) {
+        if (actions.includes(action)) await page.keyboard.down(key); else await page.keyboard.up(key);
+      }
+    };
+    // Ordinary authored jump inputs use only the rounded, visible distance HUD.
+    // They neither import the model nor inspect or replace the ride state.
+    let elapsed = 0, jumpIndex = 0;
+    const checkpoints = [0.26, 0.44, 0.62, 0.80, 0.98];
+    while (await distance() < 1.12 && elapsed < 160000) {
+      assert.equal(await mode(page), 'riding', 'free ride ended before passing the course distance');
+      if (jumpIndex < checkpoints.length && await distance() >= checkpoints[jumpIndex]) {
+        await advance(page, 200); elapsed += 200;
+        await hold(['jump']);
+        try { await advance(page, 100); elapsed += 100; } finally { await hold([]); }
+        jumpIndex++;
+      }
+      await advance(page, 200); elapsed += 200;
+    }
+    const beyondKm = await freeHud(); assert(beyondKm >= 1.12, 'free ride did not pass Meadow’s 1.1 km finish');
+    assert.equal(jumpIndex, checkpoints.length); await unchanged();
+    const beyond = await hud(page), canvas = await pixels(page);
+    stage('free pause resume and restart', { beyond, beyondKm, virtualMs: elapsed, authoredJumps: jumpIndex, canvas });
+    await activate('#pause-button'); assert.equal(await mode(page), 'paused'); const paused = await hud(page);
+    await advance(page, 1000); await advance(page, 1000); assert.deepEqual(await hud(page), paused);
+    await activate('#resume-button'); await advance(page, 200); await freeHud();
+    assert.notEqual(await text(page, '#run-time'), paused.time); await unchanged();
+    await activate('#pause-button'); await activate('#restart-button');
+    assert.equal(await text(page, '#run-time'), '00:00.0'); assert.equal(await freeHud(), 0);
+    await advance(page, 500); await pauseToMenu();
+    stage('new free ride intentional crash and frozen free-ride log');
+    await activate('#free-button'); await freeHud(); await hold(['tuck']);
+    let crashMs = 0;
+    try {
+      for (let index = 0; index < 10; index++) await advance(page, 1000);
+      await hold(['right', 'tuck']);
+      while (await mode(page) === 'riding' && crashMs < 40000) { await advance(page, 200); crashMs += 200; }
+    } finally { await hold([]); }
+    assert.equal(await mode(page), 'result'); assert.equal(await text(page, '#result-eyebrow'), 'FREE-RIDE LOG');
+    assert.equal(await text(page, '#result-title'), 'There’s another run in you.');
+    assert.equal(await text(page, '#result-time-label'), 'TIME ON THE SLOPE'); assert.equal(await text(page, '#result-flags'), 'Free ride');
+    assert.match(await text(page, '#result-detail'), /^\d+\.\d{2} km down the mountain\.$/u);
+    assert.equal(await text(page, '#record-message'), 'Free rides don’t replace course records.');
+    const log = await page.locator('#result-overlay').textContent(); await advance(page, 1000);
+    assert.equal(await page.locator('#result-overlay').textContent(), log); await unchanged();
+    const crashMessage = await text(page, '#result-message');
+    await activate('#again-button'); assert.equal(await text(page, '#run-time'), '00:00.0'); await freeHud();
+    await advance(page, 200); await pauseToMenu();
+    await activate('#free-button'); await hold(['right', 'tuck']);
+    try {
+      let finalMs = 0;
+      while (await mode(page) === 'riding' && finalMs < 50000) { await advance(page, 200); finalMs += 200; }
+      assert.equal(await mode(page), 'result'); assert.equal(await text(page, '#result-eyebrow'), 'FREE-RIDE LOG');
+    } finally { await hold([]); }
+    await activate('#result-menu-button'); assert.equal(await mode(page), 'menu'); await unchanged();
+    stage('reload exact earned-save bytes');
+    await page.reload({ waitUntil: 'load' }); await page.waitForFunction(() => document.body.dataset.mode === 'menu');
+    await unchanged(); assert.match(await text(page, '#best-note'), /Your best:/u); const layout = await healthy(page);
+    return { profile: mobile ? 'narrow-touch390x844' : 'desktop1440x1000', earned, beyondKm, beyond, canvas, layout,
+      authoredJumps: jumpIndex, virtualMs: elapsed, paused, pauseFrozen: true, resumeStayedFree: true, restartStayedFree: true,
+      againStayedFree: true, pauseMenuExit: true, resultMenuExit: true, freeRideLogFrozen: true, crashMessage,
+      earnedSaveBytes: Buffer.byteLength(before), earnedSaveSha256: sha(before), earnedSaveByteExactAfterReload: true,
+      input: mobile ? 'ordinary buttons and CDP touch contacts; actual Chromium pointer events' : 'ordinary buttons and keyboard controls', physicalDevice: false };
+  } finally { if (session) await bounded(session.detach(), 5000, 'free-ride touch CDP detach'); }
+}
+
 try {
   assert.equal(process.env.CI, 'true', 'owned CI execution is required');
-  assert(requestedCases === undefined || requestedCases === 'F03,F04,F05,F06' || requestedCases === 'F04,F05,F06', 'unsupported fixed gameplay case selection');
+  assert(requestedCases === undefined || requestedCases === 'F03,F04,F05,F06' || requestedCases === 'F04,F05,F06' || requestedCases === 'F07,F08', 'unsupported fixed gameplay case selection');
   assert.equal(origin, 'https://fallline-alvaro.vercel.app', 'only the selected public Fallline origin is allowed');
   const root = process.env.FALLLINE_PLAYWRIGHT_ROOT;
   assert(root && isAbsolute(root), 'absolute CI-owned Playwright installation is required');
@@ -207,8 +314,8 @@ try {
   const packageInfo = JSON.parse(await readFile(join(actualRoot, 'node_modules/playwright/package.json'), 'utf8'));
   assert.equal(packageInfo.version, '1.64.1');
   const { chromium } = await import(pathToFileURL(join(actualRoot, 'node_modules/playwright/index.mjs')).href);
-  const browser = await launch(chromium), desktopContext = await contextFor(browser);
-  const desktop = await open(desktopContext);
+  const browser = await launch(chromium);
+  const desktop = requestedCases === 'F07,F08' ? null : await open(await contextFor(browser));
 
   await runCase(0, async () => {
     stage('menu canvas and guide');
@@ -388,6 +495,9 @@ try {
       truthfulVisitOnlyRecord: true, recordNotPromisedAfterReload: true, unrelatedSessionStoragePreserved: true,
       inaccessibleLocalStoragePreservation: 'not observable or claimed' };
   });
+
+  await runCase(6, () => freeRideJourney(browser, false));
+  await runCase(7, () => freeRideJourney(browser, true));
 } catch (error) {
   report.errors.push(clean(error?.message ?? error, 1600));
 } finally {

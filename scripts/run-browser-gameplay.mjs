@@ -6,10 +6,12 @@ import { spawn } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
 import { gzipSync, gunzipSync } from 'node:zlib';
 const REPOSITORY = 'alvarovillalbaa/fallline';
-const BRANCH = 'refs/heads/qa/fallline-gameplay-20261105';
-const ACTIVE = '.github/workflows/browser-gameplay.yml';
+const FREE_RIDE = process.argv[4] === '--free-ride';
+const BRANCH = FREE_RIDE ? 'refs/heads/qa/fallline-free-ride-20261107' : 'refs/heads/qa/fallline-gameplay-20261105';
+const ACTIVE = FREE_RIDE ? '.github/workflows/free-ride.yml' : '.github/workflows/browser-gameplay.yml';
 const SPEC = 'tests/browser/gameplay.mjs';
-const SPEC_SHA = '20c1262f3cde3cd37254659fcb51696535e1a20e386de119afa52c482b07ecfa';
+const SPEC_SHA = FREE_RIDE ? '6a4bc62fabd64db5d2c13cda0fafd6a2fee19892630ab1a3697e29449d2287c5'
+  : '20c1262f3cde3cd37254659fcb51696535e1a20e386de119afa52c482b07ecfa';
 const CARRY = 'docs/results/2026/11-05/gameplay-attempt-2.json';
 const CARRY_SHA = '41fa780c980b51b33a1c2ecc2affdabe87d886fabfd02931d2d6591853d46b06';
 const ORIGIN = 'https://fallline-alvaro.vercel.app';
@@ -20,6 +22,8 @@ const TITLES = [
   'pause guide restart and resume clear held keyboard input',
   'narrow touch holds multitouch cancellation and jump affect gameplay',
   'corrupt and disabled storage keep play available with honest record notices',
+  'desktop free ride passes the course end and preserves earned records across its lifecycle',
+  'narrow touch free ride passes the course end and preserves earned records across its lifecycle',
 ];
 const ASSETS = [
   ['/', 'public/index.html'], ['/styles.css', 'public/styles.css'], ['/favicon.svg', 'public/favicon.svg'],
@@ -31,7 +35,7 @@ const gitBlob = bytes => createHash('sha1').update(`blob ${bytes.length}\0`).upd
 const need = (condition, code) => { if (!condition) throw new Error(code); };
 const finite = error => /^[a-z0-9_]+$/.test(error?.message ?? '') ? error.message : 'controller_error';
 const sourceCommit = process.argv[3], deployment = process.env.FALLLINE_EXPECTED_DEPLOYMENT;
-need(process.argv.length === 4 && process.argv[2] === '--source-commit' && /^[a-f0-9]{40}$/.test(sourceCommit ?? ''), 'source_pin_required');
+need(process.argv.length === (FREE_RIDE ? 5 : 4) && process.argv[2] === '--source-commit' && /^[a-f0-9]{40}$/.test(sourceCommit ?? ''), 'source_pin_required');
 need(/^dpl_[A-Za-z0-9]{1,100}$/.test(deployment ?? ''), 'deployment_pin_required');
 need(process.version === 'v24.21.0' && process.platform === 'linux' && process.env.CI === 'true'
   && process.env.GITHUB_ACTIONS === 'true' && process.env.GITHUB_REPOSITORY === REPOSITORY
@@ -40,17 +44,18 @@ need(process.version === 'v24.21.0' && process.platform === 'linux' && process.e
 
 const repo = fs.realpathSync(process.cwd()), parent = fs.realpathSync(process.env.RUNNER_TEMP ?? '');
 need(path.isAbsolute(parent) && fs.statSync(parent).isDirectory(), 'runner_temp_invalid');
-const root = fs.mkdtempSync(path.join(parent, 'fallline-gameplay-'));
+const root = fs.mkdtempSync(path.join(parent, FREE_RIDE ? 'fallline-free-ride-' : 'fallline-gameplay-'));
 fs.chmodSync(root, 0o700);
 const identity = fs.lstatSync(root), nonce = randomUUID();
 need(identity.uid === process.getuid(), 'scratch_owner_invalid');
 fs.writeFileSync(path.join(root, 'owner'), nonce, { flag: 'wx', mode: 0o600 });
 for (const name of ['tools', 'tmp', 'cache', 'config', 'browsers']) fs.mkdirSync(path.join(root, name), { mode: 0o700 });
+if (FREE_RIDE) fs.mkdirSync(path.join(root, 'home'), { mode: 0o700 });
 for (const name of ['npm-user', 'npm-global']) fs.writeFileSync(path.join(root, name), '', { flag: 'wx', mode: 0o600 });
 const tools = path.join(root, 'tools'), specFile = path.join(tools, 'gameplay.mjs');
 const env = {
   PATH: `${path.dirname(process.execPath)}:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`,
-  HOME: process.env.HOME, LANG: 'C.UTF-8', TZ: 'UTC', CI: 'true', NO_COLOR: '1',
+  HOME: FREE_RIDE ? path.join(root, 'home') : process.env.HOME, LANG: 'C.UTF-8', TZ: 'UTC', CI: 'true', NO_COLOR: '1',
   TMPDIR: path.join(root, 'tmp'), TMP: path.join(root, 'tmp'), TEMP: path.join(root, 'tmp'),
   XDG_CACHE_HOME: path.join(root, 'cache'), XDG_CONFIG_HOME: path.join(root, 'config'),
   NODE_COMPILE_CACHE: path.join(root, 'cache', 'node'),
@@ -60,15 +65,15 @@ const env = {
   GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0',
   PLAYWRIGHT_BROWSERS_PATH: path.join(root, 'browsers'), PLAYWRIGHT_HTML_OPEN: 'never',
   FALLLINE_EXPECTED_DEPLOYMENT: deployment, FALLLINE_GAMEPLAY_ORIGIN: ORIGIN, FALLLINE_PLAYWRIGHT_ROOT: tools,
-  FALLLINE_GAMEPLAY_CASE_IDS: 'F04,F05,F06',
+  FALLLINE_GAMEPLAY_CASE_IDS: FREE_RIDE ? 'F07,F08' : 'F04,F05,F06',
 };
 const report = {
-  schemaVersion: 'fallline.browser-gameplay.v1', sourceCommit, expectedDeployment: deployment, origin: ORIGIN,
+  schemaVersion: FREE_RIDE ? 'fallline.free-ride.v1' : 'fallline.browser-gameplay.v1', sourceCommit, expectedDeployment: deployment, origin: ORIGIN,
   status: 'failed', startedAtUtc: new Date().toISOString(),
   runtime: { node: process.version, platform: process.platform, architecture: process.arch },
-  scope: { scenarios: TITLES.slice(3), cases: 3, carriedCases: ['F01', 'F02', 'F03'], retries: 0, workers: 1, appBuild: false, appDependencies: false,
+  scope: { scenarios: FREE_RIDE ? TITLES.slice(6) : TITLES.slice(3, 6), cases: FREE_RIDE ? 2 : 3, carriedCases: FREE_RIDE ? [] : ['F01', 'F02', 'F03'], retries: 0, workers: 1, appBuild: false, appDependencies: false,
     accounts: false, backend: false, models: false, realTimePerformance: false, physicalTouch: false,
-    profiles: ['desktop1440x1000', 'touch-emulated390x844', 'storage-disabled-chromium'],
+    profiles: FREE_RIDE ? ['desktop1440x1000', 'touch-emulated390x844'] : ['desktop1440x1000', 'touch-emulated390x844', 'storage-disabled-chromium'],
     clock: 'Actual application RAF advanced through Playwright clock.runFor; no state injection or score replacement.' },
   limits: { workSeconds: 1020, cleanupSeconds: 90, browserSeconds: 540, jobMinutes: 20,
     streamBytes: STREAM_LIMIT, streamGzipBytes: 131072, allStreamsGzipBytes: 524288,
@@ -327,6 +332,25 @@ function prepareManifest() {
   env.FALLLINE_EXPECTED_ASSETS = JSON.stringify(assetManifest);
   report.expectedAssets = assetManifest;
 }
+function referenceAccepted() {
+  const file = 'docs/results/2026/11-05/gameplay-checks.json', bytes = read(path.join(repo, file), 524288);
+  const digest = '19a558eb4f0713da98a9f6924f631d2dcee90c1b6d30fdf8fe6db401e4c2729f';
+  need(sha(bytes) === digest, 'previous_acceptance_receipt_hash');
+  const old = JSON.parse(bytes);
+  need(old.status === 'passed' && old.sourceCommit === '2dbe02f2be9e3a8cb4675d4639171d81bcda9a2d'
+    && old.owningWorkflow?.runId === 42020209360 && old.owningWorkflow?.jobId === 127220763970
+    && old.scratchCleanup === 'passed' && old.processCleanup?.passed === true && old.browserProcessCleanup?.passed === true,
+  'previous_acceptance_identity');
+  const oldFiles = new Map(old.sourceFiles.map(value => [value.path, value]));
+  const protectedPaths = [...ASSETS.map(([, name]) => name), 'package.json', 'vercel.json', 'tests/ride.test.js', 'tests/records.test.js'];
+  const protectedFiles = protectedPaths.map(name => {
+    const actual = fileVector(name);
+    need(JSON.stringify(actual) === JSON.stringify(oldFiles.get(name)), 'previous_product_or_pure_tests_changed'); return actual;
+  });
+  report.previousAcceptance = { receipt: file, bytes: bytes.length, sha256: digest, sourceCommit: old.sourceCommit,
+    referenceOnly: true, acceptedCasesRepeated: 0, pureCasesRepeated: 0, cases: ['F01', 'F02', 'F03', 'F04', 'F05', 'F06'],
+    protectedFiles, limit: 'Historical six-journey ledger remains separate across editions; only F07/F08 execute freshly.' };
+}
 function carryAccepted() {
   const protectedPaths = [...ASSETS.map(([, file]) => file), 'package.json', 'vercel.json', 'tests/ride.test.js', 'tests/records.test.js'];
   const items = [
@@ -406,24 +430,38 @@ function browserResults(bytes) {
   const value = JSON.parse(lines[0].slice('FALLLINE_GAMEPLAY_RESULT='.length));
   report.browser = { accepted: false, result: value, rawSha256: sha(bytes), rawBytes: bytes.length };
   need(value.schemaVersion === 1 && value.origin === ORIGIN && typeof value.browserVersion === 'string'
-    && Array.isArray(value.cases) && value.cases.length === 3 && Array.isArray(value.errors) && value.errors.length === 0, 'browser_receipt_shape');
+    && Array.isArray(value.cases) && value.cases.length === (FREE_RIDE ? 2 : 3) && Array.isArray(value.errors) && value.errors.length === 0, 'browser_receipt_shape');
   const seen = new Set();
   for (const item of value.cases) {
-    need(/^F0[4-6]$/.test(item.id) && !seen.has(item.id), 'browser_case_identity'); seen.add(item.id);
+    need((FREE_RIDE ? /^F0[7-8]$/ : /^F0[4-6]$/).test(item.id) && !seen.has(item.id), 'browser_case_identity'); seen.add(item.id);
     need(item.title === TITLES[Number(item.id.slice(1)) - 1] && item.accepted === true
       && (item.error === null || item.error === undefined) && item.observations && typeof item.observations === 'object', 'browser_case_failure');
+    if (FREE_RIDE) {
+      const observed = item.observations;
+      need(observed.profile === (item.id === 'F07' ? 'desktop1440x1000' : 'narrow-touch390x844')
+        && observed.beyondKm >= 1.12 && observed.authoredJumps === 5
+        && Number.isInteger(observed.earnedSaveBytes) && observed.earnedSaveBytes > 0 && /^[a-f0-9]{64}$/.test(observed.earnedSaveSha256)
+        && ['pauseFrozen', 'resumeStayedFree', 'restartStayedFree', 'againStayedFree', 'pauseMenuExit', 'resultMenuExit',
+          'freeRideLogFrozen', 'earnedSaveByteExactAfterReload'].every(key => observed[key] === true), 'free_ride_observation_failure');
+    }
   }
   const cleanup = value.cleanup;
   need(cleanup && Number.isInteger(cleanup.contextsCreated) && cleanup.contextsCreated > 0
     && cleanup.contextsCreated === cleanup.contextsClosed && cleanup.browserClosed === true
     && cleanup.lateChecksComplete === true && Array.isArray(cleanup.failures) && cleanup.failures.length === 0, 'browser_resource_cleanup');
+  if (FREE_RIDE) {
+    need(cleanup.contextsCreated === 2 && cleanup.contextsClosed === 2 && cleanup.browsersCreated === 1 && cleanup.browsersClosed === 1,
+      'free_ride_resource_identity');
+    for (const key of ['consoleErrors', 'pageErrors', 'unhandledRejections', 'failedSameOriginRequests', 'unexpectedRequests', 'webSockets', 'credentialRequests'])
+      need(value.boundaries?.[key] === 0, 'free_ride_browser_boundary');
+  }
   report.browser.accepted = true;
 }
 try {
   await guard('before');
   need(JSON.parse(read(path.join(repo, 'package.json'), 32768)).name === 'fallline', 'package_identity');
   prepareManifest();
-  carryAccepted();
+  if (FREE_RIDE) referenceAccepted(); else carryAccepted();
   report.runtime.nodeSha256 = sha(read(process.execPath, 268435456));
   const npm = fs.realpathSync(path.join(path.dirname(process.execPath), 'npm'));
   need(fs.statSync(npm).isFile(), 'npm_cli_missing'); report.runtime.npmCliSha256 = sha(read(npm, 1048576));
