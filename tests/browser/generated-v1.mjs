@@ -136,6 +136,18 @@ try{
   await p.keyboard.up('ArrowRight');await p.keyboard.up('ArrowUp');row.crash=await snap(p);assert.equal(row.crash.mode,'result');assert.match(row.crash['result-title'],/another run/);assert.deepEqual((await readSave(p)).records,before.records);assert.equal((await readSave(p)).progress.level,before.progress.level);
   await p.locator('#again-button').click();await advance(p,200);await p.locator('#guide-button').click();const frozen=await snap(p);await advance(p,1000);assert.deepEqual(await snap(p),frozen);await p.keyboard.press('Escape');assert.equal((await snap(p)).mode,'paused');await p.locator('#restart-button').click();await advance(p,300);assert.equal((await snap(p)).mode,'riding');await menu(p);await p.locator('#free-button').click();await advance(p,2500);row.free=await snap(p);assert.equal(row.free.mode,'riding');assert.equal(row.free.penalty,'Free ride');assert.deepEqual((await readSave(p)).records,before.records);await menu(p);
  });
+ // Close the five-case main profile completely before opening the isolated storage profile.
+ for(const ctx of contexts)for(const p of ctx.pages())assert.equal(await p.evaluate(()=>window.__unhandled||null),null);
+ const closed=[];
+ for(const ctx of contexts.splice(0))await ctx.close();
+ for(const item of browsers.splice(0)){
+  const child=item.server.process();await item.browser.close();await item.server.close();
+  let absent=false;try{process.kill(child.pid,0);}catch(e){absent=e.code==='ESRCH';}
+  const row={pid:child.pid,exitCode:child.exitCode,absent};closed.push(row);
+  assert.equal(row.exitCode,0,'Main native process must exit normally before storage profile');assert.equal(row.absent,true);
+ }
+ report.mainProfileClosure={contextsClosed:true,native:closed,closedCaseIds:report.cases.filter(c=>c.status==='passed').map(c=>c.id)};
+ await writeFile(path.join(out,'generated-browser.json'),JSON.stringify(report,null,2)+'\n');
  await run('G06','Native disabled storage still permits a real completed generated course without saved claim',async row=>{
   const disabled=await launch(true),s=await profile(disabled),d=s.page;currentPage=d;
   row.native=await d.evaluate(()=>{let read=false,write=false;try{localStorage.getItem('fallline.v1');}catch{read=true;}try{localStorage.setItem('fallline.v1','never');}catch{write=true;}sessionStorage.setItem('fallline-gen-session','keep');return{readDenied:read,writeDenied:write};});assert.deepEqual(row.native,{readDenied:true,writeDenied:true});

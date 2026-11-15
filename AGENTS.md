@@ -2,6 +2,13 @@
 
 An original downhill snowboard browser game. `docs/spec.md` owns source scope and choices; `docs/ride-contract.md` owns module boundaries.
 
+- The owner's15November “Autorizo todo” grant approves the pending generated V5
+  proposal and its15minute extension: cumulative cap35minutes/2100seconds, with
+ 940seconds already used across four preserved failed jobs. Use the prepared
+  six-case native closure protocol, then exact hosted H01 and leased retirement.
+  This does not reopen closed historical/37 Node cases or authorize local heavy
+  execution. Read docs/proposals/generated-native-v5.md on the prepared QA source.
+
 - The 14 November GEN-3659 request supersedes the three-authored-course choice.
   Current local worlds are versioned generated seed/level maps; preserve exact
   reconstruction, bounded saved levels and old records. New course completion

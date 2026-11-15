@@ -16,7 +16,7 @@ for name in ("tmp","tools","browsers","npm-cache"): (owned/name).mkdir()
 tools=owned/"tools"
 env=dict(os.environ)
 env.update(TMPDIR=str(owned/"tmp"),npm_config_cache=str(owned/"npm-cache"),npm_config_audit="false",npm_config_fund="false",npm_config_update_notifier="false",PLAYWRIGHT_BROWSERS_PATH=str(owned/"browsers"),FALLLINE_MANIFEST=str(out/"public-manifest.json"),FALLLINE_READY=str(out/"server-ready.json"),FALLLINE_PLAYWRIGHT=str(tools/"node_modules/playwright/index.mjs"))
-deadline=time.monotonic()+10*60
+deadline=time.monotonic()+11*60
 receipt={"source":os.environ["GITHUB_SHA"],"product":"3f4f957521474dfface56cb17ca23e03037a26ba","commands":[],"passed":False,"appInstall":False,"appBuild":False,"localMacExecution":False}
 server=None;streams=[]
 def digest(b): return hashlib.sha256(b).hexdigest()
@@ -80,9 +80,9 @@ def resources(label):
     (out/(label+".json")).write_text(json.dumps(rows,indent=2)+"\n")
 try:
     receipt["diskFreeBytesBefore"]=shutil.disk_usage(owned).free
-    assert receipt["diskFreeBytesBefore"]>3*1024**3,"Disposable runner needs bounded tool capacity"
+    assert receipt["diskFreeBytesBefore"]>=34*1024**3,"Runner Storage Guard requires30GiB reserve plus4GiB estimate"
     version=run("node-version",["node","--version"]).strip();assert version=="v24.22.2"
-    expected=json.loads((repo/"docs/qualification/generated-v1-build-inputs.json").read_text())
+    expected=json.loads((repo/"docs/qualification/generated-v5-build-inputs.json").read_text())
     assert len(expected)==11
     for item in expected:
         if item["path"]=="vercel.json":
@@ -95,7 +95,7 @@ try:
         else:
             raw=(repo/item["path"]).read_bytes();assert len(raw)==item["bytes"] and digest(raw)==item["sha256"],item["path"]
     (out/"declared-inputs.json").write_text(json.dumps(expected,indent=2)+"\n")
-    manifest=json.loads((repo/"docs/qualification/generated-v1-public-manifest.json").read_text());assert len(manifest)==8
+    manifest=json.loads((repo/"docs/qualification/generated-v5-public-manifest.json").read_text());assert len(manifest)==8
     (out/"public-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
     archive=repo/"docs/results/2026/11-15/generated-v1/attempt-2"
     carried=json.loads((repo/"docs/qualification/generated-v3-carried-checks.json").read_text())
@@ -129,7 +129,7 @@ try:
     while not ready.exists() and server.poll() is None and time.monotonic()<end:time.sleep(.05)
     info=json.loads(ready.read_text());assert info["pid"]==server.pid and re.fullmatch(r"http://127\.0\.0\.1:\d+",info["url"])
     env["FALLLINE_URL"]=info["url"];resources("served-before")
-    run("generated-browser",["node","tests/browser/generated-v1.mjs"],520)
+    run("generated-browser",["node","tests/browser/generated-v1.mjs"],620)
     result=json.loads((out/"generated-browser.json").read_text())
     assert result["passed"] and len(result["cases"])==6 and {c["id"] for c in result["cases"]}=={"G01","G02","G03","G04","G05","G06"}
     assert all(c["status"]=="passed" for c in result["cases"])
