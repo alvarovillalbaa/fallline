@@ -47,3 +47,25 @@ This job used 601 seconds. Prior jobs used 12+17+374+537=940 seconds, yielding
 No local install/build/browser was run, and the dirty Mac source/index/refs remain
 preserved. Publication, exact production READY, the separately bounded public H01
 journey and leased QA retirement are the remaining steps of this approved packet.
+
+## Published source and actual H01
+
+Release source `ab24ebff2aa77cd71d1539a2aaeedaf157971265` is published on main,
+with all eight public blobs/modes identical to accepted V5, original production
+config restored and the temporary workflow removed. Actual production deployment
+`dpl_34fgGnU6k2DTQ86FjsXqui65KeH8` is READY and owns the canonical alias
+https://fallline-alvaro.vercel.app. Provider metadata was checked before and after
+H01; that control-plane observation is separate from actual HTTP/body evidence.
+
+[H01 run43760506680](https://github.com/alvarovillalbaa/fallline/actions/runs/43760506680)
+passes on source `66de497aa447b05f9b1cffabb3e43e40f7077df1`. All eight anonymous
+bodies/security headers match before and after (16 responses);18 actual browser
+responses also match their source bytes. At320px, native touch creates/saves a
+new generated level, reload preserves it, multitouch jump/spin earns landing
+points, release clears held actions, and pause freezes the real HUD. No score
+or game state is injected. Context and browser child close normally, exit0/absent;
+all command groups/source/Git/scratch guards pass. Originals are in hosted/.
+
+H01 used26 job seconds, bringing cumulative CI to1567/2100seconds (26m07s),
+with533seconds before the one-minute leased retirement. Zero QA deployments
+were observed. No old gameplay/free-ride or37-node identity was replayed.

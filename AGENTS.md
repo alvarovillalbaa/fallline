@@ -14,6 +14,10 @@ An original downhill snowboard browser game. `docs/spec.md` owns source scope an
   covers the approved exact-source publication, H01 (two-minute job) and leased
   retirement (one-minute job). Preserve all four original failed packets and the
   main-before-storage native closure milestone. Do not replay closed cases.
+  Actual public H01 also passes at run43760506680 on READY dpl_34fgGnU6k2DTQ86FjsXqui65KeH8,
+  release ab24ebff2aa77cd71d1539a2aaeedaf157971265:16 anonymous byte/header matches,
+  320px saved-level/reload/multitouch spin/pause and normal browser closure.
+  CI1567/2100seconds before leased retirement; H01 is now closed as well.
 
 - The 14 November GEN-3659 request supersedes the three-authored-course choice.
   Current local worlds are versioned generated seed/level maps; preserve exact

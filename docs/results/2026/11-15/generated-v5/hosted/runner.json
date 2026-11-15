@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "source": "66de497aa447b05f9b1cffabb3e43e40f7077df1",
+  "commands": [
+    {
+      "label": "node-version",
+      "exit": 0,
+      "timedOut": false,
+      "groupAbsent": true,
+      "seconds": 0.00364717499999756,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "browser-tools",
+      "exit": 0,
+      "timedOut": false,
+      "groupAbsent": true,
+      "seconds": 1.9085059479999984,
+      "stdoutSha256": "65c731cd02e19c79f6f5a3e84a4dd64a49acd6c47d2ee551d7cc9da191e8c96c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "chromium",
+      "exit": 0,
+      "timedOut": false,
+      "groupAbsent": true,
+      "seconds": 5.42784978600001,
+      "stdoutSha256": "57f963b8e038353879d9a73042558fc18f5f36301a683464d2348137188121d8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "hosted-browser",
+      "exit": 0,
+      "timedOut": false,
+      "groupAbsent": true,
+      "seconds": 8.921888358000004,
+      "stdoutSha256": "afdc3f2ec702542e8e0bf1dd5fc234e2f711988be13c8f493441b6ee9066b0b4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cleanup": true,
+  "diskFreeBytesBefore": 91496656896,
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true
+}
