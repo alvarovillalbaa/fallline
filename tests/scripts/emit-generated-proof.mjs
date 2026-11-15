@@ -1,7 +1,7 @@
 import {readdir,readFile,lstat} from 'node:fs/promises';
 import path from 'node:path';import {createHash} from 'node:crypto';import {gzipSync} from 'node:zlib';
 const root=process.env.FALLLINE_OUTPUT;if(!root)throw Error('Owned proof root required');
-const allowed=new Set(['owner.json','runner.json','source-before.json','source-after.json','declared-inputs.json','public-manifest.json','served-before.json','served-after.json','server-ready.json','server.stdout.txt','server.stderr.txt','generated-browser.json','tools-lock.json']);
+const allowed=new Set(['owner.json','runner.json','source-before.json','source-after.json','declared-inputs.json','public-manifest.json','served-before.json','served-after.json','server-ready.json','server.stdout.txt','server.stderr.txt','generated-browser.json','tools-lock.json','carried-checks.json']);
 let names;try{names=await readdir(root);}catch(e){if(e.code!=='ENOENT')throw e;names=[];}let total=0;
 for(const name of names.sort()){
  const full=path.join(root,name),s=await lstat(full);

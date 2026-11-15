@@ -1,0 +1,45 @@
+✔ defaults and settings remain bounded to the supported run and boolean fields (2.033742ms)
+✔ normalization copies only complete valid records for the three authored descents (0.428668ms)
+✔ invalid persisted times, statistics and contradictory penalties are discarded (0.562719ms)
+✔ empty and corrupt JSON reset the save while keeping truthful readable-storage availability (0.349494ms)
+✔ unavailable reads fail safely without writing or touching other storage (1.082313ms)
+✔ writes normalize and use only fallline.v1; failed writes report false (0.389454ms)
+✔ only completed course rides with known run IDs can produce a record (0.255278ms)
+✔ candidate validation happens before reporting any improvement (0.701743ms)
+✔ the first valid record is immutable and contains no transient ride fields (0.528127ms)
+✔ lower adjusted time wins even if its raw time is higher (0.285755ms)
+✔ equal adjusted time breaks ties by lower raw time, then retains the old record (0.183674ms)
+✔ an invalid existing record cannot prevent a valid replacement (0.110748ms)
+✔ a failed persistence attempt preserves the in-memory best for subsequent rides (0.955492ms)
+✔ six generated map previews have ordered flags, a clear finish and descending shared snow (2.923673ms)
+✔ slope creates downhill acceleration, while tuck and braking change actual travel (16.501446ms)
+✔ carving changes the line and trades forward speed for a turn (7.262192ms)
+✔ manual jump changes clearance, lands on shared terrain and latches held input (2.695978ms)
+✔ a timed jump clears a low rock that blocks a grounded rider (1.611683ms)
+✔ jumping does not clear a tall tree and fast movement cannot tunnel through it (0.458593ms)
+✔ the shared ramp profile raises the board and a crest launches a real jump (2.074309ms)
+✔ flags use crossing interpolation, award once and preserve input state (0.729134ms)
+✔ a missed flag adds exactly four seconds without ending the ride (0.22543ms)
+✔ the last flag precedes the finish, whose adjusted time and state freeze (2.373563ms)
+✔ leaving the marked snow crashes without silently moving back inside (0.227179ms)
+✔ free world is deterministic, bounded per query, and contains no authored flags (1.357006ms)
+✔ free riding passes course finish and never scores authored flags (16.645657ms)
+✔ invalid or giant frame delays and invalid turn values cannot destabilize a ride (6.733732ms)
+✔ fixed substeps make equal input histories independent of render-frame partitioning (2.340027ms)
+✔ control-only feedback pilots can finish every run through all authored flags (107.297664ms)
+✔ versioned seeds reproduce exact levels after cache eviction, and distinct seeds produce distinct worlds (33.215589ms)
+✔ level identifiers reject malformed, unknown, noncanonical and unbounded data (0.20129ms)
+✔ difficulty increases speed, gusts, obstacle density and precision across generated maps (1.837886ms)
+✔ gusts move the rider, grounded spins earn nothing, and completed airborne spins score only on landing (9.412455ms)
+✔ remembered levels, completion and next difficulty survive a real serialized storage round trip (1.021377ms)
+✔ a collision before a projected landing cannot award its unfinished trick (0.349978ms)
+✔ crashes, free rides and partial finishes cannot advance; levels and persisted arrays remain bounded (5.587083ms)
+✔ ordinary steering can finish varied generated levels without skipping flags or tunnelling through obstacles (1115.203241ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1279.238635

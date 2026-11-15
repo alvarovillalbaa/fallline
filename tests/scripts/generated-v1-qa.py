@@ -97,10 +97,24 @@ try:
     (out/"declared-inputs.json").write_text(json.dumps(expected,indent=2)+"\n")
     manifest=json.loads((repo/"docs/qualification/generated-v1-public-manifest.json").read_text());assert len(manifest)==8
     (out/"public-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
-    run("static",["node","scripts/check.mjs"])
-    tap=run("node24-generated",["node","--test","tests/ride.test.js","tests/records.test.js","tests/unit/generated-levels.test.js"],120)
+    archive=repo/"docs/results/2026/11-15/generated-v1/attempt-2"
+    carried=json.loads((repo/"docs/qualification/generated-v3-carried-checks.json").read_text())
+    assert carried["source"]=="a1dcc22325ee509613e88dd2f77ab58dd5539b63" and carried["run"]==43691584174 and carried["node"]==version
+    native=json.loads((archive/"runner.json").read_text())
+    assert native["source"]==carried["source"]
+    for scope in ("static","nodeCases"):
+        item=carried[scope];command=item["command"]
+        assert command in native["commands"] and command["exit"]==0 and command["streamsComplete"] and not command["failure"] and not command["orphanedGroup"]
+        assert digest((archive/item["stdout"]).read_bytes())==command["stdoutSha256"]
+        assert digest((archive/item["stderr"]).read_bytes())==command["stderrSha256"]
+    for item in carried["nodeCases"]["inputs"]:
+        raw=(repo/item["path"]).read_bytes()
+        assert len(raw)==item["bytes"] and digest(raw)==item["sha256"],"Changed completed Node case input"
+    spec=(archive/carried["nodeCases"]["stdout"]).read_text()
     for key,value in (("tests",37),("pass",37),("fail",0),("skipped",0),("cancelled",0)):
-        assert re.search(r"^# "+key+r" "+str(value)+r"$",tap,re.M),("Unexpected TAP",key)
+        assert re.search(r"^ℹ "+key+r" "+str(value)+r"$",spec,re.M)
+    receipt["carriedChecks"]={"source":carried["source"],"run":carried["run"],"nodeCases":37,"static":True,"repeated":False,"rawSpecSha256":digest(spec.encode())}
+    (out/"carried-checks.json").write_text(json.dumps(receipt["carriedChecks"],indent=2)+"\n")
     (tools/"package.json").write_text(json.dumps({"private":True,"dependencies":{"playwright":"1.64.1"}})+"\n")
     run("browser-tools",["npm","install","--ignore-scripts","--no-audit","--no-fund","--save-exact","--registry=https://registry.npmjs.org/"],150,cwd=tools)
     for name in ("playwright","playwright-core"):

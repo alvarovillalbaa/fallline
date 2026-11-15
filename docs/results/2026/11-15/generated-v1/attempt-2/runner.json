@@ -1,0 +1,70 @@
+{
+  "source": "a1dcc22325ee509613e88dd2f77ab58dd5539b63",
+  "product": "3f4f957521474dfface56cb17ca23e03037a26ba",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "static",
+      "argv": [
+        "node",
+        "scripts/check.mjs"
+      ],
+      "stdout": "02-static.stdout.txt",
+      "stderr": "02-static.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.201,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "f7730acee3d4f450759436263672778a6c87fd49d83b315523696e5a6ffce20b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node24-generated",
+      "argv": [
+        "node",
+        "--test",
+        "tests/ride.test.js",
+        "tests/records.test.js",
+        "tests/unit/generated-levels.test.js"
+      ],
+      "stdout": "03-node24-generated.stdout.txt",
+      "stderr": "03-node24-generated.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 1.403,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "832deca1e8401683c33882aa6a8eab406432be86088dca48028b9af8c761c7a9",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": false,
+  "appInstall": false,
+  "appBuild": false,
+  "localMacExecution": false,
+  "diskFreeBytesBefore": 94962704384,
+  "productionConfigGitBlob": "8138ba426bea84cb719bf8129dba9b5ab01ed4ca",
+  "error": "AssertionError: ('Unexpected TAP', 'tests')",
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 82,
+  "ownedScratchRemoved": true
+}
