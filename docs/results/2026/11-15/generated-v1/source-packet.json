@@ -1,0 +1,88 @@
+{
+  "localBase": "90a7233c528f4b0bf08e1f8c2bcf9ff21cb62599",
+  "productCommit": "3f4f957521474dfface56cb17ca23e03037a26ba",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 3243,
+      "sha256": "bfde8646fe5d1c130bb4f7af2c4fcf49a3a71fac17dd78ff4c90ec9a6a1b8aa7"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2864,
+      "sha256": "a4ac1128faf0c62e5e03348ca111698a727f5d667e89b755e3541868a44e326b"
+    },
+    {
+      "path": "docs/results/2026/11-14/generated-levels.md",
+      "bytes": 4709,
+      "sha256": "4295fe44d282ae620af25a3cc3c7163b2d2afa4df7c6f1ff255c6fb0c420eb1e"
+    },
+    {
+      "path": "docs/ride-contract.md",
+      "bytes": 4997,
+      "sha256": "5b60cbdbaa1cf872800e615b57265f6e8730e58eb4d2fef75747c58fc9495803"
+    },
+    {
+      "path": "docs/spec.md",
+      "bytes": 4067,
+      "sha256": "1d1cb62293dd4903dac07e59afb852aadda698a7568d9b2fa4220f0d55af4245"
+    },
+    {
+      "path": "package.json",
+      "bytes": 355,
+      "sha256": "9ec97949395c2c7090bebaf265f8ad5a3d858d2fee2404a6a9d5450da8bf711b"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 10688,
+      "sha256": "173cb5f74f2f65f7f7e6e4e8a46e73e5d46d18c88177d53f79a9d797cd1437ea"
+    },
+    {
+      "path": "public/src/game.js",
+      "bytes": 17783,
+      "sha256": "b636bb4f8131e51678f51ff7a29e3c9a56c57c055963d79048a6f708a8c9ad1b"
+    },
+    {
+      "path": "public/src/records.js",
+      "bytes": 4724,
+      "sha256": "301d168186eaac418df6bce2f37af8350c3068c3e88a66a3a935e47fca852760"
+    },
+    {
+      "path": "public/src/renderer.js",
+      "bytes": 27939,
+      "sha256": "afceb00f96eb528470ebf7fa252e376a431d265ec581524490edc8745839e671"
+    },
+    {
+      "path": "public/src/ride.js",
+      "bytes": 17534,
+      "sha256": "d4fd5188ab846fb89f0f70151bdd320bcad7e20c8ec388a8f31cc2455e025868"
+    },
+    {
+      "path": "public/styles.css",
+      "bytes": 20246,
+      "sha256": "f765b50befb79f72549148dd7ac325c428a9d358d5a2ea1c8e03d57dac716817"
+    },
+    {
+      "path": "tests/records.test.js",
+      "bytes": 8359,
+      "sha256": "11777a4aa2d87b2ea94e4f474d3c46b9be556b7ffc82bf5bbc69cbe95fc254ff"
+    },
+    {
+      "path": "tests/ride.test.js",
+      "bytes": 12685,
+      "sha256": "13daec8fb154b928ef910d2aea3a11fc5599e89788650be50773c684e9b99f25"
+    },
+    {
+      "path": "tests/unit/generated-levels.test.js",
+      "bytes": 7053,
+      "sha256": "879a572b5c646cebca546efa425a8d963e4589d1b625b1553e74f9db51c00c22"
+    }
+  ],
+  "localStorageGuard": {
+    "exit": 2,
+    "freeGiB": 0.1,
+    "requiredGiB": 34
+  },
+  "localCheckout": "preserved, new helper/evidence source is remote-only",
+  "currentEvidence": "prepared; native/Node24/hosted acceptance not yet observed"
+}

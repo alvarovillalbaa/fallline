@@ -1,0 +1,146 @@
+"""Generated-level edition, exact source, owned disposable remote tools only."""
+from pathlib import Path
+import hashlib,json,os,re,secrets,shutil,signal,subprocess,time,urllib.request
+repo=Path.cwd().resolve()
+runner=Path(os.environ["RUNNER_TEMP"]).resolve()
+job=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]
+owned=Path("/tmp")/("fl-gen-"+job)
+out=Path(os.environ["FALLLINE_OUTPUT"]).resolve()
+assert out.parent==runner and out.name=="fallline-generated-proof-"+job
+assert not owned.exists() and not out.exists(),"Preserve prior paths"
+owned.mkdir(mode=0o700);out.mkdir()
+owner={"job":job,"nonce":secrets.token_hex(16),"pid":os.getpid()}
+(owned/"owner.json").write_text(json.dumps(owner));(out/"owner.json").write_text(json.dumps(owner))
+inode=owned.stat().st_ino
+for name in ("tmp","tools","browsers","npm-cache"): (owned/name).mkdir()
+tools=owned/"tools"
+env=dict(os.environ)
+env.update(TMPDIR=str(owned/"tmp"),npm_config_cache=str(owned/"npm-cache"),npm_config_audit="false",npm_config_fund="false",npm_config_update_notifier="false",PLAYWRIGHT_BROWSERS_PATH=str(owned/"browsers"),FALLLINE_MANIFEST=str(out/"public-manifest.json"),FALLLINE_READY=str(out/"server-ready.json"),FALLLINE_PLAYWRIGHT=str(tools/"node_modules/playwright/index.mjs"))
+deadline=time.monotonic()+8*60
+receipt={"source":os.environ["GITHUB_SHA"],"product":"3f4f957521474dfface56cb17ca23e03037a26ba","commands":[],"passed":False,"appInstall":False,"appBuild":False,"localMacExecution":False}
+server=None;streams=[]
+def digest(b): return hashlib.sha256(b).hexdigest()
+def vector():
+    rows=[]
+    for raw in subprocess.check_output(["git","ls-files","-z"],cwd=repo).split(b"\0"):
+        if not raw:continue
+        name=os.fsdecode(raw);p=repo/name
+        assert p.is_file() and not p.is_symlink()
+        rows.append({"path":name,"bytes":p.stat().st_size,"sha256":digest(p.read_bytes())})
+    return rows
+before=vector();(out/"source-before.json").write_text(json.dumps(before,indent=2)+"\n")
+def record(): (out/"runner.json").write_text(json.dumps(receipt,indent=2)+"\n")
+def stop(child):
+    forced=False
+    if child.poll() is None:
+        os.killpg(child.pid,signal.SIGTERM)
+        try:child.wait(timeout=8)
+        except subprocess.TimeoutExpired:
+            forced=True;os.killpg(child.pid,signal.SIGKILL);child.wait(timeout=5)
+    return forced
+def run(label,args,seconds=60,cwd=repo):
+    stem=str(len(receipt["commands"])+1).zfill(2)+"-"+label
+    output=out/(stem+".stdout.txt");error=out/(stem+".stderr.txt")
+    row={"label":label,"argv":args,"stdout":output.name,"stderr":error.name};receipt["commands"].append(row)
+    started=time.monotonic();failure=None
+    with output.open("xb") as stdout,error.open("xb") as stderr:
+        child=subprocess.Popen(args,cwd=cwd,env=env,stdout=stdout,stderr=stderr,start_new_session=True)
+        while child.poll() is None:
+            if time.monotonic()>min(deadline,started+seconds) or output.stat().st_size+error.stat().st_size>8*1024*1024:
+                failure="deadline/output limit";row["forced"]=stop(child);break
+            time.sleep(.1)
+        row["exit"]=child.wait()
+        try:
+            os.killpg(child.pid,0);row["orphanedGroup"]=True;os.killpg(child.pid,signal.SIGTERM);time.sleep(.2)
+            try:os.killpg(child.pid,signal.SIGKILL)
+            except ProcessLookupError:pass
+            failure=failure or "Owned command descendants remained"
+        except ProcessLookupError:row["orphanedGroup"]=False
+    row.update(seconds=round(time.monotonic()-started,3),failure=failure,streamsComplete=failure is None,stdoutSha256=digest(output.read_bytes()),stderrSha256=digest(error.read_bytes()));record()
+    if failure or row["exit"]:raise RuntimeError(label+" failed; preserve original streams")
+    return output.read_text()
+def pids():
+    found=[]
+    for p in Path("/proc").iterdir():
+        if not p.name.isdigit():continue
+        try:
+            if p.stat().st_uid==os.getuid() and (p/"exe").resolve().is_relative_to(owned):found.append(int(p.name))
+        except (OSError,RuntimeError):pass
+    return found
+def resources(label):
+    rows=[];headers=json.loads((repo/"vercel.json").read_text())["headers"][0]["headers"]
+    for f in manifest:
+        name="/" if f["path"]=="index.html" else "/"+f["path"]
+        with urllib.request.urlopen(env["FALLLINE_URL"]+name,timeout=10) as response:
+            body=response.read(2*1024*1024);actual=digest(body)
+            assert response.status==200 and len(body)==f["bytes"] and actual==f["sha256"]
+            observed={h["key"]:response.headers.get(h["key"]) for h in headers}
+            assert all(observed[h["key"]]==h["value"] for h in headers)
+            rows.append({"path":name,"status":response.status,"bytes":len(body),"sha256":actual,"headers":observed})
+    (out/(label+".json")).write_text(json.dumps(rows,indent=2)+"\n")
+try:
+    receipt["diskFreeBytesBefore"]=shutil.disk_usage(owned).free
+    assert receipt["diskFreeBytesBefore"]>3*1024**3,"Disposable runner needs bounded tool capacity"
+    version=run("node-version",["node","--version"]).strip();assert version=="v24.22.2"
+    expected=json.loads((repo/"docs/qualification/generated-v1-build-inputs.json").read_text())
+    assert len(expected)==11
+    for item in expected:
+        if item["path"]=="vercel.json":
+            raw=subprocess.check_output(["git","show",receipt["product"]+":vercel.json"],cwd=repo)
+            assert len(raw)==item["bytes"] and digest(raw)==item["sha256"]
+            actual=json.loads((repo/"vercel.json").read_text());overlay=actual.pop("git",None)
+            assert overlay=={"deploymentEnabled":False} and actual==json.loads(raw),"Only branch Git preview overlay allowed"
+        else:
+            raw=(repo/item["path"]).read_bytes();assert len(raw)==item["bytes"] and digest(raw)==item["sha256"],item["path"]
+    (out/"declared-inputs.json").write_text(json.dumps(expected,indent=2)+"\n")
+    manifest=json.loads((repo/"docs/qualification/generated-v1-public-manifest.json").read_text());assert len(manifest)==8
+    (out/"public-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+    run("static",["node","scripts/check.mjs"])
+    tap=run("node24-generated",["node","--test","tests/ride.test.js","tests/records.test.js","tests/unit/generated-levels.test.js"],120)
+    for key,value in (("tests",37),("pass",37),("fail",0),("skipped",0),("cancelled",0)):
+        assert re.search(r"^# "+key+r" "+str(value)+r"$",tap,re.M),("Unexpected TAP",key)
+    (tools/"package.json").write_text(json.dumps({"private":True,"dependencies":{"playwright":"1.64.1"}})+"\n")
+    run("browser-tools",["npm","install","--ignore-scripts","--no-audit","--no-fund","--save-exact","--registry=https://registry.npmjs.org/"],150,cwd=tools)
+    for name in ("playwright","playwright-core"):
+        package=json.loads((tools/"node_modules"/name/"package.json").read_text());assert package["name"]==name and package["version"]=="1.64.1"
+    shutil.copyfile(tools/"package-lock.json",out/"tools-lock.json")
+    run("chromium",["node",str(tools/"node_modules/playwright/cli.js"),"install","--no-shell","chromium"],150)
+    for label in ("server.stdout.txt","server.stderr.txt"):streams.append((out/label).open("xb"))
+    server=subprocess.Popen(["node","tests/scripts/generated-server-v1.mjs"],cwd=repo,env=env,stdout=streams[0],stderr=streams[1],start_new_session=True)
+    ready=out/"server-ready.json";end=time.monotonic()+10
+    while not ready.exists() and server.poll() is None and time.monotonic()<end:time.sleep(.05)
+    info=json.loads(ready.read_text());assert info["pid"]==server.pid and re.fullmatch(r"http://127\.0\.0\.1:\d+",info["url"])
+    env["FALLLINE_URL"]=info["url"];resources("served-before")
+    run("generated-browser",["node","tests/browser/generated-v1.mjs"],360)
+    result=json.loads((out/"generated-browser.json").read_text())
+    assert result["passed"] and len(result["cases"])==6 and {c["id"] for c in result["cases"]}=={"G01","G02","G03","G04","G05","G06"}
+    assert all(c["status"]=="passed" for c in result["cases"])
+    assert all(p["exitCode"]==0 and p["absent"] for p in result["cleanup"]["native"])
+    resources("served-after");receipt["passed"]=True
+except Exception as error:
+    receipt["error"]=type(error).__name__+": "+str(error)
+finally:
+    if server is not None:
+        receipt["serverForced"]=stop(server);receipt["serverExit"]=server.returncode
+        try:os.killpg(server.pid,0);receipt["serverGroupAbsent"]=False
+        except ProcessLookupError:receipt["serverGroupAbsent"]=True
+    for stream in streams:stream.close()
+    try:
+        after=vector();(out/"source-after.json").write_text(json.dumps(after,indent=2)+"\n");receipt["sourceStable"]=before==after
+        receipt["gitClean"]=not subprocess.check_output(["git","status","--porcelain"],cwd=repo).strip()
+    except Exception as error:receipt["guardError"]=str(error)
+    lingering=pids();receipt["lingeringOwnedPids"]=lingering
+    for pid in lingering:
+        try:os.kill(pid,signal.SIGTERM)
+        except ProcessLookupError:pass
+    if lingering:time.sleep(1)
+    for pid in pids():
+        try:os.kill(pid,signal.SIGKILL)
+        except ProcessLookupError:pass
+    receipt["ownedProcessesAbsent"]=not pids()
+    receipt["scratchBytes"]=sum(p.stat().st_size for p in owned.rglob("*") if p.is_file() and not p.is_symlink())
+    if owned.stat().st_ino==inode and json.loads((owned/"owner.json").read_text())==owner and receipt["ownedProcessesAbsent"]:shutil.rmtree(owned)
+    receipt["ownedScratchRemoved"]=not owned.exists()
+    receipt["passed"]=bool(receipt["passed"] and receipt.get("sourceStable") and receipt.get("gitClean") and receipt.get("serverExit")==0 and receipt.get("serverGroupAbsent") and not receipt.get("serverForced") and not lingering and receipt["ownedProcessesAbsent"] and receipt["ownedScratchRemoved"])
+    record();print(json.dumps({k:v for k,v in receipt.items() if k!="commands"}))
+raise SystemExit(0 if receipt["passed"] else 1)
