@@ -1,0 +1,120 @@
+{
+  "source": "49707d62a0db6e3ca3d3f0b162848faf6b37f635",
+  "product": "3f4f957521474dfface56cb17ca23e03037a26ba",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "static",
+      "argv": [
+        "node",
+        "scripts/check.mjs"
+      ],
+      "stdout": "02-static.stdout.txt",
+      "stderr": "02-static.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.201,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "f7730acee3d4f450759436263672778a6c87fd49d83b315523696e5a6ffce20b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "browser-tools",
+      "argv": [
+        "npm",
+        "install",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--save-exact",
+        "--registry=https://registry.npmjs.org/"
+      ],
+      "stdout": "03-browser-tools.stdout.txt",
+      "stderr": "03-browser-tools.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 3.005,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "bf14b7a2bc076990244fa3239536925868dfe5ad05089c7d459b5fa482abfc72",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "chromium",
+      "argv": [
+        "node",
+        "/tmp/fl-gen-43692694515-1/tools/node_modules/playwright/cli.js",
+        "install",
+        "--no-shell",
+        "chromium"
+      ],
+      "stdout": "04-chromium.stdout.txt",
+      "stderr": "04-chromium.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 4.418,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "0251e5c3b0f898d0acd9d4be3db823a527fa8b2c8ea303beb3d842e042742584",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "generated-browser",
+      "argv": [
+        "node",
+        "tests/browser/generated-v1.mjs"
+      ],
+      "stdout": "05-generated-browser.stdout.txt",
+      "stderr": "05-generated-browser.stderr.txt",
+      "forced": false,
+      "exit": 1,
+      "orphanedGroup": false,
+      "seconds": 520.248,
+      "failure": "deadline/output limit",
+      "streamsComplete": false,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": false,
+  "appInstall": false,
+  "appBuild": false,
+  "localMacExecution": false,
+  "diskFreeBytesBefore": 91510718464,
+  "productionConfigGitBlob": "8138ba426bea84cb719bf8129dba9b5ab01ed4ca",
+  "carriedChecks": {
+    "source": "a1dcc22325ee509613e88dd2f77ab58dd5539b63",
+    "run": 43691584174,
+    "nodeCases": 37,
+    "static": false,
+    "repeated": false,
+    "rawSpecSha256": "832deca1e8401683c33882aa6a8eab406432be86088dca48028b9af8c761c7a9"
+  },
+  "staticExecutedAfterCssRepair": true,
+  "error": "RuntimeError: generated-browser failed; preserve original streams",
+  "serverForced": false,
+  "serverExit": 0,
+  "serverGroupAbsent": true,
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 486142346,
+  "ownedScratchRemoved": true
+}
