@@ -2,6 +2,13 @@
 
 An original downhill snowboard browser game. `docs/spec.md` owns source scope and choices; `docs/ride-contract.md` owns module boundaries.
 
+- The 14 November GEN-3659 request supersedes the three-authored-course choice.
+  Current local worlds are versioned generated seed/level maps; preserve exact
+  reconstruction, bounded saved levels and old records. New course completion
+  advances difficulty once. Wind affects trajectory; spins score on landing.
+  See docs/results/2026/11-14/generated-levels.md for the changed-edition checks.
+  Historical browser acceptance below is not qualification of this edition.
+
 - Accepted gameplay: `docs/results/2026/11-05/gameplay-checks.md`. Six journeys
   have evidence across editions; three historical cases were carried while the
   repaired pause/touch/storage cases ran freshly. Preserve all failed/cancelled

@@ -21,13 +21,14 @@ function memoryStorage(initial = {}) {
 }
 
 test('defaults and settings remain bounded to the supported run and boolean fields', () => {
-  assert.deepEqual(normalizeSave(null), { runId: 'meadow', sound: false, steady: false, records: {} });
+  const progress = { level: 1, levels: [], completed: [] };
+  assert.deepEqual(normalizeSave(null), { runId: 'meadow', sound: false, steady: false, records: {}, progress });
   assert.equal(normalizeSave([], true).steady, true);
   assert.deepEqual(normalizeSave({ runId: 'pines', sound: true, steady: false, extra: 'ignored' }, true), {
-    runId: 'pines', sound: true, steady: false, records: {},
+    runId: 'pines', sound: true, steady: false, records: {}, progress,
   });
   assert.deepEqual(normalizeSave({ runId: 'unknown', sound: 'true', steady: 0 }, true), {
-    runId: 'meadow', sound: false, steady: true, records: {},
+    runId: 'meadow', sound: false, steady: true, records: {}, progress,
   });
 });
 

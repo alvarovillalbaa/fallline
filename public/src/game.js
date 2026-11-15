@@ -1,7 +1,7 @@
-import { RUNS, getRun, createRide, stepRide } from './ride.js';
+import { MAPS, levelId, parseLevel, getRun, createRide, stepRide } from './ride.js';
 import { createRenderer } from './renderer.js';
 import { createRideAudio } from './audio.js';
-import { loadSave, writeSave, keepRecord } from './records.js';
+import { loadSave, writeSave, keepRecord, rememberLevel } from './records.js';
 
 const byId = id => document.getElementById(id);
 const canvas = byId('slope');
@@ -11,7 +11,8 @@ const audio = createRideAudio();
 let storage;
 try { storage = window.localStorage; } catch { storage = null; }
 let { value: save, available: storageAvailable } = loadSave(storage, window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-let run = getRun(save.runId);
+const newSeed = () => globalThis.crypto?.getRandomValues(new Uint32Array(1))[0] || Math.floor(Math.random() * 0xfffffffe) + 1;
+let run = getRun(parseLevel(save.runId) ? save.runId : levelId(getRun(save.runId).map, newSeed(), save.progress.level));
 let ride = createRide(run.id);
 let mode = 'menu';
 let renderer, observer, animationFrame;
@@ -22,7 +23,7 @@ const pointers = new Map();
 const pulses = new Map();
 const runButtons = new Map();
 const touchButtons = [...document.querySelectorAll('[data-action]')];
-const rideKeys = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS', 'Space']);
+const rideKeys = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS', 'Space', 'KeyX']);
 
 function formatTime(seconds) {
   const tenths = Math.floor(Math.max(0, seconds) * 10);
@@ -56,6 +57,7 @@ function controls(timestamp) {
     brake: keys.has('ArrowDown') || keys.has('KeyS') || held('brake'),
     tuck: keys.has('ArrowUp') || keys.has('KeyW') || held('tuck'),
     jump: keys.has('Space') || held('jump'),
+    trick: keys.has('KeyX') || held('trick'),
   };
 }
 function announce(text, duration = 2200) {
@@ -81,8 +83,10 @@ function showMode(next) {
   audio.update(ride.speed, ride.onGround, next === 'riding');
 }
 function updateMenu() {
-  runButtons.forEach((button, id) => button.setAttribute('aria-pressed', String(id === run.id)));
-  byId('run-number').textContent = `RUN ${String(RUNS.findIndex(item => item.id === run.id) + 1).padStart(2, '0')}`;
+  runButtons.forEach((button, id) => button.setAttribute('aria-pressed', String(id === run.map)));
+  byId('run-number').textContent = `LEVEL ${run.level} · SEED ${run.seed}`;
+  byId('campaign-level').textContent = `Your next challenge: level ${save.progress.level}`;
+  byId('start-button').firstChild.textContent = `Drop in · level ${run.level} `;
   byId('run-length').textContent = `${(run.length / 1000).toFixed(1)} KM`;
   byId('run-description').textContent = run.description;
   byId('run-tag').textContent = `${run.name}${ride.mode === 'free' ? ' / Free ride' : ''}`;
@@ -90,10 +94,18 @@ function updateMenu() {
   byId('best-note').textContent = best
     ? `${storageAvailable ? 'Your best' : 'Best this visit'}: ${formatTime(best.adjustedTime)} · ${best.passed}/${run.flags.length} flags`
     : 'Your first tracks are waiting.';
+  const select = byId('saved-levels'); select.replaceChildren();
+  for (const id of [...new Set([run.id, ...save.progress.levels.slice().reverse()])]) {
+    const level = getRun(id), option = document.createElement('option');
+    option.value = id; option.textContent = `${level.name} · L${level.level} · #${level.seed}${save.progress.completed.includes(id) ? ' ✓' : ''}`;
+    select.append(option);
+  }
+  select.value = run.id;
 }
 function selectRun(id) {
   if (mode !== 'menu') return;
-  run = getRun(id); ride = createRide(run.id); save.runId = run.id;
+  run = getRun(MAPS.some(map => map.id === id) ? levelId(id, newSeed(), save.progress.level) : id);
+  ride = createRide(run.id); save = rememberLevel(save, run.id);
   persist(); updateMenu();
 }
 function updatePreferences() {
@@ -116,6 +128,7 @@ function activateSound() {
 function start(free = false) {
   if (!renderer || mode === 'error' || document.hidden) return;
   ride = createRide(run.id, free ? 'free' : 'course'); lastEventId = 0;
+  save = rememberLevel(save, run.id); persist();
   guide.close(); showMode('riding'); updateMenu(); updateHud();
   canvas.focus({ preventScroll: true }); mountain.scrollIntoView({ behavior: 'instant', block: 'nearest' });
   activateSound();
@@ -137,8 +150,10 @@ function menu() {
 function endRide() {
   if (mode !== 'riding') return;
   const finished = ride.status === 'finished';
-  const next = keepRecord(save, ride); save = next.value;
-  if (next.improved) persist();
+  const next = keepRecord(save, ride), changed = next.value !== save; save = next.value;
+  if (changed) persist();
+  byId('next-level-button').hidden = !finished || ride.mode === 'free';
+  byId('next-level-button').textContent = `Next challenge · level ${save.progress.level}`;
   byId('result-eyebrow').textContent = ride.mode === 'free' ? 'FREE-RIDE LOG' : finished ? 'DOWN TO THE VALLEY' : 'A FRESH START IS A TURN AWAY';
   byId('result-title').textContent = finished ? 'That was a good line.' : 'There’s another run in you.';
   byId('result-message').textContent = finished ? `${run.name}, complete. Take a breath, then see what the next run brings.` : ride.lastEvent?.text || 'The ride ended. Leave more room for your next turn.';
@@ -149,6 +164,7 @@ function endRide() {
   byId('result-jumps').textContent = String(ride.jumps);
   byId('result-detail').textContent = ride.mode === 'free' ? `${(ride.z / 1000).toFixed(2)} km down the mountain.`
     : `${formatTime(ride.time)} on the slope + ${ride.missed * 4}s for ${ride.missed} missed ${ride.missed === 1 ? 'flag' : 'flags'}.`;
+  byId('result-detail').textContent += ` ${ride.tricks} spins landed · ${ride.trickScore} trick points.`;
   byId('record-message').textContent = next.improved
     ? storageAvailable ? 'A new personal best. Saved on this device.' : 'A new personal best for this visit.'
     : ride.mode === 'free' ? 'Free rides don’t replace course records.'
@@ -175,21 +191,25 @@ function updateHud() {
   byId('next-flag').textContent = ride.mode === 'free' ? `${(ride.z / 1000).toFixed(2)} km · Find your own line`
     : next ? `Flag ${ride.flagIndex + 1} · ${Math.max(0, Math.round(next.z - ride.z))} m ahead${Math.abs(offset) > 5 ? ` · ${Math.round(Math.abs(offset))} m ${offset > 0 ? 'right' : 'left'}` : ''}`
       : `${Math.max(0, Math.round(run.length - ride.z))} m to the finish`;
-  byId('rider-status').textContent = ride.onGround ? 'RIDING' : 'IN THE AIR';
+  byId('rider-status').textContent = `${ride.onGround ? 'RIDING' : 'AIR · HOLD X TO SPIN'} · ${ride.trickScore} PTS`;
+  byId('wind-value').textContent = `Gust ${Math.abs(ride.wind).toFixed(1)} m/s ${ride.wind >= 0 ? '→' : '←'}`;
   const warning = mode === 'riding' && Math.abs(ride.x) > run.halfWidth - 15
     ? `Slope edge. Carve ${ride.x > 0 ? 'left' : 'right'} to stay on the mountain.` : '';
   byId('ride-warning').textContent = warning; byId('ride-warning').hidden = !warning;
 }
 
-for (const [index, item] of RUNS.entries()) {
+for (const [index, item] of MAPS.entries()) {
   const button = document.createElement('button'); button.type = 'button'; button.className = 'run-option';
-  const label = document.createElement('small'); label.textContent = `0${index + 1} · ${item.difficulty}`;
+  const label = document.createElement('small'); label.textContent = `0${index + 1} · GENERATED`;
   const name = document.createElement('strong'); name.textContent = item.name;
-  button.append(label, name); button.setAttribute('aria-label', `${item.name}: ${item.subtitle}`);
+  button.append(label, name); button.setAttribute('aria-label', `${item.name}: generate a new map`);
   button.addEventListener('click', () => selectRun(item.id)); byId('run-options').append(button); runButtons.set(item.id, button);
 }
 byId('start-button').addEventListener('click', () => start());
 byId('free-button').addEventListener('click', () => start(true));
+byId('new-map-button').addEventListener('click', () => selectRun(run.map));
+byId('saved-levels').addEventListener('change', event => selectRun(event.target.value));
+byId('next-level-button').addEventListener('click', () => { showMode('menu'); selectRun(run.map); start(); });
 byId('pause-button').addEventListener('click', () => pause());
 byId('resume-button').addEventListener('click', resume);
 byId('restart-button').addEventListener('click', () => start(ride.mode === 'free'));

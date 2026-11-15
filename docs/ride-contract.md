@@ -1,5 +1,15 @@
 # Ride module contract
 
+Last updated: 2026-11-14
+
+## Generated-level edition
+
+`MAPS` holds six biome identities; `levelId(map, seed, level)` and `parseLevel(id)` validate canonical `v2-<map>-<uint32 seed>-<1..50 level>` identities. `getRun` reconstructs immutable generated worlds with a bounded 64-entry cache. `RUNS` contains generated biome previews, not authored scene coordinates. `sampleWind(run,z,time)` returns the lateral gust used by physics and the HUD. Terrain, flags, obstacles and ramps use the same selected run in rendering and integration.
+
+Runs additionally carry `map`, `seed`, `level`, `phase`, `gust` and `maxSpeed`. Ride state adds `wind`, `spin`, `tricks` and `trickScore`; `stepRide` accepts boolean `trick`. Spin is visual yaw only and does not redirect the airborne velocity. Complete rotations are awarded on landing. `records.js` exports `rememberLevel(save,id)` and normalizes bounded `progress: { level, levels, completed }`; finished generated courses advance once, while course timing remains separate from trick points. The storage key remains `fallline.v1` to preserve prior settings/records; the generator version belongs to each new level ID. `writeSave` verifies an exact readback.
+
+The remaining coordinate, collision and lifecycle contract below still applies. Earlier authored-course references describe historical cases, not the new generator.
+
 Native ESM throughout. Coordinates: x is right, z is horizontal distance downhill, y is world height. Terrain descends as z increases; y can be negative. Time is seconds, speed is metres/second, heading/lean are radians. The board follows shared terrain while grounded.
 
 `public/src/ride.js` exports:

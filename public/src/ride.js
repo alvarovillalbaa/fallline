@@ -11,50 +11,91 @@ function freeze(value) {
   for (const child of Object.values(value)) if (child && typeof child === 'object') freeze(child);
   return Object.freeze(value);
 }
-const flags = (id, points, width) => points.map(([x, z], index) => ({ id: `${id}-flag-${index + 1}`, x, z, width }));
-const trees = (id, points) => points.map(([x, z], index) => ({ id: `${id}-tree-${index + 1}`, type: 'tree', x, z, radius: 1.7, height: 13 }));
-const rocks = (id, points) => points.map(([x, z], index) => ({ id: `${id}-rock-${index + 1}`, type: 'rock', x, z, radius: 1.4, height: 0.95 }));
-
-export const RUNS = freeze([
-  {
-    id: 'meadow', name: 'Meadow', subtitle: 'Find your first line', difficulty: 'Gentle',
-    description: 'A broad, forgiving meadow. Make small turns through eight roomy flags, with space to try a jump.',
-    length: 1100, halfWidth: 65, slope: 0.155, startSpeed: 10,
-    colors: { sky: '#B9D5E5', horizon: '#F0E7DB', snow: '#F4F5EE', shadow: '#B4CCDB', pine: '#597B70', accent: '#D99760' },
-    flags: flags('meadow', [[0, 140], [10, 270], [-10, 400], [-16, 530], [12, 660], [18, 790], [-8, 920], [0, 1040]], 24),
-    obstacles: [...trees('meadow', [[-43, 245], [43, 420], [-45, 650], [44, 895]]), ...rocks('meadow', [[-29, 345], [30, 805]])],
-    ramps: [{ id: 'meadow-ramp-1', x: 28, z: 560, width: 13, length: 16, height: 1.8 }],
-  },
-  {
-    id: 'pines', name: 'Pines', subtitle: 'Carve between the trees', difficulty: 'Flowing',
-    description: 'A little more slope and ten linked turns. Follow the openings, and give the pines plenty of room.',
-    length: 1450, halfWidth: 70, slope: 0.185, startSpeed: 11,
-    colors: { sky: '#B7CCD9', horizon: '#ECE4DA', snow: '#F0F3EB', shadow: '#ABC2D0', pine: '#3F6D61', accent: '#CF8C5D' },
-    flags: flags('pines', [[0, 150], [-18, 285], [16, 420], [23, 555], [-14, 690], [-22, 825], [14, 960], [22, 1095], [-14, 1230], [0, 1380]], 22),
-    obstacles: [...trees('pines', [[-45, 230], [44, 350], [-44, 500], [46, 710], [-47, 890], [45, 1130], [-44, 1320]]), ...rocks('pines', [[29, 640], [-31, 1040]])],
-    ramps: [{ id: 'pines-ramp-1', x: -29, z: 470, width: 13, length: 17, height: 2 }, { id: 'pines-ramp-2', x: 30, z: 1010, width: 13, length: 17, height: 2 }],
-  },
-  {
-    id: 'ridge', name: 'Ridge', subtitle: 'Link the longer descent', difficulty: 'Lively',
-    description: 'An open ridge with twelve flowing flags, a faster fall line and optional lips beside the main route.',
-    length: 1800, halfWidth: 78, slope: 0.215, startSpeed: 12,
-    colors: { sky: '#B3C9DC', horizon: '#EFE4DB', snow: '#F5F4EF', shadow: '#AFBED0', pine: '#56766C', accent: '#C27F67' },
-    flags: flags('ridge', [[0, 150], [22, 285], [-18, 420], [-27, 555], [20, 690], [27, 825], [-18, 960], [-26, 1095], [18, 1230], [26, 1365], [-18, 1500], [0, 1660]], 22),
-    obstacles: [...trees('ridge', [[-49, 230], [49, 380], [-50, 600], [48, 900], [-49, 1160], [50, 1450], [-48, 1650]]), ...rocks('ridge', [[32, 500], [-33, 1000], [34, 1550]])],
-    ramps: [{ id: 'ridge-ramp-1', x: 32, z: 735, width: 14, length: 18, height: 2.2 }, { id: 'ridge-ramp-2', x: -32, z: 1300, width: 14, length: 18, height: 2.2 }],
-  },
+// Biomes define a visual identity, never a pre-authored scene. Every flag,
+// obstacle, ramp and terrain phase is derived from a versioned seed and level.
+export const MAPS = freeze([
+  { id: 'meadow', name: 'Alpine', sky: '#B9D5E5', snow: '#F4F5EE', pine: '#597B70' },
+  { id: 'pines', name: 'Black Pines', sky: '#9BBCC9', snow: '#E8F0EB', pine: '#28584E' },
+  { id: 'ridge', name: 'High Ridge', sky: '#B3C9DC', snow: '#F5F4EF', pine: '#56766C' },
+  { id: 'glacier', name: 'Blue Glacier', sky: '#8CBADD', snow: '#DAECF6', pine: '#54788E' },
+  { id: 'sunset', name: 'Last Light', sky: '#D6AFBE', snow: '#F5E4E4', pine: '#655F7E' },
+  { id: 'storm', name: 'Storm Pass', sky: '#8498B0', snow: '#D8E0E9', pine: '#3D536A' },
 ]);
-
+const generated = new Map();
+export function levelId(map, seed, level) {
+  if (!MAPS.some(item => item.id === map) || !Number.isInteger(seed) || seed < 1 || seed > 0xffffffff
+    || !Number.isInteger(level) || level < 1 || level > 50) return null;
+  return `v2-${map}-${seed}-${level}`;
+}
+export function parseLevel(id) {
+  const match = typeof id === 'string' && /^v2-([a-z]+)-(\d{1,10})-(\d{1,2})$/.exec(id);
+  if (!match || levelId(match[1], Number(match[2]), Number(match[3])) !== id) return null;
+  return { map: match[1], seed: Number(match[2]), level: Number(match[3]) };
+}
+function generateRun(map, seed, level, id) {
+  const biome = MAPS.find(item => item.id === map);
+  const difficulty = (level - 1) / 49;
+  const count = 9 + Math.floor(difficulty * 9), spacing = 125 - difficulty * 28;
+  const phase = random(seed, 91 + MAPS.findIndex(item => item.id === map) * 37) * Math.PI * 2;
+  const halfWidth = map === 'ridge' ? 64 : map === 'glacier' ? 78 : 70;
+  const line = z => Math.sin(z / 170 + phase) * (15 + difficulty * 8)
+    + Math.sin(z / 340 + phase) * 7;
+  const flags = Array.from({ length: count }, (_, index) => ({ id: `${id}-flag-${index}`,
+    x: line(150 + index * spacing), z: 150 + index * spacing, width: 23 - difficulty * 9 }));
+  const racingLine = z => {
+    const next = flags.find(flag => flag.z >= z);
+    if (!next) return flags.at(-1).x;
+    const previous = flags[flags.indexOf(next) - 1] || { x: 0, z: 0 };
+    return mix(previous.x, next.x, (z - previous.z) / (next.z - previous.z));
+  };
+  const length = flags.at(-1).z + 95;
+  const obstacles = [], ramps = [];
+  const density = 3 + Math.floor(difficulty * 3) + (map === 'pines' ? 2 : 0);
+  for (let chunk = 1; chunk * 105 < length - 95; chunk++) {
+    for (let index = 0; index < density; index++) {
+      const z = chunk * 105 + random(chunk * 13 + index, seed) * 65;
+      let x = (random(chunk * 17 + index, seed + 1) - 0.5) * (halfWidth * 1.8);
+      // Leave a navigable racing line, with jumpable rocks on optional trick lines.
+      const clearance = 12 - difficulty * 3;
+      if (Math.abs(x - racingLine(z)) < clearance) x = racingLine(z) + (x < racingLine(z) ? -1 : 1) * clearance;
+      const rock = index % 3 === 2;
+      obstacles.push({ id: `${id}-object-${chunk}-${index}`, type: rock ? 'rock' : 'tree', x, z,
+        radius: rock ? 1.4 : 1.7, height: rock ? 0.9 : 11 + random(chunk, seed + index) * 5 });
+    }
+    if (chunk % 2 === 0) ramps.push({ id: `${id}-ramp-${chunk}`, x: line(chunk * 105) + (chunk % 4 ? -18 : 18),
+      z: chunk * 105 + 5, width: 15, length: 20, height: 2.5 + difficulty });
+  }
+  return freeze({ id, map, seed, level, phase, name: biome.name, subtitle: 'A new line every seed',
+    difficulty: `Level ${level}`, description: `${flags.length} gates · ${obstacles.length} obstacles · ${ramps.length} trick ramps · gusting wind`,
+    length, halfWidth, slope: 0.32 + difficulty * 0.16 + (map === 'ridge' ? 0.065 : 0),
+    startSpeed: 19 + difficulty * 9, maxSpeed: 38 + difficulty * 10, gust: 1.5 + difficulty * 3.5 + (map === 'storm' ? 2 : 0),
+    colors: { sky: biome.sky, horizon: '#E8DCD8', snow: biome.snow, shadow: '#A8BCCD', pine: biome.pine, accent: '#ED865F' },
+    flags, obstacles, ramps });
+}
+export const RUNS = freeze(MAPS.map((map, index) => generateRun(map.id, index + 1, 1, map.id)));
 export function getRun(id) {
-  return RUNS.find(run => run.id === String(id).toLowerCase()) || RUNS[0];
+  const base = RUNS.find(run => run.id === String(id).toLowerCase());
+  if (base) return base;
+  const parts = parseLevel(id);
+  if (!parts) return RUNS[0];
+  if (!generated.has(id)) {
+    if (generated.size >= 64) generated.delete(generated.keys().next().value);
+    generated.set(id, generateRun(parts.map, parts.seed, parts.level, id));
+  }
+  return generated.get(id);
 }
 const selectedRun = run => run && typeof run === 'object' ? run : getRun(run);
 
 export function terrainHeight(run, x, z, mode = 'course') {
   const selected = selectedRun(run);
   x = clamp(finite(x), -10_000_000, 10_000_000); z = clamp(finite(z), -10_000_000, 10_000_000);
-  return -finite(selected.slope, 0.155) * z + 1.4 * Math.sin(z * 0.012)
-    + 0.5 * Math.sin(z * 0.004 + x * 0.018) + 0.0009 * x * x;
+  return -finite(selected.slope, 0.32) * z + 1.4 * Math.sin(z * 0.012 + finite(selected.phase))
+    + 0.5 * Math.sin(z * 0.004 + x * 0.018 + finite(selected.phase)) + 0.0009 * x * x;
+}
+
+export function sampleWind(run, z, time) {
+  return run.gust * (Math.sin(finite(time) * 0.9 + finite(z) * 0.013 + run.phase)
+    + 0.35 * Math.sin(finite(time) * 2.3 + run.phase));
 }
 
 export function rampHeight(ramp, x, z) {
@@ -82,18 +123,18 @@ export function getWorld(run, zMin, zMax, mode = 'course') {
     ramps: selected.ramps.filter(ramp => ramp.z + ramp.length >= low && ramp.z <= high),
   };
   const obstacles = [], ramps = [];
-  const seed = selected.id === 'ridge' ? 79 : selected.id === 'pines' ? 43 : 17;
+  const seed = selected.seed;
   // Rebuild only the queried chunks. IDs/positions do not depend on query history.
   for (let chunk = Math.max(1, Math.floor((low - 24) / 180)); chunk <= Math.floor(high / 180); chunk++) {
     const start = chunk * 180;
-    for (let side = 0; side < 2; side++) {
-      const x = (side ? 1 : -1) * (selected.halfWidth * 0.53 + random(chunk, seed + side) * selected.halfWidth * 0.28);
+    for (let side = 0; side < 4 + Math.floor(selected.level / 10); side++) {
+      const x = (side % 2 ? 1 : -1) * (selected.halfWidth * 0.34 + random(chunk, seed + side) * selected.halfWidth * 0.5);
       const z = start + 24 + random(chunk, seed + side + 3) * 90;
       if (z + 1.8 >= low && z - 1.8 <= high) obstacles.push({ id: `${selected.id}-free-tree-${chunk}-${side}`, type: 'tree', x, z, radius: 1.8, height: 12 + random(chunk, seed + side + 7) * 4 });
     }
     const z = start + 88;
     if (z + 1.35 >= low && z - 1.35 <= high) obstacles.push({ id: `${selected.id}-free-rock-${chunk}`, type: 'rock', x: (random(chunk, seed + 11) - 0.5) * selected.halfWidth * 0.85, z, radius: 1.35, height: 0.8 + random(chunk, seed + 12) * 0.3 });
-    if (chunk % 3 === 1) {
+    if (chunk % 2 === 1) {
       const ramp = { id: `${selected.id}-free-ramp-${chunk}`, x: (random(chunk, seed + 16) - 0.5) * selected.halfWidth * 0.8, z: start + 132, width: 13, length: 16, height: 1.9 };
       if (ramp.z + ramp.length >= low && ramp.z <= high) ramps.push(ramp);
     }
@@ -112,6 +153,7 @@ export function createRide(runId, mode = 'course') {
     x: 0, y: terrainHeight(run, 0, 0), z: 0, vx: 0, vy: -run.slope * run.startSpeed, vz: run.startSpeed,
     speed: run.startSpeed, heading: 0, lean: 0, onGround: true,
     time: 0, flagIndex: 0, passed: 0, missed: 0, airTime: 0, jumps: 0, adjustedTime: 0,
+    tricks: 0, trickScore: 0, spin: 0, wind: sampleWind(run, 0, 0),
     lastEvent: null, _remainder: 0, _eventId: 0, _jumpHeld: false,
   };
 }
@@ -135,13 +177,14 @@ function sweptInterval(before, after, obstacle) {
 }
 
 function integrate(state, run, controls) {
-  const before = { x: state.x, y: state.y, z: state.z, time: state.time, airTime: state.airTime };
+  const before = { x: state.x, y: state.y, z: state.z, time: state.time, airTime: state.airTime,
+    tricks: state.tricks, trickScore: state.trickScore };
   const world = getWorld(run, state.z - 40, state.z + 60, state.mode);
   const turn = controls.turn;
   const jump = controls.jump && !state._jumpHeld;
   state._jumpHeld = controls.jump;
   if (jump && state.onGround) {
-    state.onGround = false; state.vy += 6.6; state.jumps++;
+    state.onGround = false; state.vy += 8.2; state.jumps++; state.spin = 0;
     event(state, 'jump', 'A little airtime. Keep your landing line clear.');
   }
   const airborne = !state.onGround;
@@ -152,15 +195,17 @@ function integrate(state, run, controls) {
   const grade = terrainHeight(run, state.x - directionX * 0.5, state.z - directionZ * 0.5, state.mode)
     - terrainHeight(run, state.x + directionX * 0.5, state.z + directionZ * 0.5, state.mode);
   const gravity = airborne ? 0 : GRAVITY * grade / Math.sqrt(1 + grade * grade);
-  const drag = (controls.tuck ? 0.0026 : 0.0058) * state.speed * state.speed + 0.03 * state.speed;
+  const drag = (controls.tuck ? 0.0018 : 0.0032) * state.speed * state.speed + 0.03 * state.speed;
   const carving = airborne ? 0 : 0.8 * Math.abs(directionX) + 0.045 * state.speed * Math.abs(turn);
   const braking = controls.brake && !airborne ? 5.8 : 0;
-  state.speed = clamp(state.speed + (gravity - drag - carving - braking) * STEP, 0, 38);
-  state.vx = state.speed * directionX; state.vz = state.speed * directionZ;
+  state.speed = clamp(state.speed + (gravity - drag - carving - braking) * STEP, 0, run.maxSpeed);
+  state.wind = sampleWind(run, state.z, state.time);
+  state.vx = state.speed * directionX + state.wind * (airborne ? 1 : 0.35); state.vz = state.speed * directionZ;
   state.x += state.vx * STEP; state.z += state.vz * STEP;
   const surface = surfaceHeight(run, state.x, state.z, world.ramps, state.mode);
   let airFraction = airborne ? 1 : 0;
   if (airborne) {
+    if (controls.trick) state.spin += 7 * STEP;
     state.y += state.vy * STEP - GRAVITY * STEP * STEP / 2;
     state.vy -= GRAVITY * STEP;
     if (state.y <= surface) {
@@ -168,7 +213,9 @@ function integrate(state, run, controls) {
       const oldClearance = Math.max(0, before.y - previousSurface), newClearance = state.y - surface;
       airFraction = oldClearance > 0 ? clamp(oldClearance / (oldClearance - newClearance), 0, 1) : 0;
       state.y = surface; state.onGround = true; state.vy = (state.y - before.y) / STEP;
-      event(state, 'land', 'Back on the snow. Find your next turn.');
+      const turns = Math.floor((state.spin + 1e-9) / (Math.PI * 2));
+      state.tricks += turns; state.trickScore += turns * 100; state.spin = 0;
+      event(state, 'land', turns ? `${turns * 360}° landed · +${turns * 100} trick points` : 'Back on the snow. Find your next turn.');
     }
   } else {
     const crest = world.ramps.find(ramp => before.z < ramp.z + ramp.length && state.z >= ramp.z + ramp.length
@@ -181,7 +228,7 @@ function integrate(state, run, controls) {
       const launchVy = state.vz * (gradeZ + crest.height / crest.length) + 2.3;
       const remainder = STEP * (1 - fraction);
       state.y = launchY + launchVy * remainder - GRAVITY * remainder * remainder / 2;
-      state.vy = launchVy - GRAVITY * remainder; state.onGround = false; state.jumps++;
+      state.vy = launchVy - GRAVITY * remainder; state.onGround = false; state.jumps++; state.spin = 0;
       airFraction = 1 - fraction;
       event(state, 'jump', 'Off the lip. Keep a clear landing line.');
     } else if (before.y - surface > Math.max(0.2, Math.abs(state.vy) * STEP + 0.08)) {
@@ -231,7 +278,12 @@ function integrate(state, run, controls) {
       }
     }
   }
-  if (reason) { state.status = 'crashed'; event(state, 'crash', reason); }
+  if (reason) {
+    // Collision can stop the substep before its projected landing. Credit only
+    // rotations landed in earlier, collision-free substeps.
+    state.tricks = before.tricks; state.trickScore = before.trickScore;
+    state.status = 'crashed'; event(state, 'crash', reason);
+  }
   else if (finish) { state.status = 'finished'; event(state, 'finish', `${run.name} complete · ${state.passed} of ${run.flags.length} flags.`); }
   state.adjustedTime = state.time + state.missed * 4;
 }
@@ -241,7 +293,7 @@ export function stepRide(state, controls = {}, dt = 0) {
   const elapsed = clamp(finite(dt), 0, MAX_FRAME);
   if (!elapsed) return state;
   const run = getRun(state.runId), next = { ...state };
-  const input = { turn: clamp(finite(controls?.turn), -1, 1), brake: controls?.brake === true, tuck: controls?.tuck === true, jump: controls?.jump === true };
+  const input = { turn: clamp(finite(controls?.turn), -1, 1), brake: controls?.brake === true, tuck: controls?.tuck === true, jump: controls?.jump === true, trick: controls?.trick === true };
   let remainder = clamp(finite(state._remainder), 0, STEP) + elapsed;
   while (remainder + 1e-12 >= STEP && next.status === 'riding') { integrate(next, run, input); remainder -= STEP; }
   next._remainder = next.status === 'riding' ? Math.max(0, remainder) : 0;

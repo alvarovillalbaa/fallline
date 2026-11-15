@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#f2f3ee">
   <meta name="description" content="Find your line. Carve, tuck and hop your way down original alpine runs in Fallline, a free snowboard browser game.">
   <meta property="og:title" content="Fallline — one more run">
-  <meta property="og:description" content="Three descents, fresh tracks and one more run. An original downhill snowboard game with keyboard and touch controls.">
+  <meta property="og:description" content="Generated mountains, saved levels and faster challenges. Drop in, land a spin, and ride one more run.">
   <title>Fallline — one more run</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <script type="module" src="/src/game.js"></script>
 </head>
-<body>
+<body data-mode="menu">
   <a class="skip-link" href="#mountain">Skip to the mountain</a>
   <header class="site-header">
     <a class="brand" href="/" aria-label="Fallline home"><img src="/favicon.svg" width="34" height="34" alt=""><span>fallline<span class="brand-mark">/</span></span></a>
@@ -28,12 +28,13 @@
 
       <div id="menu-overlay" class="menu-overlay">
         <div class="intro">
-          <p class="eyebrow">FRESH TRACKS, EVERY TIME</p>
-          <h1>ONE<br>MORE RUN.</h1>
-          <p class="intro-copy">Lean into a turn. Catch a little air.<br>Leave the rest of the world at the top.</p>
+          <p id="campaign-level" class="eyebrow">Your next challenge: level 1</p>
+          <h1>DROP IN.</h1>
+          <p class="intro-copy">Fast lines. Wild gusts. Land a 360.<br>Every mountain is generated. Your levels stay saved.</p>
           <div class="run-heading"><span>PICK YOUR LINE</span><span id="run-length">1.1 KM</span></div>
           <div id="run-options" class="run-options" role="group" aria-label="Choose a snowboard run"></div>
           <p id="run-description" class="run-description"></p>
+          <div class="level-library"><label for="saved-levels">SAVED LEVELS</label><select id="saved-levels" aria-label="Replay a saved level"></select><button id="new-map-button" class="button quiet">New terrain ↻</button></div>
           <div class="launch-actions"><button id="start-button" class="button primary">Drop in <span aria-hidden="true">↓</span></button><button id="free-button" class="button quiet">Free ride <span aria-hidden="true">↗</span></button></div>
           <p id="best-note" class="best-note">Your first tracks are waiting.</p>
         </div>
@@ -51,20 +52,21 @@
       <p id="ride-event" class="ride-event" aria-live="polite"></p>
       <p id="ride-warning" class="ride-warning" role="status" hidden></p>
       <div id="rider-status" class="rider-status" hidden>RIDING</div>
+      <p id="wind-value" class="wind-value" aria-label="Wind across the slope"></p>
 
       <div id="touch-controls" class="touch-controls" hidden>
         <div class="touch-group"><button type="button" data-action="left" aria-label="Hold to carve left">←</button><button type="button" data-action="right" aria-label="Hold to carve right">→</button></div>
-        <div class="touch-group"><button type="button" data-action="brake" aria-label="Hold to brake"><span aria-hidden="true">Ⅱ</span><small>BRAKE</small></button><button type="button" data-action="tuck" aria-label="Hold to tuck"><span aria-hidden="true">↓</span><small>TUCK</small></button><button type="button" data-action="jump" aria-label="Jump"><span aria-hidden="true">↑</span><small>HOP</small></button></div>
+        <div class="touch-group"><button type="button" data-action="brake" aria-label="Hold to brake"><span aria-hidden="true">Ⅱ</span><small>BRAKE</small></button><button type="button" data-action="tuck" aria-label="Hold to tuck"><span aria-hidden="true">↓</span><small>TUCK</small></button><button type="button" data-action="jump" aria-label="Jump"><span aria-hidden="true">↑</span><small>HOP</small></button><button type="button" data-action="trick" aria-label="Hold in the air to spin"><span aria-hidden="true">↻</span><small>SPIN</small></button></div>
       </div>
 
       <div id="pause-overlay" class="center-overlay" hidden><div class="overlay-card"><p class="eyebrow">SAVE A LITTLE ROOM TO BREATHE</p><h2>The mountain can wait.</h2><p id="pause-reason">Your run is paused.</p><button id="resume-button" class="button primary">Back to the run <span aria-hidden="true">↓</span></button><div class="secondary-actions"><button id="restart-button" class="button secondary">Start again</button><button id="pause-menu-button" class="button quiet">Choose a run</button></div></div></div>
-      <div id="result-overlay" class="center-overlay" hidden><div class="overlay-card result-card"><p id="result-eyebrow" class="eyebrow">DOWN TO THE VALLEY</p><h2 id="result-title">Run complete.</h2><p id="result-message"></p><div class="result-clock"><strong id="result-time">00:00.0</strong><span id="result-time-label">ADJUSTED TIME</span></div><div class="result-stats"><span><strong id="result-flags">0 / 8</strong>Flags passed</span><span><strong id="result-air">0.0s</strong>Air time</span><span><strong id="result-jumps">0</strong>Jumps</span></div><p id="result-detail" class="result-detail"></p><p id="record-message" class="record-message"></p><button id="again-button" class="button primary">Ride again <span aria-hidden="true">↺</span></button><button id="result-menu-button" class="button quiet">Choose a run</button></div></div>
+      <div id="result-overlay" class="center-overlay" hidden><div class="overlay-card result-card"><p id="result-eyebrow" class="eyebrow">DOWN TO THE VALLEY</p><h2 id="result-title">Run complete.</h2><p id="result-message"></p><div class="result-clock"><strong id="result-time">00:00.0</strong><span id="result-time-label">ADJUSTED TIME</span></div><div class="result-stats"><span><strong id="result-flags">0 / 8</strong>Flags passed</span><span><strong id="result-air">0.0s</strong>Air time</span><span><strong id="result-jumps">0</strong>Jumps</span></div><p id="result-detail" class="result-detail"></p><p id="record-message" class="record-message"></p><button id="next-level-button" class="button primary" hidden>Next challenge</button><button id="again-button" class="button secondary">Replay this level <span aria-hidden="true">↺</span></button><button id="result-menu-button" class="button quiet">Choose a map</button></div></div>
       <div id="error-overlay" class="center-overlay" hidden><div class="overlay-card"><p class="eyebrow">MOUNTAIN VIEW UNAVAILABLE</p><h2>We couldn’t open the run.</h2><p>Reload, or try a browser with Canvas support. No account is needed.</p><button id="reload-button" class="button primary">Reload game</button></div></div>
       <div class="scene-caption" aria-hidden="true"><span>CHOOSE THE SCENIC ROUTE.</span><span>FALLLINE / 001</span></div>
     </section>
 
     <div class="control-strip">
-      <p><kbd>←</kbd><kbd>→</kbd><span>Carve</span><kbd>↓</kbd><span>Brake</span><kbd>↑</kbd><span>Tuck</span><kbd>Space</kbd><span>Hop</span><kbd>P</kbd><span>Pause</span></p>
+      <p><kbd>←</kbd><kbd>→</kbd><span>Carve</span><kbd>↓</kbd><span>Brake</span><kbd>↑</kbd><span>Tuck</span><kbd>Space</kbd><span>Hop</span><kbd>X</kbd><span>Spin in air</span><kbd>P</kbd><span>Pause</span></p>
       <div class="preferences"><label><input type="checkbox" id="steady-camera"><span>Stable camera</span></label><button id="sound-button" class="plain-button" aria-pressed="false"><span aria-hidden="true">♪</span><span id="sound-label">Sound off</span></button></div>
     </div>
 

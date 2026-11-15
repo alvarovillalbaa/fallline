@@ -1,5 +1,8 @@
+import { MAPS, parseLevel, getRun } from './ride.js';
+
 const KEY = 'fallline.v1';
-const RUN_IDS = ['meadow', 'pines', 'ridge'];
+const RUN_IDS = MAPS.map(map => map.id);
+const validId = id => RUN_IDS.includes(id) || Boolean(parseLevel(id));
 const MAX_TIME = 7200;
 const MAX_FLAGS = 100;
 const MAX_JUMPS = 10000;
@@ -19,16 +22,21 @@ function recordValue(value) {
 }
 
 export function normalizeSave(value, reducedMotion = false) {
-  const defaults = { runId: 'meadow', sound: false, steady: Boolean(reducedMotion), records: {} };
+  const defaults = { runId: 'meadow', sound: false, steady: Boolean(reducedMotion), records: {}, progress: { level: 1, levels: [], completed: [] } };
   if (!value || typeof value !== 'object' || Array.isArray(value)) return defaults;
   const normalized = {
-    runId: RUN_IDS.includes(value.runId) ? value.runId : defaults.runId,
+    runId: validId(value.runId) ? value.runId : defaults.runId,
     sound: typeof value.sound === 'boolean' ? value.sound : false,
     steady: typeof value.steady === 'boolean' ? value.steady : defaults.steady,
     records: {},
+    progress: {
+      level: Number.isInteger(value.progress?.level) && value.progress.level >= 1 && value.progress.level <= 50 ? value.progress.level : 1,
+      levels: Array.isArray(value.progress?.levels) ? [...new Set(value.progress.levels.filter(id => parseLevel(id)))].slice(-80) : [],
+      completed: Array.isArray(value.progress?.completed) ? [...new Set(value.progress.completed.filter(id => parseLevel(id)))].slice(-80) : [],
+    },
   };
   if (value.records && typeof value.records === 'object' && !Array.isArray(value.records)) {
-    for (const id of RUN_IDS) {
+    for (const id of Object.keys(value.records).filter(validId).slice(-100)) {
       if (!Object.hasOwn(value.records, id)) continue;
       const record = recordValue(value.records[id]);
       if (record) normalized.records[id] = record;
@@ -48,23 +56,40 @@ export function loadSave(storage, reducedMotion = false) {
 }
 
 export function writeSave(storage, value) {
-  try { storage.setItem(KEY, JSON.stringify(normalizeSave(value))); return true; }
+  try {
+    const raw = JSON.stringify(normalizeSave(value));
+    storage.setItem(KEY, raw); return storage.getItem(KEY) === raw;
+  }
   catch { return false; }
 }
 
+export function rememberLevel(save, id) {
+  const normalized = normalizeSave(save);
+  if (!parseLevel(id)) return normalized;
+  return { ...normalized, runId: id, progress: { ...normalized.progress,
+    levels: [...normalized.progress.levels.filter(item => item !== id), id].slice(-80) } };
+}
+
 export function keepRecord(save, ride) {
-  if (!ride || ride.status !== 'finished' || ride.mode !== 'course' || !RUN_IDS.includes(ride.runId)) {
+  if (!ride || ride.status !== 'finished' || ride.mode !== 'course' || !validId(ride.runId)) {
     return { value: save, improved: false };
   }
   const candidate = recordValue(ride);
   if (!candidate) return { value: save, improved: false };
+  const level = parseLevel(ride.runId);
+  if (level && ride.passed + ride.missed !== getRun(ride.runId).flags.length) return { value: save, improved: false };
   const normalized = normalizeSave(save);
+  const advanced = level && !normalized.progress.completed.includes(ride.runId)
+    && ride.passed + ride.missed === getRun(ride.runId).flags.length;
+  const progress = advanced ? { ...normalized.progress,
+    level: Math.min(50, Math.max(normalized.progress.level, level.level + 1)),
+    completed: [...normalized.progress.completed, ride.runId].slice(-80) } : normalized.progress;
   const previous = normalized.records[ride.runId];
   const improved = !previous || candidate.adjustedTime < previous.adjustedTime
     || (candidate.adjustedTime === previous.adjustedTime && candidate.time < previous.time);
-  if (!improved) return { value: save, improved: false };
+  if (!improved) return { value: advanced ? { ...normalized, progress } : save, improved: false };
   return {
-    value: { ...normalized, records: { ...normalized.records, [ride.runId]: candidate } },
+    value: { ...normalized, progress, records: { ...normalized.records, [ride.runId]: candidate } },
     improved: true,
   };
 }

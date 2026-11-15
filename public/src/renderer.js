@@ -318,7 +318,7 @@ export function createRenderer(canvas) {
     }
   }
   function rider(state, run, world, camera, p) {
-    const heading = state.heading, lean = clamp(state.lean, -0.9, 0.9);
+    const heading = state.heading + (state.onGround ? 0 : state.spin || 0), lean = clamp(state.lean, -0.9, 0.9);
     const forward = { x: Math.sin(heading), z: Math.cos(heading) };
     const ground = surface(run, world, state.x, state.z, state.mode);
     // Sample behind the sole so a ramp's abrupt tip does not point the board down.
