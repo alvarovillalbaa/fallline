@@ -8,6 +8,12 @@ An original downhill snowboard browser game. `docs/spec.md` owns source scope an
   six-case native closure protocol, then exact hosted H01 and leased retirement.
   This does not reopen closed historical/37 Node cases or authorize local heavy
   execution. Read docs/proposals/generated-native-v5.md on the prepared QA source.
+  V5 native acceptance now passes all six cases at ae605395f89387ae2f75237384bc71193f7bb079,
+  run43758486921, with both native children exit0/absent and full owned closure.
+  The37 Node cases stay carried, not rerun. Current CI1541/2100seconds; remaining559
+  covers the approved exact-source publication, H01 (two-minute job) and leased
+  retirement (one-minute job). Preserve all four original failed packets and the
+  main-before-storage native closure milestone. Do not replay closed cases.
 
 - The 14 November GEN-3659 request supersedes the three-authored-course choice.
   Current local worlds are versioned generated seed/level maps; preserve exact

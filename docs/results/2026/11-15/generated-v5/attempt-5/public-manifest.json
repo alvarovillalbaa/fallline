@@ -1,0 +1,42 @@
+[
+  {
+    "path": "favicon.svg",
+    "bytes": 326,
+    "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2"
+  },
+  {
+    "path": "index.html",
+    "bytes": 10688,
+    "sha256": "173cb5f74f2f65f7f7e6e4e8a46e73e5d46d18c88177d53f79a9d797cd1437ea"
+  },
+  {
+    "path": "src/audio.js",
+    "bytes": 5028,
+    "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17"
+  },
+  {
+    "path": "src/game.js",
+    "bytes": 17783,
+    "sha256": "b636bb4f8131e51678f51ff7a29e3c9a56c57c055963d79048a6f708a8c9ad1b"
+  },
+  {
+    "path": "src/records.js",
+    "bytes": 4724,
+    "sha256": "301d168186eaac418df6bce2f37af8350c3068c3e88a66a3a935e47fca852760"
+  },
+  {
+    "path": "src/renderer.js",
+    "bytes": 27939,
+    "sha256": "afceb00f96eb528470ebf7fa252e376a431d265ec581524490edc8745839e671"
+  },
+  {
+    "path": "src/ride.js",
+    "bytes": 17534,
+    "sha256": "d4fd5188ab846fb89f0f70151bdd320bcad7e20c8ec388a8f31cc2455e025868"
+  },
+  {
+    "path": "styles.css",
+    "bytes": 20247,
+    "sha256": "41eb2340c7402cd3b1bed1d57845d3df9ca274180ab3ae3776fa2627a1363062"
+  }
+]

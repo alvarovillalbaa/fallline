@@ -1,0 +1,42 @@
+{
+  "capSeconds": 2100,
+  "jobs": [
+    {
+      "id": 132742618990,
+      "runId": 43691396813,
+      "source": "791a388b8d738ce8aea6f59696838850ccc2ca03",
+      "conclusion": "failure",
+      "seconds": 12
+    },
+    {
+      "id": 132743178113,
+      "runId": 43691584174,
+      "source": "a1dcc22325ee509613e88dd2f77ab58dd5539b63",
+      "conclusion": "failure",
+      "seconds": 17
+    },
+    {
+      "id": 132743901624,
+      "runId": 43691823576,
+      "source": "7237ad35d4fde2c7fce44297e52d64f01371df45",
+      "conclusion": "failure",
+      "seconds": 374
+    },
+    {
+      "id": 132746461072,
+      "runId": 43692694515,
+      "source": "49707d62a0db6e3ca3d3f0b162848faf6b37f635",
+      "conclusion": "failure",
+      "seconds": 537
+    },
+    {
+      "id": 132947732777,
+      "runId": 43758486921,
+      "source": "ae605395f89387ae2f75237384bc71193f7bb079",
+      "conclusion": "success",
+      "seconds": 601
+    }
+  ],
+  "usedSeconds": 1541,
+  "remainingSeconds": 559
+}
