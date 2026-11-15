@@ -1,0 +1,34 @@
+{
+  "source": "791a388b8d738ce8aea6f59696838850ccc2ca03",
+  "product": "3f4f957521474dfface56cb17ca23e03037a26ba",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": false,
+  "appInstall": false,
+  "appBuild": false,
+  "localMacExecution": false,
+  "diskFreeBytesBefore": 94962888704,
+  "error": "CalledProcessError: Command '['git', 'show', '3f4f957521474dfface56cb17ca23e03037a26ba:vercel.json']' returned non-zero exit status 128.",
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 82,
+  "ownedScratchRemoved": true
+}

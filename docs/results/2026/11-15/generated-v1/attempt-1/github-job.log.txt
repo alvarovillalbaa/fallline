@@ -1,0 +1,239 @@
+﻿2026-11-15T07:46:03.3666306Z Current runner version: '2.338.2'
+2026-11-15T07:46:03.3694227Z ##[group]Runner Image Provisioner
+2026-11-15T07:46:03.3695118Z Hosted Compute Agent
+2026-11-15T07:46:03.3695661Z Version: 20261103.629
+2026-11-15T07:46:03.3696376Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-15T07:46:03.3697094Z Build Date: 2026-11-03T17:26:59Z
+2026-11-15T07:46:03.3697767Z Worker ID: {d4a618c2-58d6-43aa-8091-98b1166d8c75}
+2026-11-15T07:46:03.3698492Z Region: us-east-1
+2026-11-15T07:46:03.3699004Z Cloud: AWS
+2026-11-15T07:46:03.3699549Z ##[endgroup]
+2026-11-15T07:46:03.3701136Z ##[group]Operating System
+2026-11-15T07:46:03.3702046Z Ubuntu
+2026-11-15T07:46:03.3702577Z 24.04.5
+2026-11-15T07:46:03.3703050Z LTS
+2026-11-15T07:46:03.3703855Z ##[endgroup]
+2026-11-15T07:46:03.3704382Z ##[group]Runner Image
+2026-11-15T07:46:03.3705033Z Image: ubuntu-24.04
+2026-11-15T07:46:03.3705570Z Version: 20261111.127.1
+2026-11-15T07:46:03.3706853Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-15T07:46:03.3708348Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-15T07:46:03.3709483Z ##[endgroup]
+2026-11-15T07:46:03.3710530Z ##[group]GITHUB_TOKEN Permissions
+2026-11-15T07:46:03.3713033Z Contents: read
+2026-11-15T07:46:03.3713819Z Metadata: read
+2026-11-15T07:46:03.3714401Z ##[endgroup]
+2026-11-15T07:46:03.3716661Z Secret source: Actions
+2026-11-15T07:46:03.3717613Z Cache mode: write
+2026-11-15T07:46:03.3718450Z Prepare workflow directory
+2026-11-15T07:46:03.4058092Z Prepare all required actions
+2026-11-15T07:46:03.4112226Z Getting action download info
+2026-11-15T07:46:03.5987051Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-11-15T07:46:04.7445384Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+2026-11-15T07:46:04.8107300Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-15T07:46:05.0716435Z Complete job name: generated
+2026-11-15T07:46:05.1424372Z ##[group]Run echo "FALLLINE_OUTPUT=$RUNNER_TEMP/fallline-generated-proof-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"
+2026-11-15T07:46:05.1427137Z [36;1mecho "FALLLINE_OUTPUT=$RUNNER_TEMP/fallline-generated-proof-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"[0m
+2026-11-15T07:46:05.5869332Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T07:46:05.5871048Z ##[endgroup]
+2026-11-15T07:46:05.6246153Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-11-15T07:46:05.6247365Z with:
+2026-11-15T07:46:05.6248153Z   persist-credentials: false
+2026-11-15T07:46:05.6249111Z   repository: alvarovillalbaa/fallline
+2026-11-15T07:46:05.6255573Z   token: ***
+2026-11-15T07:46:05.6256323Z   ssh-strict: true
+2026-11-15T07:46:05.6257039Z   ssh-user: git
+2026-11-15T07:46:05.6257764Z   clean: true
+2026-11-15T07:46:05.6258557Z   sparse-checkout-cone-mode: true
+2026-11-15T07:46:05.6259372Z   fetch-depth: 1
+2026-11-15T07:46:05.6260099Z   fetch-tags: false
+2026-11-15T07:46:05.6260824Z   show-progress: true
+2026-11-15T07:46:05.6261567Z   lfs: false
+2026-11-15T07:46:05.6262262Z   submodules: false
+2026-11-15T07:46:05.6262997Z   set-safe-directory: true
+2026-11-15T07:46:05.6264253Z   allow-unsafe-pr-checkout: false
+2026-11-15T07:46:05.6265079Z env:
+2026-11-15T07:46:05.6266110Z   FALLLINE_OUTPUT: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:05.6267447Z ##[endgroup]
+2026-11-15T07:46:07.8492003Z Syncing repository: alvarovillalbaa/fallline
+2026-11-15T07:46:07.8493579Z ##[group]Getting Git version info
+2026-11-15T07:46:07.8494303Z Working directory is '/home/runner/work/fallline/fallline'
+2026-11-15T07:46:07.8495353Z [command]/usr/bin/git version
+2026-11-15T07:46:08.0178913Z git version 2.56.1
+2026-11-15T07:46:08.0195930Z ##[endgroup]
+2026-11-15T07:46:08.0208909Z Temporarily overriding HOME='/home/runner/work/_temp/68434816-ab9c-420a-a891-f2077069e048' before making global git config changes
+2026-11-15T07:46:08.0209992Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T07:46:08.0213601Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/fallline/fallline
+2026-11-15T07:46:08.0676140Z Deleting the contents of '/home/runner/work/fallline/fallline'
+2026-11-15T07:46:08.0679782Z ##[group]Determining repository object format
+2026-11-15T07:46:08.0681422Z ##[endgroup]
+2026-11-15T07:46:08.0682081Z ##[group]Initializing the repository
+2026-11-15T07:46:08.0686038Z [command]/usr/bin/git init /home/runner/work/fallline/fallline
+2026-11-15T07:46:08.0822507Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-15T07:46:08.0823624Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-15T07:46:08.0824161Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-15T07:46:08.0824628Z hint: call:
+2026-11-15T07:46:08.0824936Z hint:
+2026-11-15T07:46:08.0825397Z hint: 	git config --global init.defaultBranch <name>
+2026-11-15T07:46:08.0825737Z hint:
+2026-11-15T07:46:08.0826127Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-15T07:46:08.0826595Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-15T07:46:08.0826978Z hint:
+2026-11-15T07:46:08.0827252Z hint: 	git branch -m <name>
+2026-11-15T07:46:08.0827515Z hint:
+2026-11-15T07:46:08.0827949Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-15T07:46:08.0830741Z Initialized empty Git repository in /home/runner/work/fallline/fallline/.git/
+2026-11-15T07:46:08.0839642Z [command]/usr/bin/git remote add origin https://github.com/alvarovillalbaa/fallline
+2026-11-15T07:46:08.0898321Z ##[endgroup]
+2026-11-15T07:46:08.0899051Z ##[group]Disabling automatic garbage collection
+2026-11-15T07:46:08.0901176Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-15T07:46:08.0925391Z ##[endgroup]
+2026-11-15T07:46:08.0925918Z ##[group]Setting up auth
+2026-11-15T07:46:08.0926334Z Removing SSH command configuration
+2026-11-15T07:46:08.0929962Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T07:46:08.0958468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T07:46:08.4204374Z Removing HTTP extra header
+2026-11-15T07:46:08.4210442Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T07:46:08.4238315Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T07:46:08.4389805Z Removing includeIf entries pointing to credentials config files
+2026-11-15T07:46:08.4396287Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T07:46:08.4423801Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T07:46:08.4578717Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-15T07:46:08.4610421Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/fallline/fallline/.git.path /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.4635591Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/fallline/fallline/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.4660175Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.4691117Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.4712229Z ##[endgroup]
+2026-11-15T07:46:08.4712741Z ##[group]Fetching the repository
+2026-11-15T07:46:08.4719433Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +791a388b8d738ce8aea6f59696838850ccc2ca03:refs/remotes/origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.7917430Z From https://github.com/alvarovillalbaa/fallline
+2026-11-15T07:46:08.7918050Z  * [new ref]         791a388b8d738ce8aea6f59696838850ccc2ca03 -> origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.7966346Z [command]/usr/bin/git branch --list --remote origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.7966956Z   origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.7973804Z [command]/usr/bin/git rev-parse refs/remotes/origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.7992692Z 791a388b8d738ce8aea6f59696838850ccc2ca03
+2026-11-15T07:46:08.7995689Z ##[endgroup]
+2026-11-15T07:46:08.7996220Z ##[group]Determining the checkout info
+2026-11-15T07:46:08.7997240Z ##[endgroup]
+2026-11-15T07:46:08.8000326Z [command]/usr/bin/git sparse-checkout disable
+2026-11-15T07:46:08.8059812Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-15T07:46:08.8081596Z ##[group]Checking out the ref
+2026-11-15T07:46:08.8085181Z [command]/usr/bin/git checkout --progress --force -B qa/fallline-generated-20261115 refs/remotes/origin/qa/fallline-generated-20261115
+2026-11-15T07:46:08.8182044Z Switched to a new branch 'qa/fallline-generated-20261115'
+2026-11-15T07:46:08.8190126Z branch 'qa/fallline-generated-20261115' set up to track 'origin/qa/fallline-generated-20261115'.
+2026-11-15T07:46:08.8227616Z ##[endgroup]
+2026-11-15T07:46:08.8230203Z [command]/usr/bin/git log -1 --format=%H
+2026-11-15T07:46:08.8249203Z 791a388b8d738ce8aea6f59696838850ccc2ca03
+2026-11-15T07:46:08.8256303Z ##[group]Removing auth
+2026-11-15T07:46:08.8256723Z Removing SSH command configuration
+2026-11-15T07:46:08.8259152Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T07:46:08.8282624Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T07:46:08.8438329Z Removing HTTP extra header
+2026-11-15T07:46:08.8440515Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T07:46:08.8463516Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T07:46:08.8615844Z Removing includeIf entries pointing to credentials config files
+2026-11-15T07:46:08.8618816Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T07:46:08.8643571Z includeif.gitdir:/home/runner/work/fallline/fallline/.git.path
+2026-11-15T07:46:08.8644265Z includeif.gitdir:/home/runner/work/fallline/fallline/.git/worktrees/*.path
+2026-11-15T07:46:08.8644732Z includeif.gitdir:/github/workspace/.git.path
+2026-11-15T07:46:08.8645096Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T07:46:08.8650309Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/fallline/fallline/.git.path
+2026-11-15T07:46:08.8667559Z /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8675126Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/fallline/fallline/.git.path /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8699325Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/fallline/fallline/.git/worktrees/*.path
+2026-11-15T07:46:08.8716269Z /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8721307Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/fallline/fallline/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8753347Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-15T07:46:08.8770434Z /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8775181Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8797888Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T07:46:08.8814006Z /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8819473Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config
+2026-11-15T07:46:08.8842927Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T07:46:08.8991478Z Removing credentials config '/home/runner/work/_temp/git-credentials-08b2968d-135e-4514-ab79-46f8afe6e4c6.config'
+2026-11-15T07:46:08.8999030Z ##[endgroup]
+2026-11-15T07:46:08.9154784Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+2026-11-15T07:46:08.9155136Z with:
+2026-11-15T07:46:08.9155371Z   node-version: 24.22.2
+2026-11-15T07:46:08.9155613Z   check-latest: false
+2026-11-15T07:46:08.9157510Z   token: ***
+2026-11-15T07:46:08.9157785Z   package-manager-cache: true
+2026-11-15T07:46:08.9158046Z env:
+2026-11-15T07:46:08.9158375Z   FALLLINE_OUTPUT: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:08.9158726Z ##[endgroup]
+2026-11-15T07:46:09.1472139Z Found in cache @ /opt/hostedtoolcache/node/24.22.2/x64
+2026-11-15T07:46:09.1477022Z ##[group]Environment details
+2026-11-15T07:46:12.2551147Z node: v24.22.2
+2026-11-15T07:46:12.2551551Z npm: 11.19.1
+2026-11-15T07:46:12.2551812Z yarn: 1.22.22
+2026-11-15T07:46:12.2552586Z ##[endgroup]
+2026-11-15T07:46:12.2648064Z ##[group]Run python3 tests/scripts/generated-v1-qa.py
+2026-11-15T07:46:12.2648527Z [36;1mpython3 tests/scripts/generated-v1-qa.py[0m
+2026-11-15T07:46:12.3416313Z shell: /usr/bin/bash -e {0}
+2026-11-15T07:46:12.3416695Z env:
+2026-11-15T07:46:12.3417068Z   FALLLINE_OUTPUT: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:12.3417445Z ##[endgroup]
+2026-11-15T07:46:12.4930380Z fatal: path 'vercel.json' exists on disk, but not in '3f4f957521474dfface56cb17ca23e03037a26ba'
+2026-11-15T07:46:12.5030476Z {"source": "791a388b8d738ce8aea6f59696838850ccc2ca03", "product": "3f4f957521474dfface56cb17ca23e03037a26ba", "passed": false, "appInstall": false, "appBuild": false, "localMacExecution": false, "diskFreeBytesBefore": 94962888704, "error": "CalledProcessError: Command '['git', 'show', '3f4f957521474dfface56cb17ca23e03037a26ba:vercel.json']' returned non-zero exit status 128.", "sourceStable": true, "gitClean": true, "lingeringOwnedPids": [], "ownedProcessesAbsent": true, "scratchBytes": 82, "ownedScratchRemoved": true}
+2026-11-15T07:46:12.5112302Z ##[error]Process completed with exit code 1.
+2026-11-15T07:46:12.5153614Z ##[group]Run node tests/scripts/emit-generated-proof.mjs
+2026-11-15T07:46:12.5154016Z [36;1mnode tests/scripts/emit-generated-proof.mjs[0m
+2026-11-15T07:46:12.5181632Z shell: /usr/bin/bash -e {0}
+2026-11-15T07:46:12.5181919Z env:
+2026-11-15T07:46:12.5182251Z   FALLLINE_OUTPUT: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:12.5182765Z ##[endgroup]
+2026-11-15T07:46:12.5513973Z FALLLINE_GENERATED_FILE {"name":"01-node-version.stderr.txt","bytes":0,"sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","codec":"gzip-base64","chunks":1}
+2026-11-15T07:46:12.5515155Z FALLLINE_GENERATED_CHUNK {"name":"01-node-version.stderr.txt","index":0,"data":"H4sIAAAAAAACAwMAAAAAAAAAAAA="}
+2026-11-15T07:46:12.5521292Z FALLLINE_GENERATED_FILE {"name":"01-node-version.stdout.txt","bytes":9,"sha256":"6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04","codec":"gzip-base64","chunks":1}
+2026-11-15T07:46:12.5522633Z FALLLINE_GENERATED_CHUNK {"name":"01-node-version.stdout.txt","index":0,"data":"H4sIAAAAAAACAyszMtEzMtIz4gIAvxJnfQkAAAA="}
+2026-11-15T07:46:12.5526695Z FALLLINE_GENERATED_FILE {"name":"owner.json","bytes":82,"sha256":"b680eca4a954badef363bee536c2ca91efa78c7e8870c3e05bb695e9f1d05e03","codec":"gzip-base64","chunks":1}
+2026-11-15T07:46:12.5528248Z FALLLINE_GENERATED_CHUNK {"name":"owner.json","index":0,"data":"H4sIAAAAAAACAxXKMQ6AMAgF0Ks0zDr8QkjpbSww6NC6G+9unN976FqDeiFhNbBpA++grdBc0/MXd0s3gSFNRgxvgUiLI9BqsPz5PoN6qVX1/QBe/wSpUgAAAA=="}
+2026-11-15T07:46:12.5530166Z FALLLINE_GENERATED_FILE {"name":"runner.json","bytes":1076,"sha256":"5ceab9c7008e5d096b6f81f39bc98dc5f8c6112319869597cee4cca06fc5c839","codec":"gzip-base64","chunks":1}
+2026-11-15T07:46:12.5535804Z FALLLINE_GENERATED_CHUNK {"name":"runner.json","index":0,"data":"H4sIAAAAAAACA41TwW7bMAy95ysEX3JpAkuWLCm3NeiGHYYV67HogabpxJtiGZKcdiv674PtInULDNjFgt/jI0g+8nnFWBb9EJCyHcu05VAYU5laFwbJAEHZKFva0hTGqBwRBUJeZFejrg++HjCNwqKRjVVaCS61rJsGkFSJFdcIoqC8yAsNoqxgFqI/naCrY7Zj9yvGGHuevoxlDipyY8LO17Q5U4it7ybRREM4nC+iCRnjLjxj2eYiesUeLuKYaj9M1eZ8s8y/nZltekrZMppC+Ec0hfA+mp7aMXN+AXzoj9BR/SX4oc92rAEX6S05oZ/7z7c85xe8gdYNYbSiG5xb1BIITnHvT72jNNIpDPShsbsjCFWOBZeQI6EgrnRRKuRgAMua6/G/qDQWheCgUalSmVKAzjmC5tTkeaFsncuPQ3jLTEWVo5TCmgY5cmmhqRqJxtqyqayQQgNJTrKUtrKFRJBWWcsrbZSojFKzKS+rV1uyHmKkejmeDPr+axcTOPcRvh5a9z7WeQT3DfDmiXBIo+lLtm7jr8+B6Pp3onhNjZ8Ga6UthTFG53KKohD8ZPMenKP6NnikGG9GdMf286Ky9f360Kb1FVvHo38c3/9d+N2ZApLb/oy+Wz+sWaA0hI5q1vlu84eCZ+PqsJggDZFxYbbzicw3eZegcku/s0Ob9o6gW2Ku7Q4U2u7w/bGj+radD2uesJ+guSmKn6pIXVpqIwZIeJxmlO2YEW+qu5n6QSd/nkwaRauX1V/fL8mPNAQAAA=="}
+2026-11-15T07:46:12.5539341Z FALLLINE_GENERATED_FILE {"name":"source-after.json","bytes":7692,"sha256":"a54164d95f2ee4d14528f583d36be675eb6435fb486c4a166da762269ddd9da7","codec":"gzip-base64","chunks":2}
+2026-11-15T07:46:12.5553952Z FALLLINE_GENERATED_CHUNK {"name":"source-after.json","index":0,"data":"H4sIAAAAAAACA62ZS29l13GF5/oVjR6bzV1Vux7bMyMRggCJB3FmgQe169GixSZpXnbLQpD/Hpxuy5Z0L/shaUqQxIeq2qtWrfM/X7148b9fvXjx4sXLB3/65uXvX7x89frm6Zu3+/q7+8dv+/b+u9P167qrR3+qvHoHV3/1V9+/uX35uw9/tL9/qtPL378AAvr7j07fOLIc/8nGzu3Z7iQ9Fg7UMOuEtZ0Xro7YVOBYYCIRwGZ7EvY0SLR8+dWLF//3u8uEN6/v7h/r5xhznUE45YSqQtoVOcmhjCdqAHWiAIvxsEXAZWuaYSSjamQy5gp8DuIP//b1H//7T6/e5M8ZCOd5KXZnmUzp4oQAGnvPVm+M2dFzOblCe4BmqnXPWKNiuThsc9fnKP7j3//l6z/+6euzdgy1MwYp8jJBH72sVpNqL2uFThOQsQjTU8FkgjTzWE7EOiikizY/x/BfX//hX//z6wuVQJN53o/pAYDW3iMEi2sQTQsHAFnmitqcIlq2tjIX8QQT8zmLUPZzFHkfp+uHx/uH+5Pfnq734/13p3q8eu1v6uHWv7+Kbyq+PV2gBFDjM8xso5irfaOL54hJM9+P6HbO7TFCdthe0EE+KovGkKJMo8jVvxDz1Q+v7nhkr+pv/ubh9mzKged5d7FkFZSbYgEXu9jGndCqY48og01IkgALQsxBmxc0J2/cNOQzgfux6urxJuv5gjKinuEthprpK2gjC86JvFKZeO2oDWHvaywzcNAEnyStSIKpDUsH/1K8z6unnuvGsADgGGujoOkiJpBcEmOX72UlNidVkm/fBIN1Nh/KRjR6wseB//rWb2/6Jvzp5v7up/q6397c5tXN3cPbp9Orv5zu7y7QjvPub6cJY+Ge6CVVTtAxoQxRVplyTlzm3pLh6SCxfJXUZoC59JfSPrzdtzdx9cbvbrpOT5eBYcAZcLfthsCcNRlIAAVzjdawzbkBQJNj4uKqjY2TmN24OO34Df+FwBfGVVjlvPuzFY19kg8ajrCCROEQIVw0gDK0GFLNYjIyozRNtlw5a7R9FO+xTm9vn07XOFCuYVyhXH+o43veyzVceK5Ro7cDN5fvgTlKi2b3iolWPWRnIEkss+aBFcPCd+cAB+GyuX4N5AW113VeR41luLaDz5AVPKEgdWdXpiIyswZKzAacU5Z6aMTBHNZrmH4p4un+7WN8RJto4DnkbOyS49maFrVr7g7d07y1fc2gzGppK+fd5USEMkRTyGDP8QWQcDX4+h87yZ+e6s3D0xVc7DkOgws6r6ybXIcbSbi4iICaDgJE3Mf+sVgZdSzUJAgN6glyjDnT6N8A9sIO5UGXVmh4ApNpFSF5js41fUviHhMsUphllkhMHkDDeMpqUB440H41KV5+SmpDz33JhHa1EcvGZthEDoEVgd6dvss0zaTfvyBcBIkpvMCYcsr+xP78PNoLb0rofDPxotah7a1UYYU91faIVew9Jw9XyfLabLB6ynDM1jYCWGOvX09Kl+s6Jszzx2W4Y7QgA+zFCVwZYrRlY7DtjNWwRSiP6lMZjwazFrGIjJ6/Ae2FusKFcyWQeEHOxUsseRpzDGZZiRtGwahJ013npD4mdZNBjVg9J0L4L39Zf1eri0UVM8AzVFjObLVnDwVKX+arZeFseT+ZUbVGwJak0dnWJbnngJqBiutXo14Q1gXnC4p258qYc7fu0MJB792me49cwa0l2xqXZARxCIQFy6FuaAb6ZZj6I/f3cWVdyy70X0cFT6XYxrpUDKKWCaRZISwsn0WHxc7g2B0wgUZgNYwKB/wtaM8LO+nCEYWIPg33HgaLS2YjLccwGXIUWCvdho6wrVtxdzJGqiHPXbm+DBXmjyzUbb2r20sDMHWcS9Xh37rmTLTDluLwRnaKoFAQ2pjo7TNbQxq6kTmk94iJozbUl3HyT6zeD17gwePbuuxMUeHcSh8X8k6GtYCHEW5MXuBZZDSWKh2z6T14HdusN8zQjaihs6Di4870w2lyf/f06PF0qYprnd9OvGXEEaU4RJuijVECvFlRuKVMadR7OUjsamWdGmwday62QR8lOj1UXAIZcg4CCbEFcVHmXIPSY2jx8t7G6J7p7094Fsu1sX0ijh7Jx2LC+exNdLTIX9fFHhGf68qqWLrmosWBoWONXdv7qIZ5slMa21GLwjmmi6/kySPddivAsxnCB4N73f7uJu7vXp3evT4Pd843HOxUdlceDO5IRt14HC9pbqaTgfk4YQBbbS7bQ479nL2iiAo/QXNzl/W3V988XQjdhti5QYRDwbj1cLXCrYfI1izzKaVUnFMSLA591WRqXb5Sl0bCJC3/BM7pMa79bd7cv/rL6ezyH3jOw4I0p6KTbnZsGF2u7nNtm85BKJWV2JA1uzcrw2FxO4iynl8CP+I51tMFHFC1C1GckBzpmwFBMYhaM3Sr4yqK5SzBeiz+JZS6xjSX1mFusTw/OTwHz2PF/WOeLiBNxXM1pwEJYmBS7jHBsmVHYZN6G/EIGmJBZeYiTr6Ia2qHG6PK+Cyiu6zHeryAhLoumEzvqD1GryMiQJs6ah/XEDIWqfg8fIZwBRswzrlGZRzDbrRKFD6H6SYvd43pvEY5OxnMfNuU3rZ6tA5g2JmEY4fn4S/CKsjMrQkicDLXQDaxT/E8fX9bp1dxOi/PwAuutlV489jVW1cr8lwwLVM9CI/cwnwlsSU7lkNYDUrW9GPvfcTZnOLx5uHpdP3eZ716c6E6Qucj7ThJJ3Qfua0or1ruwttkLjxiSl/IEq0i4Z3cgJTbimrAGMKfonl8e3d1llRegKNlF6LUybFj5hBDQQ4k0lTcCBYt7JILdtYurq4Gp5Xo3LZk760ez34GeKrT0z8S1OuPcU3QdR5Bic8dgu07ZebmxACK9NHeKX6sD1i2UGj4BidZWrjmXIloGvyZXD9Jny40dNGFrxYdCAE9OUfYUashdpwbNlD4GHM31wLJRjJfhSPDUoE8dM7Uj7P9"}
+2026-11-15T07:46:12.5570958Z FALLLINE_GENERATED_CHUNK {"name":"source-after.json","index":1,"data":"oE9PHyK7nyMZ8TkRgKr6dMc03Vi+Zs2eOpNiyl67mGVr98HbvPeR9+xa3IE8uz9BdGjBMziAcmGqjrOnwnoDz72OxGvBSPRycoAO5rXKlprJ8U55qFKIzVp7rcZPdO+Hya83N09X/2zhw+P9fV/sIl8YMGIt2keE7DrYicOgPXftRk0w6S5S9nXECIF0bGowwYJpmBafh/hPulM9vqvH5+aML+zmiiO3RFzYYAowJiL7hqRchwWO4xyaK5Czk2ho+I4j8CQ3C6IvJfzw/fDh+3MnM4ZeyjeV0GLpVOVdq9AZwH2tHZuzdQ7dXUS0jzON0VUqFKYZ6d4fp3t7d/N0ftg8M4M6+ML3TV3OiptDpkTtcJ5Sh+tlt1xCNdlWwhbkDcxUOnvlZogxAp81fu/qMer2ohu2deEYJNLjMRoWHYZgYB6LT1SklmgXyYiBNEO6vYQH95ETrOPDWu0P+vrVn7/6f2nD4PQMHgAA"}
+2026-11-15T07:46:12.5573430Z FALLLINE_GENERATED_FILE {"name":"source-before.json","bytes":7692,"sha256":"a54164d95f2ee4d14528f583d36be675eb6435fb486c4a166da762269ddd9da7","codec":"gzip-base64","chunks":2}
+2026-11-15T07:46:12.5588729Z FALLLINE_GENERATED_CHUNK {"name":"source-before.json","index":0,"data":"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"}
+2026-11-15T07:46:12.5603315Z FALLLINE_GENERATED_CHUNK {"name":"source-before.json","index":1,"data":"oE9PHyK7nyMZ8TkRgKr6dMc03Vi+Zs2eOpNiyl67mGVr98HbvPeR9+xa3IE8uz9BdGjBMziAcmGqjrOnwnoDz72OxGvBSPRycoAO5rXKlprJ8U55qFKIzVp7rcZPdO+Hya83N09X/2zhw+P9fV/sIl8YMGIt2keE7DrYicOgPXftRk0w6S5S9nXECIF0bGowwYJpmBafh/hPulM9vqvH5+aML+zmiiO3RFzYYAowJiL7hqRchwWO4xyaK5Czk2ho+I4j8CQ3C6IvJfzw/fDh+3MnM4ZeyjeV0GLpVOVdq9AZwH2tHZuzdQ7dXUS0jzON0VUqFKYZ6d4fp3t7d/N0ftg8M4M6+ML3TV3OiptDpkTtcJ5Sh+tlt1xCNdlWwhbkDcxUOnvlZogxAp81fu/qMer2ohu2deEYJNLjMRoWHYZgYB6LT1SklmgXyYiBNEO6vYQH95ETrOPDWu0P+vrVn7/6f2nD4PQMHgAA"}
+2026-11-15T07:46:12.5665590Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-15T07:46:12.5665963Z with:
+2026-11-15T07:46:12.5666209Z   name: fallline-generated-proof
+2026-11-15T07:46:12.5666557Z   path: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:12.5666908Z   retention-days: 7
+2026-11-15T07:46:12.5667130Z   if-no-files-found: warn
+2026-11-15T07:46:12.5667442Z   compression-level: 6
+2026-11-15T07:46:12.5667692Z   overwrite: false
+2026-11-15T07:46:12.5667925Z   include-hidden-files: false
+2026-11-15T07:46:12.5668173Z   archive: true
+2026-11-15T07:46:12.5668368Z env:
+2026-11-15T07:46:12.5668693Z   FALLLINE_OUTPUT: /home/runner/work/_temp/fallline-generated-proof-43691396813-1
+2026-11-15T07:46:12.5669040Z ##[endgroup]
+2026-11-15T07:46:12.6888412Z With the provided path, there will be 6 files uploaded
+2026-11-15T07:46:12.6889078Z Artifact name is valid!
+2026-11-15T07:46:12.6889384Z Root directory input is valid!
+2026-11-15T07:46:13.0105078Z Uploading artifact: fallline-generated-proof.zip
+2026-11-15T07:46:13.0136842Z Beginning upload of artifact content to blob storage
+2026-11-15T07:46:13.1669845Z Uploaded bytes 6708
+2026-11-15T07:46:13.1926561Z Finished uploading artifact content to blob storage!
+2026-11-15T07:46:13.1927210Z SHA256 digest of uploaded artifact is 7cb099c1bf37c5c543a0e23deef8b1d7da4dbebf1c34055f0298ab4cf15c659c
+2026-11-15T07:46:13.1927997Z Finalizing artifact upload
+2026-11-15T07:46:13.5314092Z Artifact fallline-generated-proof successfully finalized. Artifact ID 14152806631
+2026-11-15T07:46:13.5314905Z Artifact fallline-generated-proof has been successfully uploaded! Final size is 6708 bytes. Artifact ID is 14152806631
+2026-11-15T07:46:13.5317360Z Artifact download URL: https://github.com/alvarovillalbaa/fallline/actions/runs/43691396813/artifacts/14152806631
+2026-11-15T07:46:13.5474899Z Post job cleanup.
+2026-11-15T07:46:13.6234826Z [command]/usr/bin/git version
+2026-11-15T07:46:13.6235663Z git version 2.56.1
+2026-11-15T07:46:13.6264810Z Temporarily overriding HOME='/home/runner/work/_temp/783b95cd-23aa-41f4-b935-82ff57521264' before making global git config changes
+2026-11-15T07:46:13.6266246Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T07:46:13.6267972Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/fallline/fallline
+2026-11-15T07:46:13.6295607Z Removing SSH command configuration
+2026-11-15T07:46:13.6300960Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T07:46:13.6339577Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T07:46:13.6498766Z Removing HTTP extra header
+2026-11-15T07:46:13.6502635Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T07:46:13.6526652Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T07:46:13.6684525Z Removing includeIf entries pointing to credentials config files
+2026-11-15T07:46:13.6688420Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T07:46:13.6715183Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T07:46:13.6986344Z Cleaning up orphan processes

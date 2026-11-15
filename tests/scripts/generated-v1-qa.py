@@ -86,7 +86,9 @@ try:
     assert len(expected)==11
     for item in expected:
         if item["path"]=="vercel.json":
-            raw=subprocess.check_output(["git","show",receipt["product"]+":vercel.json"],cwd=repo)
+            raw=(repo/"docs/qualification/generated-v1-production-vercel.json").read_bytes()
+            receipt["productionConfigGitBlob"]=subprocess.check_output(["git","hash-object","docs/qualification/generated-v1-production-vercel.json"],cwd=repo).decode().strip()
+            assert receipt["productionConfigGitBlob"]=="8138ba426bea84cb719bf8129dba9b5ab01ed4ca"
             assert len(raw)==item["bytes"] and digest(raw)==item["sha256"]
             actual=json.loads((repo/"vercel.json").read_text());overlay=actual.pop("git",None)
             assert overlay=={"deploymentEnabled":False} and actual==json.loads(raw),"Only branch Git preview overlay allowed"
