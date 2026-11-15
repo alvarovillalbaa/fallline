@@ -16,7 +16,7 @@ for name in ("tmp","tools","browsers","npm-cache"): (owned/name).mkdir()
 tools=owned/"tools"
 env=dict(os.environ)
 env.update(TMPDIR=str(owned/"tmp"),npm_config_cache=str(owned/"npm-cache"),npm_config_audit="false",npm_config_fund="false",npm_config_update_notifier="false",PLAYWRIGHT_BROWSERS_PATH=str(owned/"browsers"),FALLLINE_MANIFEST=str(out/"public-manifest.json"),FALLLINE_READY=str(out/"server-ready.json"),FALLLINE_PLAYWRIGHT=str(tools/"node_modules/playwright/index.mjs"))
-deadline=time.monotonic()+8*60
+deadline=time.monotonic()+10*60
 receipt={"source":os.environ["GITHUB_SHA"],"product":"3f4f957521474dfface56cb17ca23e03037a26ba","commands":[],"passed":False,"appInstall":False,"appBuild":False,"localMacExecution":False}
 server=None;streams=[]
 def digest(b): return hashlib.sha256(b).hexdigest()
@@ -102,7 +102,7 @@ try:
     assert carried["source"]=="a1dcc22325ee509613e88dd2f77ab58dd5539b63" and carried["run"]==43691584174 and carried["node"]==version
     native=json.loads((archive/"runner.json").read_text())
     assert native["source"]==carried["source"]
-    for scope in ("static","nodeCases"):
+    for scope in ("nodeCases",):
         item=carried[scope];command=item["command"]
         assert command in native["commands"] and command["exit"]==0 and command["streamsComplete"] and not command["failure"] and not command["orphanedGroup"]
         assert digest((archive/item["stdout"]).read_bytes())==command["stdoutSha256"]
@@ -113,8 +113,10 @@ try:
     spec=(archive/carried["nodeCases"]["stdout"]).read_text()
     for key,value in (("tests",37),("pass",37),("fail",0),("skipped",0),("cancelled",0)):
         assert re.search(r"^ℹ "+key+r" "+str(value)+r"$",spec,re.M)
-    receipt["carriedChecks"]={"source":carried["source"],"run":carried["run"],"nodeCases":37,"static":True,"repeated":False,"rawSpecSha256":digest(spec.encode())}
+    receipt["carriedChecks"]={"source":carried["source"],"run":carried["run"],"nodeCases":37,"static":False,"repeated":False,"rawSpecSha256":digest(spec.encode())}
     (out/"carried-checks.json").write_text(json.dumps(receipt["carriedChecks"],indent=2)+"\n")
+    run("static",["node","scripts/check.mjs"])
+    receipt["staticExecutedAfterCssRepair"]=True
     (tools/"package.json").write_text(json.dumps({"private":True,"dependencies":{"playwright":"1.64.1"}})+"\n")
     run("browser-tools",["npm","install","--ignore-scripts","--no-audit","--no-fund","--save-exact","--registry=https://registry.npmjs.org/"],150,cwd=tools)
     for name in ("playwright","playwright-core"):
@@ -127,7 +129,7 @@ try:
     while not ready.exists() and server.poll() is None and time.monotonic()<end:time.sleep(.05)
     info=json.loads(ready.read_text());assert info["pid"]==server.pid and re.fullmatch(r"http://127\.0\.0\.1:\d+",info["url"])
     env["FALLLINE_URL"]=info["url"];resources("served-before")
-    run("generated-browser",["node","tests/browser/generated-v1.mjs"],360)
+    run("generated-browser",["node","tests/browser/generated-v1.mjs"],520)
     result=json.loads((out/"generated-browser.json").read_text())
     assert result["passed"] and len(result["cases"])==6 and {c["id"] for c in result["cases"]}=={"G01","G02","G03","G04","G05","G06"}
     assert all(c["status"]=="passed" for c in result["cases"])

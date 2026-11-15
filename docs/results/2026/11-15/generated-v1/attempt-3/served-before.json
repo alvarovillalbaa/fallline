@@ -1,0 +1,98 @@
+[
+  {
+    "path": "/favicon.svg",
+    "status": 200,
+    "bytes": 326,
+    "sha256": "1bd75aa75051aa2383ff2d5c4d8a88745155b2f212f78498b066deadf9ce33e2",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/",
+    "status": 200,
+    "bytes": 10688,
+    "sha256": "173cb5f74f2f65f7f7e6e4e8a46e73e5d46d18c88177d53f79a9d797cd1437ea",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/src/audio.js",
+    "status": 200,
+    "bytes": 5028,
+    "sha256": "56234472a37b5a2f10fea7aa49b84a5c326eded2f1de4ffb575157b3fc33de17",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/src/game.js",
+    "status": 200,
+    "bytes": 17783,
+    "sha256": "b636bb4f8131e51678f51ff7a29e3c9a56c57c055963d79048a6f708a8c9ad1b",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/src/records.js",
+    "status": 200,
+    "bytes": 4724,
+    "sha256": "301d168186eaac418df6bce2f37af8350c3068c3e88a66a3a935e47fca852760",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/src/renderer.js",
+    "status": 200,
+    "bytes": 27939,
+    "sha256": "afceb00f96eb528470ebf7fa252e376a431d265ec581524490edc8745839e671",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/src/ride.js",
+    "status": 200,
+    "bytes": 17534,
+    "sha256": "d4fd5188ab846fb89f0f70151bdd320bcad7e20c8ec388a8f31cc2455e025868",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  },
+  {
+    "path": "/styles.css",
+    "status": 200,
+    "bytes": 20246,
+    "sha256": "f765b50befb79f72549148dd7ac325c428a9d358d5a2ea1c8e03d57dac716817",
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+  }
+]

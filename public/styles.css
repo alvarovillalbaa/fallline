@@ -231,7 +231,7 @@ main { max-width:none; padding:0; }
 .level-library button { padding:9px; font-size:10px; }
 .control-strip { position:fixed; inset:auto 0 0; z-index:5; padding:8px 24px; background:#edf3e9ed; border:0; }
 .storage-notice { position:fixed; left:12px; right:12px; bottom:65px; z-index:9; margin:0; }
-.wind-value { position:absolute; right:24px; top:86px; font:11px var(--sans); padding:9px 12px; border-radius:8px; background:#edf3e9dd; }
+.wind-value { position:absolute; right:24px; top:118px; font:11px var(--sans); padding:9px 12px; border-radius:8px; background:#edf3e9dd; }
 body[data-mode=menu] .wind-value,body[data-mode=error] .wind-value { display:none; }
 body[data-mode=riding] .control-strip { display:none; }
 .ride-toolbar { top:66px; }

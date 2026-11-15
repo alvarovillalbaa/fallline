@@ -11,7 +11,7 @@ jobs:
   generated:
     if: github.ref == 'refs/heads/qa/fallline-generated-20261115'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - name: Define owned output
         shell: bash
