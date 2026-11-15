@@ -1,3 +1,7 @@
+# V5 current status — accepted and retired
+
+The owner approved the extension and the six-case native packet, actual public H01 and leased retirement all passed. Total1582/2100CIseconds. See [the canonical receipt](../results/2026/11-15/generated-v5/result.md). The original inactive preparation below remains historical and does not request another approval.
+
 # Generated mountains: qualification v5 — PENDING approval
 
 This additive prepared correction is inactive until the owner explicitly grants

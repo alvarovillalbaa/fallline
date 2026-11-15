@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "main": "ab24ebff2aa77cd71d1539a2aaeedaf157971265",
+  "qaBefore": "bf4c3a17462212199fe3c28297925627df6de8f0",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/git/ref/heads/main",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/git/ref/heads/qa/fallline-generated-20261115",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/contents/.github/workflows/generated-v1-qa.yml?ref=main",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/contents/.github/workflows/generated-v1-qa.yml?ref=qa%2Ffallline-generated-20261115",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/contents/.github/workflows/generated-v1-qa.yml",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/contents/.github/workflows/generated-v1-qa.yml?ref=qa%2Ffallline-generated-20261115",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/git/ref/heads/qa/fallline-generated-20261115",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/git/refs/heads/qa/fallline-generated-20261115",
+      "status": 204
+    },
+    {
+      "method": "GET",
+      "path": "/git/ref/heads/qa/fallline-generated-20261115",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/git/ref/heads/main",
+      "status": 200
+    }
+  ],
+  "retiredCommit": "0e855cfea3ab525cc5a96c8b516f0fa5d8225390",
+  "workflowAbsent": true,
+  "qaDeleted": true,
+  "mainUnchanged": true,
+  "deleteSemantics": "serialized exact owner reads; GitHub DELETE ref is not atomic CAS"
+}

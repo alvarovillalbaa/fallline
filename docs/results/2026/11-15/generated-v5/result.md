@@ -69,3 +69,26 @@ all command groups/source/Git/scratch guards pass. Originals are in hosted/.
 H01 used26 job seconds, bringing cumulative CI to1567/2100seconds (26m07s),
 with533seconds before the one-minute leased retirement. Zero QA deployments
 were observed. No old gameplay/free-ride or37-node identity was replayed.
+
+## Completed retirement and evidence carry
+
+[Retirement run43761279689](https://github.com/alvarovillalbaa/fallline/actions/runs/43761279689)
+passed in15 job seconds. It verified actual H01 success and exact main/QA leases,
+removed the workflow and ref (200/204), and read both absences back as404.
+Retired commit: `0e855cfea3ab525cc5a96c8b516f0fa5d8225390`. Independent connector
+reads confirm those absences and unchanged tested main. GitHub DELETE ref used
+serialized exact owner reads, not an atomic compare-and-swap operation.
+
+Final total:1582/2100seconds (26m22s), including all four failed jobs, V5, H01
+and retirement.518seconds remain unused; the generated packet is now closed.
+The final evidence publication restores the exact production config again and
+carries all11 build/runtime input blobs/modes from the tested release, including
+all eight served files. A later documentation deployment with those identical
+inputs is an identity carry, not another browser run. Provider final identity is
+recorded separately after publication; no repeated closed journey is inferred.
+
+The dirty local checkout is preserved and remains based on90a7233c, including
+its earlier CSS snapshot; publication used the accepted remote tree, not a stale
+checkout push. This bounded game delivery is complete. Physical devices, audible
+sound, frame-rate/human-playability benchmarks and all possible seeds remain
+outside the accepted finite source/native/public evidence.
