@@ -1,0 +1,38 @@
+name: Temporary Fallline generated-level qualification
+on:
+  push:
+    branches: [qa/fallline-generated-20261115]
+permissions:
+  contents: read
+concurrency:
+  group: fallline-generated-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  hosted:
+    if: github.ref == 'refs/heads/qa/fallline-generated-20261115'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    env:
+      FALLLINE_RELEASE_SOURCE: ab24ebff2aa77cd71d1539a2aaeedaf157971265
+      FALLLINE_READY_DEPLOYMENT: dpl_34fgGnU6k2DTQ86FjsXqui65KeH8
+    steps:
+      - name: Define owned output
+        shell: bash
+        run: echo "FALLLINE_OUTPUT=$RUNNER_TEMP/fallline-hosted-proof-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.22.2'
+      - name: Actual public bytes and narrow native H01
+        run: python3 tests/scripts/generated-hosted-v1.py
+      - name: Preserve original bounded output
+        if: always()
+        run: node tests/scripts/emit-generated-hosted-proof.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: fallline-hosted-proof
+          path: ${{ env.FALLLINE_OUTPUT }}
+          retention-days: 7
